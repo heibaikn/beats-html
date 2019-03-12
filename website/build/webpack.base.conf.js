@@ -3,6 +3,12 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const entryList = require('./entry-list')
+const entryName = entryList.findEntryName()
+const entryPages = entryList.findEntryPages()
+
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('entryPages:', { ...entryPages });
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -22,7 +28,8 @@ const createLintingRule = () => ({
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: entryName,
+    ...entryPages
   },
   output: {
     path: config.build.assetsRoot,
