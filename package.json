@@ -1,0 +1,20 @@
+{
+  "name": "beats-html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "admin": "cd admin && yarn dev",
+    "website": "cd website && yarn dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qqhluckyi/beats-html.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qqhluckyi/beats-html/issues"
+  },
+  "homepage": "https://github.com/qqhluckyi/beats-html#readme"
+}

@@ -1,0 +1,14 @@
+### Node ###
+
+# Logs
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+/node_modules
+/website/node_modules
+/admin/node_modules
+
+/website/dist
+/admin/dist
