@@ -1,0 +1,67 @@
+
+body
+  color #222
+
+.iconfont
+  fs 22px
+
+.flex-center
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+.container
+  w 85%
+  margin 0 auto
+
+header#header
+  h 80px
+  pad 20px 0 0
+  background-color #161616
+  color #fff
+  .container
+    rel()
+    h 40px
+  .logo
+    abs left 0 top 0
+  .right-icon
+    abs right 0 top 0
+    h 100%
+  nav
+    fs 18px
+    ul
+      pad 7px 40px 0 70px
+    li
+      fl()
+      w 22%
+      tc()
+    li.last
+      w 12%
+
+
+
+.section-container
+  margin 0 auto;
+
+
+
+@media (min-width: 1024px){
+  .section-container{
+    w 85%
+  }
+}
+
+
+@media (min-width: 768px){
+  .section-container{
+    w 95%
+  }
+}
+
+
+@media (min-width: 568px){
+  .section-container{
+    w 85%
+  }
+}

@@ -1,0 +1,144 @@
+@import './base/color.styl';
+@import './base/font.styl';
+@import './mixins/mixins.styl';
+@import './components/button.styl';
+
+*
+	padding 0
+	margin 0
+	box-sizing border-box
+
+html
+	font-size 16px
+
+body
+	font 16px "NeuzeitGro", "Helvetica Neue", "Helvetica", sans-serif;
+	color #4d4d4d
+	background #f7f8fa
+
+ul li, ol, li
+	list-style  none
+img
+	border 0
+	max-width 100%
+a
+	text-decoration none
+	// color inherit
+small 
+	font-size inherit
+input
+button
+textarea
+	outline none
+	font-family "微软雅黑"
+
+
+support-for-ie ?= true
+vendor-prefixes ?= webkit khtml moz o ms official
+
+/*=== 公用Class ==*/
+.fl
+	float left
+.fr
+	float right
+.cur 
+	cursor pointer
+.rel
+	position relative
+.tc 
+	text-align center
+.dis
+	dib()
+.clear
+	clear both
+.clear:after
+	content ''
+	display table
+	clear both
+
+.flexbox
+	display flex
+	> *
+		display block
+	.col1
+		width 100%
+	.col2
+		width 50%
+	.col3
+		width 33.3333%
+	.col4
+		width 20%
+	flex()
+
+
+// ::-webkit-scrollbar-track-piece {
+// 	-webkit-border-radius: 8px;
+// 	background-color: none
+// }
+
+// ::-webkit-scrollbar {
+// 	width: 6px;
+// 	height: 6px
+// }
+
+// ::-webkit-scrollbar-thumb {
+// 	height: 50px;
+// 	background-color: #a2a2a2;
+// 	-webkit-border-radius: 6px;
+// 	outline-offset: 0
+// }
+
+// ::-webkit-scrollbar-thumb:hover {
+// 	height: 50px;
+// 	background-color: #9a9999;
+// 	-webkit-border-radius: 4px
+// }
+
+
+/*=== 公用 动画 ==*/
+@keyframes fadeIn
+	0%
+		opacity 0
+	100%
+		opacity 1
+
+@keyframes fadeOut
+	0%
+		opacity 1
+	100%
+		opacity 0
+
+@keyframes translateY
+	0%
+		transform translateY(10px)
+	100%
+		transform translateY(0)
+
+@keyframes scaleToBig
+	0%
+		transform scale(1.2)
+		animation-timing-function cubic-bezier(0.31, 0.31, 0.63, 1.22)
+		opacity 0
+	100%
+		transform scale(1)
+		opacity 1
+
+@keyframes toScale
+	0%
+		transform scale(1)
+	100%
+		transform scale(1.2)
+
+@keyframes scaleToMin
+	0%
+		transform scale(1)
+		opacity 1
+	100%
+		transform scale(0.3)
+		opacity 0
+
+@keyframes rotate360
+	0%
+		transform rotate(0)
+	100%
+		transform rotate(360deg)

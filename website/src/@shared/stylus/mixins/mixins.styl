@@ -1,0 +1,227 @@
+//圆角
+borr(arguments)
+	border-radius arguments
+
+//动画
+transition()
+	transition arguments
+
+animate()
+	animation arguments 
+
+//定位
+rel()
+	position relative
+-pos(type,args)
+	i = 0
+	position     : unquote(type)
+	{args[i]}    : args[i + 1] is a 'unit' ? args[i += 1] : 0
+	{args[i+=1]} : args[i + 1] is a 'unit' ? args[i += 1] : 0
+-pos3(type,args)
+	i = 0
+	position     : unquote(type)
+	{args[i]}    : args[i + 1] is a 'unit' ? args[i += 1] : 0
+	{args[i+=1]} : args[i + 1] is a 'unit' ? args[i += 1] : 0
+	{args[i+=1]} : args[i + 1] is a 'unit' ? args[i += 1] : 0
+	
+abs()
+	-pos('absolute', arguments)
+abs3()
+	-pos3('absolute', arguments)
+absolute()
+	-pos('absolute', arguments)
+fixed()
+	-pos('fixed', arguments)
+z(n)
+	z-index n
+fs(n)
+	font-size: n
+fw(n)
+	font-weight n
+cur()
+	cursor pointer
+rect(w, h)
+	width w
+	height h
+
+/* 
+  宽高
+ */
+w(w)
+	width w
+h(h)
+	height h
+wh(w, h)
+	width w
+	height h
+whh(w, h)
+	width w
+	height h
+	line-height h
+maxw(n)
+	max-width n
+maxh(n)
+	max-height n
+full()
+	wh 100% 100%
+
+/* 
+  行高
+ */
+lh(n)
+	line-height n
+lhh(n)
+	line-height n
+	height n
+db()
+	display block
+dib()
+	display inline-block
+hide()
+	display none
+ov()
+	overflow hidden
+tc()
+	text-align center
+tr()
+	text-align right
+
+/* 
+  边框
+ */
+bor()
+	border arguments
+borl()
+	border-left arguments
+bort()
+	border-top arguments
+borb()
+	border-bottom arguments
+
+/* 
+  padding 内间距
+ */
+pad()
+	padding arguments
+pt(n)
+	padding-top n
+pr(n)
+	padding-right n
+pb(n)
+	padding-bottom n
+pl(n)
+	padding-left n
+
+
+/* 
+  margin 外间距
+ */
+mar()
+	margin arguments
+mt(n)
+	margin-top n
+mr(n)
+	margin-right n
+mb(n)
+	margin-bottom n
+ml(n)
+	margin-left n
+fl()
+	float left
+fr()
+	float right
+
+/*
+  不换行
+*/
+notwrap()
+	white-space nowrap
+
+/*
+  强制换行
+*/
+wrap()
+	word-wrap  break-word
+	word-break normal
+
+/* 
+  box 盒子模型
+ */
+contbox()
+	box-sizing content-box
+borbox()
+	box-sizing border-box
+
+/* 
+  flex
+ */
+flex-center()
+  display flex
+	justify-content center
+	align-content center
+	align-items center
+
+
+/* 
+  背景图片
+ */
+bg(src)
+	background url(src) no-repeat
+bg-c(src)
+	background url(src) no-repeat center 0
+bg-x()
+	background-repeat repeat-x
+bg-y()
+	background-repeat repeat-y
+bg-center()
+	background-position center
+bg-r()
+	background-position right
+bg-p()
+	background-position arguments
+maskimg(src)
+	-webkit-mask-image: url(src);
+bgsize(val)
+	if val == 1
+		background-size contain
+	else if val == 2
+		background-size cover
+	else 
+		background-size val
+bgcolor(color)
+	background-color color
+btn(ww, hh)
+	cur()
+	tc()
+	dib()
+	whh ww hh
+	borr 4px
+	if arguments[2] == 1
+		background-size contain
+	else if arguments[2] == 2
+		background-size cover
+	else 
+		background-size inherit
+
+/*
+  变形
+*/
+rot(n)
+	transform rotate(n)
+	
+/*
+  css三角
+*/
+sj-t(n1, n2, color)
+	wh 0 0
+	db()
+	border-left n1 solid transparent
+	border-right n1 solid transparent
+	border-bottom n2 solid color
+sj-b(n1, n2, color)
+	wh 0 0
+	db()
+	border-left n1 solid transparent
+	border-right n1 solid transparent
+	border-top n2 solid color
+	
