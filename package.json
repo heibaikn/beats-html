@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/qqhluckyi/beats-html/issues"
   },
-  "homepage": "https://github.com/qqhluckyi/beats-html#readme"
+  "homepage": "https://github.com/qqhluckyi/beats-html#readme",
+  "devDependencies": {
+    "vue-property-decorator": "^8.0.0"
+  }
 }
