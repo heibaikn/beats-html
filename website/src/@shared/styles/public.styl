@@ -108,6 +108,9 @@ a
       background: #222
     &:hover .button-inner
       color #fff
+  &.button-holder--big
+    pl 60px
+    pr 60px
 
 header#header
   h 80px
@@ -317,6 +320,19 @@ for ani in $animateList
   li
     mb 18px
     color: #a7a6a6
+    a
+      rel()
+      &:after
+        content ''
+        abs left 0 bottom 0
+        wh 100% 2px
+        background: $red
+        transition:  all .35s
+        transform: translateY(5px)
+        opacity 0
+      &:hover:after
+        transform: translateY(0)
+        opacity 1
   .copyright
     tc()
     fs 10px
