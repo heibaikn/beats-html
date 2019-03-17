@@ -46,6 +46,10 @@ function eachFiles(files, dirpath){
     let state = checkIsFile(filepath);
     if(state && state.isDirectory()){
       var mainJsPath = path.join(dirpath, file, `${file}.js`);
+      var isFile = checkIsFile(mainJsPath)
+      if (!isFile){
+        mainJsPath = path.join(dirpath, file, `index.js`);
+      }
       var checkMainJS = checkIsFile(mainJsPath);
       if(checkMainJS){
         let jspath = mainJsPath.replace(/\\/g, '/');

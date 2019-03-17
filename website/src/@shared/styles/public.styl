@@ -1,0 +1,344 @@
+
+
+
+@font-face{
+ font-family: 'NeuzeitGro';
+ src: url('~@shared/styles/font/NeuzeitGro-Bol.ttf'), url('~@shared/styles/font/NeuzeitGro-Bol.woff');
+}
+
+@font-face{
+ font-family: 'AlternateGotNo2D';
+ src: url('~@shared/styles/font/AlternateGotNo2D.ttf'), url('~@shared/styles/font/AlternateGotNo2D.woff');
+}
+
+font()
+  font-family  "NeuzeitGro", "Helvetica Neue", "Helvetica", sans-serif
+font-def()
+  font-family: '微软雅黑'
+font-A()
+  font-family "AlternateGotNo2D"
+full()
+  wh 100% 100%
+
+body
+  color #222
+  min-width 1100px
+  padding-top 50px
+  font-def()
+  background: #f7f7f8;
+
+h3
+  font-family 'NeuzeitGro'
+
+img
+  max-width: 100%;
+
+a
+  color inherit
+
+.iconfont
+  fs 22px
+
+.flex-center
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+.container
+  w 85%
+  margin 0 auto
+  max-width 1500px
+
+.section-container
+  margin 0 auto;
+
+.button-holder
+  border 2px solid #bec1c3
+  lh 39px
+  borr 22px
+  pad 0 38px
+  fs 18px
+  tc()
+  dib()
+  ov()
+  rel()
+  cur()
+  font-def()
+  .mask
+    abs left 0 top 0
+    db()
+    background: #bec1c3
+    wh 100% 100%
+    z-index 1
+    transition all .35s
+    transform: translateY(100%)
+  .button-inner
+    rel()
+    z-index 2
+    transition all .35s
+  &:hover .button-inner
+    color #222
+  &:hover .mask
+    transform: translateY(0)
+  &.button-holder--black
+    border 2px solid #222
+    color #222
+    .mask
+      background: #222;
+    &:hover .button-inner
+      color #fff
+  &.button-holder--red
+    border 0
+    background: #e01e3c
+    color: #fff
+    pt 2px
+    pb 2px
+    .mask
+      background: #fff
+    &:hover .button-inner
+      color #222
+  &.button-holder--red2
+    border 0
+    background: #e01e3c
+    color: #fff
+    pt 2px
+    pb 2px
+    .mask
+      background: #222
+    &:hover .button-inner
+      color #fff
+
+header#header
+  h 80px
+  pad 20px 0 0
+  background-color #161616
+  color #fff
+  position fixed
+  left: 0
+  right: 0
+  top: 0
+  min-width 900px
+  z-index: 3
+  > .container
+    rel()
+    h 40px
+    z-index 21
+  .logo
+    abs left 0 top 0
+    z-index 21
+  .right-icon
+    abs right 0 top 0
+    z-index 21
+    h 100%
+    i{
+      fs 18px
+      fw 700
+    }
+  nav
+    fs 18px
+    ul
+      pad 7px 40px 0 70px
+    li
+      fl()
+      w 22%
+      tc()
+      i{
+        color #ccc
+        vertical-align: top
+        dib()
+        transition: all .35s
+      }
+      .arrow-active
+        transform: rotate(180deg)
+        color $red
+    li.last
+      w 12%
+      i{
+        fs 26px
+      }
+
+.header-mask
+  position: fixed
+  left 0
+  top 0
+  right 0
+  bottom 0
+  z-index  20
+  background rgba(0,0,0,.6)
+
+
+.header-mask__body
+  min-width 900px
+  w 100%
+  background rgba(0,0,0,.6)
+  .container
+    display: flex
+    pt 97px
+    img
+      w 100%
+  .header-mask__body__browse
+    w 16%
+    justify-content: left
+    > div
+      mt -40px
+    .button-holder
+      fs 16px
+      lh 36px
+    h2
+      color: #fff;
+      fs 20px
+      font-weight 500
+      mar 0 0 25px
+      text-transform: none;
+      font()
+    li
+      margin-bottom 25px
+      color: #bec1c3;
+      fs 16px
+      white-space nowrap
+      font-A()
+      > a
+        rel()
+        &:after
+          content ''
+          abs left 50% bottom -3px
+          wh 20px 3px
+          ml -10px
+          background: red;
+          transition: all .35s
+          transform: scale(0)
+        &:hover:after
+          transform: scale(1)
+
+  .header-mask__body__group 
+    w 83%
+    white-space:nowrap
+    fs 0
+    .image-wrapper
+      fl()
+      dib()
+      rel()
+      w 20%
+      pad 0 20px 20px 0
+      &:after
+        content ' '
+        fl()
+        pt 100%
+      .image__content
+        pad 0 18%
+        background: #fff
+        abs3 left 0 top 0 right 20px
+        bottom 20px
+        @extends .flex-center
+        flex-direction: column
+        span
+          fs 14px
+          color #222
+          tc()
+          db()
+          mt 10px
+      &:last-child
+        .image__content
+          borr 50%
+          ov()
+          > span
+            abs left 0 top 0
+            wh 100% 100%
+            background rgba(0,0,0,.5)
+            fs 14px
+            color #fff
+            borr 50%
+            mar 0
+            @extends .flex-center
+    .main-img
+      w 40%
+      pad 0 20px 20px 0
+      rel()
+      &:after
+        pt 0
+      p
+        color #a7a6a6
+        w 100%
+        fs 14px
+        font()
+        pt 20px
+        tc()
+
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .45s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.animate-fade
+  transition: all .95s
+  transform: translateY(20px)
+  opacity 0
+
+$animateList = (1 .15s) (2 .19s) (3 .23s) (4 .27s) (5 .31s) (6 .35s) (7 .39s)
+
+for ani in $animateList
+  .animate-fade-active .animate-fade{ani[0]}
+    animation: animate-fade-active .55s ani[1] forwards;
+
+
+@keyframes animate-fade-active {
+  form{
+    transform: translateY(20px)
+    opacity 0
+  }
+  to{
+    transform: translateY(0)
+    opacity 1
+  }
+}
+
+
+#footer
+  pt 90px
+  background: #fff
+  .grid
+    display: flex
+    .logo
+      w 25%
+    .grid__links
+      flex 1
+      pb 80px
+      display: flex
+      .grid__links__item
+        flex 1
+  h2
+    fs 20px
+    mb 20px
+  li
+    mb 18px
+    color: #a7a6a6
+  .copyright
+    tc()
+    fs 10px
+    color: gray
+    pb 10px
+
+
+figure
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+.banner-pages
+  min-height: 405px
+  rel()
+  @extends .flex-center;
+  figure
+    abs left 0 top 0
+    wh 100% 100%
+  h1
+    fs 70px
+    color #fff
+    rel()
+    z 2
+    tc()

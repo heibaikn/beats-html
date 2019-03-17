@@ -1,0 +1,107 @@
+@import '~@shared/stylus/common.styl'
+@import './public.styl'
+
+h2.title
+  fs 40px
+  mt 39px
+  tc()
+
+.section-home
+  pt 50px
+  pb 120px
+
+.banner
+  rel()
+  z-index 2
+  .banner-inner
+    abs3 left 0 right 0 bottom 13%
+  h3
+    fs 40px
+    mb 10px
+  h4
+    fs 22px
+  .banner-inner__content
+    tc()
+    p
+      fw 300
+  .banner-inner__content__button
+    padding-top 50px
+    .button-holder
+      mar 0 10px
+
+.product-list
+  display: flex;
+  pt 20px
+  .item-wrapper
+    w 33.33%
+    pad 10px
+    &:after
+      content ''
+      fl()
+      pt 100%
+    .item
+      background: #fff
+      full()
+      rel()
+    .item-content
+      abs3 left 0 right 0 top 5%
+      h 60%
+      .product-photos
+        pad 0 20%
+      .product-details
+        tc()
+        b
+          fs 18px
+        p
+          color #adadad
+          pt 5px
+          fs 14px
+      .product-btn
+        pt 10px
+        tc()
+
+.product-group
+  pad 10px
+  pt 50px
+  rel()
+  .product-group__image
+    mr 16.66%
+    img
+      db()
+  .product-group__info
+    w 460px
+    abs right 10px bottom 10px
+    background: #fff
+    pad 4.5%
+    h4
+      fs 18px
+      mb 10px
+      fw 300
+    h3
+      fs 22px
+      mb 10px
+    p
+      fw 100
+      mb 40px
+  &.product-group-left
+    .product-group__image
+      mr 0
+      ml 16.66%
+    .product-group__info
+      right auto
+      left 0
+
+
+@media (max-width: 1200px){
+  .product-list .item-wrapper .item-content{
+    .product-details{
+      b, p{
+        fs 14px
+        pt 0
+      }
+    }
+    .product-btn{
+      pt 5px
+    }
+  }
+} 
