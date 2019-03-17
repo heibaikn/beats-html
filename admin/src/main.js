@@ -6,10 +6,18 @@ import store from './store';
 import App from './app.vue';
 import '@/locale';
 import 'iview/dist/styles/iview.css';
-import VueI18n from 'vue-i18n';
+// import VueI18n from 'vue-i18n';
 import { VirtualScroller } from 'vue-virtual-scroller';
 
-Vue.use(VueI18n);
+import * as api from './api';
+
+import './views/iconfont.css';
+
+if (process.env.NODE_ENV === 'development') {
+    require('./mock');
+}
+// Vue.use(VueI18n);
+Vue.prototype.api = api;
 Vue.use(iView);
 Vue.component('virtual-scroller', VirtualScroller);
 

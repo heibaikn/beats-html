@@ -7,7 +7,7 @@ let util = {
 
 };
 util.title = function (title) {
-    title = title || 'iView admin';
+    title = title || '广州市白云区华义电子厂 - 后台管理系统';
     window.document.title = title;
 };
 
@@ -262,6 +262,23 @@ util.checkUpdate = function (vm) {
                 title: 'iview-admin更新啦',
                 desc: '<p>iView-admin更新到了' + version + '了，去看看有哪些变化吧</p><a style="font-size:13px;" href="https://github.com/iview/iview-admin/releases" target="_blank">前往github查看</a>'
             });
+        }
+    });
+};
+
+util.setRuleValidate = function (filterKey) {
+    if (!filterKey) filterKey = [];
+    for (let i in this.formCustom) {
+        if (filterKey.indexOf(i) == -1) {
+            this.ruleValidate[i] = [{ required: true, message: '不能为空' }];
+        }
+    }
+};
+
+util.extend = function (vmData, source) {
+    Object.keys(source).forEach(v => {
+        if (vmData[v]) {
+            vmData[v] = source[v];
         }
     });
 };

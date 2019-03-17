@@ -1,5 +1,6 @@
 <style lang="less">
     @import "./main.less";
+    .logo-color{color: #fff; font-size: 20px; line-height: 38px;}
 </style>
 <template>
     <div class="main" :class="{'main-hide-text': shrink}">
@@ -12,8 +13,7 @@
                 :open-names="openedSubmenuArr"
                 :menu-list="menuList">
                 <div slot="top" class="logo-con">
-                    <img v-show="!shrink"  src="../images/logo.jpg" key="max-logo" />
-                    <img v-show="shrink" src="../images/logo-min.jpg" key="min-logo" />
+                    <span class="logo-color">华义电子厂</span>
                 </div>
             </shrinkable-menu>
         </div>
@@ -32,8 +32,7 @@
                 <div class="header-avator-con">
                     <full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>
                     <lock-screen></lock-screen>
-                    <message-tip v-model="mesCount"></message-tip>
-                    <theme-switch></theme-switch>
+                    <!-- <theme-switch></theme-switch> -->
                     
                     <div class="user-dropdown-menu-con">
                         <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
@@ -71,7 +70,6 @@
     import breadcrumbNav from './main-components/breadcrumb-nav.vue';
     import fullScreen from './main-components/fullscreen.vue';
     import lockScreen from './main-components/lockscreen/lockscreen.vue';
-    import messageTip from './main-components/message-tip.vue';
     import themeSwitch from './main-components/theme-switch/theme-switch.vue';
     import Cookies from 'js-cookie';
     import util from '@/libs/util.js';
@@ -83,7 +81,6 @@
             breadcrumbNav,
             fullScreen,
             lockScreen,
-            messageTip,
             themeSwitch
         },
         data () {

@@ -5,7 +5,7 @@ export const loginRouter = {
     path: '/login',
     name: 'login',
     meta: {
-        title: 'Login - 登录'
+        title: '广州市白云区华义电子厂 - 登录'
     },
     component: resolve => { require(['@/views/login.vue'], resolve); }
 };
@@ -37,12 +37,6 @@ export const page500 = {
     component: resolve => { require(['@/views/error-page/500.vue'], resolve); }
 };
 
-export const preview = {
-    path: '/preview',
-    name: 'preview',
-    component: resolve => { require(['@/views/form/article-publish/preview.vue'], resolve); }
-};
-
 export const locking = {
     path: '/locking',
     name: 'locking',
@@ -57,7 +51,7 @@ export const otherRouter = {
     component: Main,
     children: [
         { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: resolve => { require(['@/views/home/home.vue'], resolve); } },
-        { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['@/views/own-space/own-space.vue'], resolve); } },
+        { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['@/views/own-space/own-space.vue'], resolve); } }
         // { path: 'message', title: '消息中心', name: 'message_index', component: resolve => { require(['@/views/message/message.vue'], resolve); } }
     ]
 };
@@ -65,44 +59,61 @@ export const otherRouter = {
 // 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
 export const appRouter = [
     {
-        path: '/access',
-        icon: 'key',
-        name: 'access',
-        title: '权限管理',
+        path: '/user',
+        icon: 'a iconfont iconaddressbook_fill',
+        title: { i18n: '后台用户管理' },
+        name: 'user',
         component: Main,
         children: [
-            { path: 'index', title: '权限管理', name: 'access_index', component: resolve => { require(['@/views/access/access.vue'], resolve); } }
+            { path: 'index', title: { i18n: '后台用户管理' }, name: 'user_index', component: resolve => { require(['@/views/user.vue'], resolve); } }
         ]
     },
     {
-        path: '/access-test',
-        icon: 'lock-combination',
-        title: '权限测试页',
-        name: 'accesstest',
-        access: 0,
+        path: '/category',
+        icon: 'a iconfont iconcreatetask_fill',
+        title: { i18n: '分类管理' },
+        name: 'category',
         component: Main,
         children: [
-            { path: 'index', title: '权限测试页', name: 'accesstest_index', access: 0, component: resolve => { require(['@/views/access/access-test.vue'], resolve); } }
+            { path: 'index', title: { i18n: '分类管理' }, name: 'category_index', component: resolve => { require(['@/views/user.vue'], resolve); } }
         ]
     },
     {
-        path: '/international',
-        icon: 'earth',
-        title: {i18n: 'international'},
-        name: 'international',
+        path: '/product',
+        icon: 'a iconfont iconerji',
+        title: { i18n: '产品编辑' },
+        name: 'product',
         component: Main,
         children: [
-            { path: 'index', title: {i18n: 'international'}, name: 'international_index', component: resolve => { require(['@/views/international/international.vue'], resolve); } }
+            { path: 'index', title: { i18n: '产品编辑' }, name: 'product_index', component: resolve => { require(['@/views/user.vue'], resolve); } }
         ]
     },
-   
+    {
+        path: '/news',
+        icon: 'a iconfont iconxinwen',
+        title: { i18n: '新闻管理' },
+        name: 'news',
+        component: Main,
+        children: [
+            { path: 'index', title: { i18n: '新闻管理' }, name: 'news_index', component: resolve => { require(['@/views/user.vue'], resolve); } }
+        ]
+    },
+    {
+        path: '/messages',
+        icon: 'a iconfont iconmessage',
+        title: { i18n: '留言板' },
+        name: 'messages',
+        component: Main,
+        children: [
+            { path: 'index', title: { i18n: '留言板' }, name: 'messages_index', component: resolve => { require(['@/views/user.vue'], resolve); } }
+        ]
+    }
 ];
 
 // 所有上面定义的路由都要写在下面的routers里
 export const routers = [
     loginRouter,
     otherRouter,
-    preview,
     locking,
     ...appRouter,
     page500,
