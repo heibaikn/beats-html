@@ -147,7 +147,7 @@ header#header
       fl()
       w 130px
       tc()
-    .hover a.hover
+    .hover a
         rel()
         &:after
           content ''
@@ -166,15 +166,14 @@ header#header
         transform: translateY(0)
         opacity: 1;
 
-      i{
+      i
         color #ccc
         vertical-align: top
         dib()
         transition: all .35s
-      }
       .arrow-active
-        transform: rotate(180deg)
-        color $red
+        transform: rotate(180deg);
+        color: $red;
     li.last
       w 12%
       i{
@@ -378,3 +377,31 @@ figure
     rel()
     z 2
     tc()
+
+
+.pagination{
+	text-align: center;
+	li{
+    display: inline-block;
+    a{
+      db()
+      font-size: 14px;
+      width: auto;
+      line-height: 30px;
+      padding: 0 12px;
+      border: 1px solid #dcdee2;
+      border-radius: 2px;
+    }
+    cursor: pointer;
+    margin-right: 7px;
+    &.disabled a{
+      cursor: no-drop;
+      opacity: .6;
+    }
+    &.active a{
+      color: #fff;
+      border: 1px solid $blue;
+      color: $blue;
+    }
+	}
+}

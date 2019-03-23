@@ -1975,7 +1975,6 @@ dom-serializer@0:
 dom7@^2.1.3:
   version "2.1.3"
   resolved "http://registry.npm.taobao.org/dom7/download/dom7-2.1.3.tgz#a736f9c3bfbc4ca039a81cd095f97d1d7f3de19c"
-  integrity sha1-pzb5w7+8TKA5qBzQlfl9HX894Zw=
   dependencies:
     ssr-window "^1.0.1"
 
@@ -2118,6 +2117,10 @@ es-to-primitive@^1.2.0:
 es5-ext@^0.10.14, es5-ext@^0.10.35, es5-ext@^0.10.9, es5-ext@~0.10.14:
   version "0.10.49"
   resolved "http://registry.npm.taobao.org/es5-ext/download/es5-ext-0.10.49.tgz#059a239de862c94494fec28f8150c977028c6c5e"
+  dependencies:
+    es6-iterator "~2.0.3"
+    es6-symbol "~3.1.1"
+    next-tick "^1.0.0"
 
 es6-iterator@^2.0.1, es6-iterator@~2.0.1:
   version "2.0.3"
@@ -5599,7 +5602,6 @@ sshpk@^1.7.0:
 ssr-window@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/ssr-window/download/ssr-window-1.0.1.tgz#30752a6a4666e7767f0b7e6aa6fc2fdbd0d9b369"
-  integrity sha1-MHUqakZm53Z/C35qpvwv29DZs2k=
 
 ssri@^5.2.4:
   version "5.3.0"
@@ -5777,7 +5779,6 @@ svgo@^0.7.0:
 swiper@^4.0.7:
   version "4.5.0"
   resolved "http://registry.npm.taobao.org/swiper/download/swiper-4.5.0.tgz#4d870bec4f5abe2fb259325849dd2641c9243c0d"
-  integrity sha1-TYcL7E9avi+yWTJYSd0mQckkPA0=
   dependencies:
     dom7 "^2.1.3"
     ssr-window "^1.0.1"
@@ -6123,7 +6124,6 @@ vm-browserify@0.0.4:
 vue-awesome-swiper@^3.1.3:
   version "3.1.3"
   resolved "http://registry.npm.taobao.org/vue-awesome-swiper/download/vue-awesome-swiper-3.1.3.tgz#05500b501ffb3fec9bf7eb9985bcf4ae8360ed9e"
-  integrity sha1-BVALUB/7P+yb9+uZhbz0roNg7Z4=
   dependencies:
     object-assign "^4.1.1"
     swiper "^4.0.7"
@@ -6131,11 +6131,6 @@ vue-awesome-swiper@^3.1.3:
 vue-class-component@^7.0.1:
   version "7.0.1"
   resolved "http://registry.npm.taobao.org/vue-class-component/download/vue-class-component-7.0.1.tgz#7af2225c600667c7042b60712eefdf41dfc6de63"
-
-vue-concise-slider@^3.3.8:
-  version "3.3.8"
-  resolved "http://registry.npm.taobao.org/vue-concise-slider/download/vue-concise-slider-3.3.8.tgz#9b318b1dc22511d5b3458b6f6ea428b622ef6d7d"
-  integrity sha1-mzGLHcIlEdWzRYtvbqQotiLvbX0=
 
 vue-eslint-parser@^2.0.3:
   version "2.0.3"

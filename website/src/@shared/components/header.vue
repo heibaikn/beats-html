@@ -6,9 +6,10 @@
       </div>
       <nav>
         <ul>
+          <li class="hover "><a href="/index.html">首页</a></li>
           <li class="hover active"><a href="/about/index.html">公司介绍</a></li>
           <li class="hover"><a href="/news/index.html">新闻中心</a></li>
-          <li class="hover">
+          <li class="">
             <a
             @mouseover="MenuHover(0)" 
             @mouseout="MenuHoverOut(0)" 
