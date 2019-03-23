@@ -9,68 +9,18 @@ img
 body
   pt 80px
 
-.container-margin
-  mt 115px
-  mb 115px
+#main-content
+  mar 100px auto
+  pad 50px
+  pb 200px
+  background #fff
+  h2
+    fs 22px
+    mb 40px
+    tc()
 
-.product-content
-  display: flex
-  pad 60px 0
-  .product-content__images
-    w 50%
-    min-width 500px
-    .main-image
-      wh 500px 500px
-      ov()
-      rel()
-      @extends .flex-center;
-      mar 0 auto
-      mb 30px
-  .product-content__info
-    flex 1
-    pl 30px
-    pr 30px
-    display: flex;
-    align-self: center;
-    flex-direction: column
-    h1
-      fs 38px
-      mb 30px
-    .price
-      font-A()
-      fs 30px
-      // color $red
-      fw 100
-    .price-box
-      background-color: rgba(162, 162, 162, 0.13);
-      pad 30px
-      borr 4px
-      p
-        mb 10px
-        color #828282
-        &:last-child
-          mb 0
-      .tm-price
-        fs 24px
-      .font
-        font-A()
-        fs 20px
-    .button-buy
-      pt 40px
-
-
-  .small-list
-    display: flex;
-    ov()
-    overflow-x: auto;
-    justify-content: center;
-    .item
-      wh 100px 100px
-      border 1px solid #e8e7e7
-      borr 4px;
-      mr 10px
-      flex-shrink: 0;
-      transition:  all .4s
-      cur()
-      &:hover, &.active
-        border 1px solid $red
+.job-center
+  width: 730px;
+  mar 0 auto
+  p
+    mb 10px

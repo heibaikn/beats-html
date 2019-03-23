@@ -9,68 +9,50 @@ img
 body
   pt 80px
 
-.container-margin
-  mt 115px
-  mb 115px
+#main-content
+  mar 100px auto
+  pad 50px
+  pb 200px
+  background #fff
+  h2
+    fs 22px
+    mb 40px
+    tc()
 
-.product-content
-  display: flex
-  pad 60px 0
-  .product-content__images
+.feedback
+  width: 800px;
+  mar 0 auto
+  display: flex;
+  flex-wrap: wrap;
+  .group
     w 50%
-    min-width 500px
-    .main-image
-      wh 500px 500px
-      ov()
-      rel()
-      @extends .flex-center;
-      mar 0 auto
-      mb 30px
-  .product-content__info
-    flex 1
-    pl 30px
-    pr 30px
+    pr 20px
     display: flex;
-    align-self: center;
-    flex-direction: column
-    h1
-      fs 38px
-      mb 30px
-    .price
-      font-A()
-      fs 30px
-      // color $red
-      fw 100
-    .price-box
-      background-color: rgba(162, 162, 162, 0.13);
-      pad 30px
-      borr 4px
-      p
-        mb 10px
-        color #828282
-        &:last-child
-          mb 0
-      .tm-price
-        fs 24px
-      .font
-        font-A()
-        fs 20px
-    .button-buy
-      pt 40px
-
-
-  .small-list
-    display: flex;
-    ov()
-    overflow-x: auto;
-    justify-content: center;
-    .item
-      wh 100px 100px
-      border 1px solid #e8e7e7
-      borr 4px;
-      mr 10px
-      flex-shrink: 0;
-      transition:  all .4s
-      cur()
-      &:hover, &.active
-        border 1px solid $red
+    mb 15px
+    .label
+      w 60px
+      lh 36px
+      &.label--full
+        w 100%
+    .content
+      flex 1
+      input.input 
+        border: 1px solid #dedfe0;
+        wh 200px 36px
+        borr 4px
+        pl 10px
+      textarea
+        border: 1px solid #dedfe0;
+        wh 400px 100px
+        borr 4px
+        pad 5px
+      label
+        mr 10px
+  .group--full
+    w 100%
+    display: block;
+.group-btn
+  pt 50px
+  tc()
+  > a
+    mar 0 20px
