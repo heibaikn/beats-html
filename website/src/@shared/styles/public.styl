@@ -140,12 +140,32 @@ header#header
     }
   nav
     fs 18px
+    flex-center()
     ul
       pad 7px 40px 0 70px
     li
       fl()
-      w 22%
+      w 130px
       tc()
+    .hover a.hover
+        rel()
+        &:after
+          content ''
+          db()
+          wh 35px 3px
+          background: $red;
+          abs3 left 0 right 0 bottom -10px
+          mar 0 auto
+          transition:  all .35s
+          opacity: 0;
+          transform: translateY(10px)
+        &:hover:after
+          transform: translateY(0)
+          opacity: 1;
+      &.active a:after
+        transform: translateY(0)
+        opacity: 1;
+
       i{
         color #ccc
         vertical-align: top

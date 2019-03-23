@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/qqhluckyi/beats-html#readme",
   "devDependencies": {
+    "vue-concise-slider": "^3.3.8",
     "vue-property-decorator": "^8.0.0"
   }
 }

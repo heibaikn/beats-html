@@ -6,6 +6,11 @@ vue-class-component@^7.0.1:
   version "7.0.1"
   resolved "http://registry.npm.taobao.org/vue-class-component/download/vue-class-component-7.0.1.tgz#7af2225c600667c7042b60712eefdf41dfc6de63"
 
+vue-concise-slider@^3.3.8:
+  version "3.3.8"
+  resolved "http://registry.npm.taobao.org/vue-concise-slider/download/vue-concise-slider-3.3.8.tgz#9b318b1dc22511d5b3458b6f6ea428b622ef6d7d"
+  integrity sha1-mzGLHcIlEdWzRYtvbqQotiLvbX0=
+
 vue-property-decorator@^8.0.0:
   version "8.0.0"
   resolved "http://registry.npm.taobao.org/vue-property-decorator/download/vue-property-decorator-8.0.0.tgz#a2e9bb2419b638cbf1614e17b99aa675d6d4e9e4"

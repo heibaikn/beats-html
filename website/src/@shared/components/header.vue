@@ -6,19 +6,21 @@
       </div>
       <nav>
         <ul>
-          <li>
-            <a 
+          <li class="hover active"><a href="/about/index.html">公司介绍</a></li>
+          <li class="hover"><a href="/news/index.html">新闻中心</a></li>
+          <li class="hover">
+            <a
             @mouseover="MenuHover(0)" 
             @mouseout="MenuHoverOut(0)" 
-            href="">头戴式耳机 
+            href="">产品展示 
               <i :class="{ 'arrow-active' : menuStatus}" class="iconfont iconjiantou_liebiaozhankai"></i>
             </a>
           </li>
-          <li><a>入耳式耳机</a> <i class="iconfont iconjiantou_liebiaozhankai"></i></li>
-          <li><a>扬声器</a></li>
-          <li><a>支持</a></li>
-          <li class="last"><a><i class="iconfont iconcaidan"></i></a></li>
-        </ul>
+          <li class="hover"><a href="/job/index.html">人才中心</a> </li>
+          <li class="hover"><a href="/feedback/index.html">客户留言</a></li>
+          <li class="hover"><a href="/contact/index.html">联系我们</a></li>
+          <!-- <li class="last"><a><i class="iconfont iconcaidan"></i></a></li> -->
+        </ul> 
       </nav>
       <div class="right-icon flex-center">
         <i class="iconfont iconicon_search"></i>
