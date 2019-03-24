@@ -27,6 +27,10 @@ body
   font-def()
   background: #f7f7f8;
 
+body.hidden
+  wh 100% 100%
+  overflow hidden
+
 h3
   font-family 'NeuzeitGro'
 
@@ -111,6 +115,10 @@ a
   &.button-holder--big
     pl 60px
     pr 60px
+  &.button-holder--disabled
+    opacity: .5;
+    background: #ccc;
+    color #fff;
 
 header#header
   h 80px
@@ -126,13 +134,13 @@ header#header
   > .container
     rel()
     h 40px
-    z-index 21
   .logo
     abs left 0 top 0
-    z-index 21
+    z-index 99
   .right-icon
     abs right 0 top 0
     z-index 21
+    cur()
     h 100%
     i{
       fs 18px
@@ -286,6 +294,63 @@ header#header
         font()
         pt 20px
         tc()
+
+.header-search
+  position: fixed;
+  left 0
+  right 0
+  bottom 0
+  top 0
+  background: rgba(26, 27, 28, 0.9)
+  z-index: 30
+  > .container
+    max-width: 1180px;
+    margin: 0 calc(7.5% - -120px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height 80px
+    rel()
+  .search
+    flex 1;
+    input
+      background: #161616;
+      border: 3px solid #161616;
+      wh 100% 50px
+      lh 50px
+      borr 25px
+      fs 24px
+      pad 0 40px
+      pt 6px
+      color #fff
+      font()
+      &:focus
+        border: 3px solid #8c8c8c;
+  .search-close
+    wh 40px 40px
+    borr 50%
+    border: 2px solid #363636;
+    ml 50px
+    cur()
+    @extends .flex-center;
+  .search-box
+    abs left 0 right 0
+    top 100%
+    pt 80px
+    background: #161616
+    box-shadow: 0 13px 35px 0 rgba(0, 0, 0, 0.25);
+    padding: 30px 40px 50px;
+    mt 31px
+    p
+      mb 20px
+      fs 14px
+    li
+      fl()
+      mr 40px
+      mb 10px
+       border-bottom: 1px solid #161616
+      &:hover
+        border-bottom: 1px solid $red
 
 
 

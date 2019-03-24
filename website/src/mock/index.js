@@ -19,3 +19,16 @@ const getUserInfo = function () {
 }
 
 Mock.mock('/api/queryUserInfo', 'post', getUserInfo);
+
+const addCustomerMessage = function () {
+  return {
+    "code": 0,
+    "data": {},
+    "message": "string",
+    "result": true,
+    "serverTime": 0,
+    "version": "string"
+  }
+}
+
+// Mock.mock('/api/customerMessage/addCustomerMessage', 'post', addCustomerMessage);

@@ -23,7 +23,7 @@
           <!-- <li class="last"><a><i class="iconfont iconcaidan"></i></a></li> -->
         </ul> 
       </nav>
-      <div class="right-icon flex-center">
+      <div class="right-icon flex-center" @click="clickSearchIcon">
         <i class="iconfont iconicon_search"></i>
       </div>
     </section>
@@ -73,6 +73,31 @@
       </div>
     </section>
     </transition>
+
+    <transition name="fade">
+    <section class="header-search" v-show="searchPopup" @click="hideSearchMask">
+      <div class="container">
+        <div class="search">
+          <input type="text" placeholder="搜索" ref="search" @click.stop.prevent>
+        </div>
+        <div class="search-close" @click="hideSearchMask">
+          <i class="iconfont iconguanbi"></i>
+        </div>
+
+        <div class="search-box" @click.stop.prevent>
+          <p>热们搜索词</p>
+          <ul class="clear">
+            <li><a href="">耳机</a></li>
+            <li><a href="">耳机</a></li>
+            <li><a href="">耳机</a></li>
+            <li><a href="">耳机</a></li>
+            <li><a href="">耳机</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    </transition>
+
   </header>
 </template>
 
@@ -81,7 +106,8 @@
 export default {
   data(){
     return {
-      menuStatus: false
+      menuStatus: false,
+      searchPopup: false
     }
   },
   methods: {
@@ -101,6 +127,17 @@ export default {
       this.hoverId = setTimeout(()=>{
         this.menuStatus = false
       }, 100)
+    },
+    clickSearchIcon(){
+      this.searchPopup = true;
+      document.body.classList.add('hidden');
+      setTimeout(() => {
+        this.$refs.search.focus();
+      }, 300);
+    },
+    hideSearchMask(){
+      this.searchPopup = false;
+      document.body.classList.remove('hidden');
     }
   },
 }

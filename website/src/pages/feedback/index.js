@@ -2,6 +2,10 @@ import Vue from 'vue'
 import App from './index.vue'
 import 'babel-polyfill'
 
+import layer from 'vue-layer'
+
+Vue.prototype.$layer = layer(Vue);
+
 import './index.styl'
 
 if (process.env.NODE_ENV == 'development') {
