@@ -89,7 +89,7 @@ function pushHtmlWebpackPlugin(){
       new HtmlWebpackPlugin({
         filename: `${page}.html`,
         template: template,
-        chunks: [page],
+        chunks: ['manifest', 'vendor', page],
         inject: true
       })
     )
