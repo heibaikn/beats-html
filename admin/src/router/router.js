@@ -75,7 +75,7 @@ export const appRouter = [
         name: 'category',
         component: Main,
         children: [
-            { path: 'index', title: { i18n: '分类管理' }, name: 'category_index', component: resolve => { require(['@/views/user.vue'], resolve); } }
+            { path: 'index', title: { i18n: '分类管理' }, name: 'category_index', component: resolve => { require(['@/views/category.vue'], resolve); } }
         ]
     },
     {
@@ -85,7 +85,7 @@ export const appRouter = [
         name: 'product',
         component: Main,
         children: [
-            { path: 'index', title: { i18n: '产品编辑' }, name: 'product_index', component: resolve => { require(['@/views/user.vue'], resolve); } }
+            { path: 'index', title: { i18n: '产品编辑' }, name: 'product_index', component: resolve => { require(['@/views/product.vue'], resolve); } }
         ]
     },
     {
@@ -95,7 +95,7 @@ export const appRouter = [
         name: 'news',
         component: Main,
         children: [
-            { path: 'index', title: { i18n: '新闻管理' }, name: 'news_index', component: resolve => { require(['@/views/user.vue'], resolve); } }
+            { path: 'index', title: { i18n: '新闻管理' }, name: 'news_index', component: resolve => { require(['@/views/news.vue'], resolve); } }
         ]
     },
     {
@@ -105,7 +105,7 @@ export const appRouter = [
         name: 'messages',
         component: Main,
         children: [
-            { path: 'index', title: { i18n: '留言板' }, name: 'messages_index', component: resolve => { require(['@/views/user.vue'], resolve); } }
+            { path: 'index', title: { i18n: '留言板' }, name: 'messages_index', component: resolve => { require(['@/views/message.vue'], resolve); } }
         ]
     }
 ];

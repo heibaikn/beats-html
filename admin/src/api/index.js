@@ -24,7 +24,7 @@ export const addCompanyIndelCompanyInfofo = (param = {}) => {
 
 // 客户留言管理
 export const getCustomerMessages = (param = {}) => {
-    return post('/api/customerMessage/getCustomerMessages', param);
+    return post('/api/admin/customerMessage/getCustomerMessages', param);
 };
 
 // 联系我们管理
@@ -43,10 +43,23 @@ export const delRecruitmentInfo = (param = {}) => {
     return post('/api/admin/recruitmentInfo/delRecruitmentInfo', param);
 };
 
-// 人才中心管理
+// 新闻管理
+export const getNewsInfos = (param = {}) => {
+    return post('/api/newsInfo/getNewsInfos', param);
+};
 export const addNewsInfo = (param = {}) => {
     return post('/api/admin/newsInfo/addNewsInfo', param);
 };
 export const delNewsInfo = (param = {}) => {
     return post('/api/admin/newsInfo/delNewsInfo', param);
+};
+
+// 分类
+export const categories = (param = {}) => {
+    return post('/api/goods/categories', param);
+};
+
+// 商品
+export const categoryGoods = (param = {}) => {
+    return post('/api/goods/categoryGoods', param);
 };

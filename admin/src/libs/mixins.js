@@ -1,6 +1,6 @@
 export default {
     created () {
-        this.setRuleValidate();
+        this.setRuleValidate(this.filterKey);
     },
     methods: {
         setRuleValidate (filterKey) {
