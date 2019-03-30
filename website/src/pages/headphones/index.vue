@@ -1,6 +1,7 @@
 <template>
   <div id="pages">
     <mainHeader />
+    <fixedMessage />
     <section id="main-content">
       <div class="banner-pages">
         <figure :style="styleBackground"></figure>
@@ -70,6 +71,7 @@
 <script>
 import mainHeader from '@shared/components/header'
 import mainFooter from '@shared/components/footer'
+import fixedMessage from '@shared/components/fixedMessage'
 import { getUserInfo } from '@/api'
 import pageBanner from '../../assets/page-img.jpg'
 
@@ -82,7 +84,8 @@ export default {
   },
   components: {
     mainHeader,
-    mainFooter
+    mainFooter,
+    fixedMessage
   },
   computed: {
     styleBackground(){
@@ -92,6 +95,8 @@ export default {
     }
   },
   created(){
+    document.title = this.$language.homeTitle;
+
     getUserInfo().then(d=>{
       console.log(d)
     })

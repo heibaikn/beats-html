@@ -149,6 +149,7 @@ header#header
   nav
     fs 18px
     flex-center()
+    rel()
     ul
       pad 7px 40px 0 70px
     li
@@ -187,6 +188,8 @@ header#header
       i{
         fs 26px
       }
+    .nav-right
+      abs right 0 top 0
 
 .header-mask
   position: fixed
@@ -304,6 +307,7 @@ header#header
   background: rgba(26, 27, 28, 0.9)
   z-index: 30
   > .container
+    w 80%
     max-width: 1180px;
     margin: 0 calc(7.5% - -120px);
     display: flex;
@@ -334,7 +338,7 @@ header#header
     cur()
     @extends .flex-center;
   .search-box
-    abs left 0 right 0
+    abs left 0 right 93px
     top 100%
     pt 80px
     background: #161616
@@ -470,3 +474,121 @@ figure
     }
 	}
 }
+
+// fixed-message
+.fixed-icon
+  position: fixed;
+  right: 0;
+  top: 50%;
+  z-index 200
+  mt 30px
+  background: #fff;
+  tc()
+  cur()
+  wh 70px 75px
+  box-shadow: 0 0 2px #e4e4e4;
+  @extends .flex-center;
+  flex-direction: column;
+  i.iconfont
+    color #ff552e
+    fs 30px
+  p
+    color #777
+    fs 12px
+    mt 5px
+
+.fixed-popup-bg
+  position: fixed;
+  left 0
+  right 0
+  top 0
+  bottom 0
+  z-index 299
+  background: rgba(0,0,0,.5)
+
+.fixed-popup
+  position: absolute;
+  left 50%
+  w 840px
+  top 0
+  ml -420px
+  background: #fff;
+  padding: 30px;
+  pb 60px
+  z-index 300
+  borr 8px
+  h3
+    fs 20px
+    tc()
+    mb 30px
+  .colse
+    abs right 20px top 20px
+    cur()
+    i
+      fs 20px
+
+  .feedback
+    pl 0
+    .group-btn
+      pt 20px
+
+// message
+.feedback
+  width: 900px;
+  mar 0 auto
+  display: flex;
+  flex-wrap: wrap;
+  pl 76px
+  .group
+    w 50%
+    pr 20px
+    display: flex;
+    mb 25px
+    rel()
+    .label
+      w 60px
+      lh 36px
+      &.label--full
+        w 100%
+    .content
+      flex 1
+      input.input 
+        border: 1px solid #dedfe0;
+        wh 250px 36px
+        borr 4px
+        pl 10px
+      textarea
+        border: 1px solid #dedfe0;
+        wh 311px 100px
+        borr 4px
+        pad 5px
+      label
+        mr 10px
+    .error
+      abs left 60px top 38px
+      color $red
+      fs 12px
+    .error--big
+      left 0
+      top 136px
+  .group--full
+    w 100%
+    display: block;
+  .group--column
+    flex-direction: column;
+  .group--error
+    .content
+      input.input, textarea
+        border 1px solid $red
+  
+.group-btn
+  pt 50px
+  tc()
+  > a
+    mar 0 20px
+
+.group-error
+  wh 100% 30px
+  tc()
+  color $red
+  fs 16px

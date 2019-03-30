@@ -47,14 +47,14 @@ const getCustomerMessages = function () {
             company: Random.csentence(2, 5),
             face: Random.dataImage('300x250', 'mock的图片'),
             dealFlag: '是',
-            documentQuality: '是',
+            documentQuality: Mock.mock({ 'number|0-3': 3 }).number,
             fax: 'fax',
             mailAddress: Random.email(),
             mobilePhone: 'mobilePhone',
             name: Random.cname(),
             opinion: Random.cname(),
             postalCode: 'postalCode',
-            purposeFlag: '否',
+            purposeFlag: Mock.mock({ 'number|0-3': 3 }).number,
             createDate: Random.date() + ' ' + Random.time()
         };
     }

@@ -1,6 +1,7 @@
 <template>
   <div id="pages">
     <mainHeader />
+    <fixedMessage />
     <section id="main-content">
       <section class="container">
 
@@ -38,6 +39,8 @@
 import PicZoom from '@shared/components/PicZoom'
 import mainHeader from '@shared/components/header'
 import mainFooter from '@shared/components/footer'
+import fixedMessage from '@shared/components/fixedMessage'
+
 import { getUserInfo } from '@/api'
 import detailImg from '../../assets/detail-img.png'
 import detailImg3 from '../../assets/img3.png'
@@ -57,12 +60,15 @@ export default {
   components: {
     mainHeader,
     mainFooter,
+    fixedMessage,
     PicZoom
   },
   computed: {
     
   },
   created(){
+    document.title = this.$language.homeTitle;
+
     this.detailImg = this.imgsList[0]
     // getUserInfo().then(d=>{
     //   console.log(d)

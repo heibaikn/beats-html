@@ -22,6 +22,9 @@
           <li class="hover"><a href="/contact/index.html">联系我们</a></li>
           <!-- <li class="last"><a><i class="iconfont iconcaidan"></i></a></li> -->
         </ul> 
+        <div class="nav-right">
+          <li>语音</li>
+        </div>
       </nav>
       <div class="right-icon flex-center" @click="clickSearchIcon">
         <i class="iconfont iconicon_search"></i>

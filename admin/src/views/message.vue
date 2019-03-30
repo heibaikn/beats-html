@@ -84,13 +84,13 @@
                       <span>{{modal3Data.address}}</span>
                   </FormItem>
                   <FormItem label="您的目的是否已经达到：">
-                      <span>{{modal3Data.purposeFlag}}</span>
+                      <span>{{modal3Data.purposeFlag|purposeFlag}}</span>
                   </FormItem>
                   <FormItem label="是否提交服务解决问题：">
                       <span>{{modal3Data.dealFlag}}</span>
                   </FormItem>
                   <FormItem label="请评价该文档的质量：">
-                      <span>{{modal3Data.documentQuality}}</span>
+                      <span>{{modal3Data.documentQuality|documentQuality}}</span>
                   </FormItem>
                 </Form>
             </div>
@@ -204,6 +204,38 @@
         },
         computed: {
            
+        },
+        filters: {
+            // 文档质量
+            documentQuality(val){
+                if(val == 3){
+                    return '非常好'
+                }
+                if(val == 2){
+                    return '很好'
+                }
+                if(val == 1){
+                    return '平均'
+                }
+                if(val == 0){
+                    return '差'
+                }
+            },
+            // 目的是否达到
+            purposeFlag(val){
+                if(val == 0){
+                    return '否'
+                }
+                if(val == 1){
+                    return '是'
+                }
+                if(val == 2){
+                    return '一部分'
+                }
+                if(val == 3){
+                    return '仅浏览'
+                }
+            }
         },
         mixins: [mixins],
         methods: {

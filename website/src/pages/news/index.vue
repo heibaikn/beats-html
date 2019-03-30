@@ -2,6 +2,7 @@
   <div id="pages">
     <mainHeader />
     <banner />
+    <fixedMessage />
     <section id="main-content" class="container">
       <nav>
         <div class="nav-item active">公司动态</div>
@@ -28,6 +29,7 @@ import mainHeader from '@shared/components/header'
 import mainFooter from '@shared/components/footer'
 import banner from '@shared/components/banner'
 import navigation from '@shared/components/navigation'
+import fixedMessage from '@shared/components/fixedMessage'
 import { getUserInfo } from '@/api'
 
 export default {
@@ -41,6 +43,7 @@ export default {
   components: {
     mainHeader,
     mainFooter,
+    fixedMessage,
     banner,
     navigation
   },
@@ -48,7 +51,7 @@ export default {
     
   },
   created(){
-    
+    document.title = this.$language.newsTitle;
   },
   methods: {
     

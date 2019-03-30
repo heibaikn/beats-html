@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <mainHeader />
+    <fixedMessage />
 
     <section class="banner">
       <img src="./assets/banner1.jpg" alt="" />
@@ -111,15 +112,19 @@
 <script>
 import mainHeader from '@shared/components/header'
 import mainFooter from '@shared/components/footer'
+import fixedMessage from '@shared/components/fixedMessage'
 import { getUserInfo } from '@/api'
 
 export default {
   name: 'Home',
   components: {
     mainHeader,
-    mainFooter
+    mainFooter,
+    fixedMessage,
   },
   created(){
+    document.title = this.$language.homeTitle;
+
     getUserInfo().then(d=>{
       console.log(d)
     })
