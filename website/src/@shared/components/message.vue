@@ -23,7 +23,7 @@
         </div>
 
         <div class="group" :class="{'group--error': errorData.key == 'mobilePhone'}">
-          <div class="label">电话：</div>
+          <div class="label">{{$language.phone}}: </div>
           <div class="content">
             <input type="text" class="input"  v-model="userData.mobilePhone"/>
             <span class="red">*</span>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="group" :class="{'group--error': errorData.key == 'mailAddress'}">
-          <div class="label">邮箱：</div>
+          <div class="label">{{$language.email}}: </div>
           <div class="content">
             <input type="text" class="input"  v-model="userData.mailAddress"/>
             <span class="red">*</span>
@@ -107,8 +107,8 @@
     </div>
 
     <div class="group-btn">
-      <a class="button-holder button-holder--big button-holder--red2" @click="clickApply" :class="{'button-holder--disabled': isLoading}"><span class="button-inner">发送</span><span class="mask"></span></a>
-      <a class="button-holder " @click="clickRestart"><span class="button-inner">重新填写</span><span class="mask"></span></a>
+      <a class="button-holder button-holder--big button-holder--red2" @click="clickApply" :class="{'button-holder--disabled': isLoading}"><span class="button-inner">{{$language.send}}</span><span class="mask"></span></a>
+      <a class="button-holder " @click="clickRestart"><span class="button-inner">{{$language.reset}}</span><span class="mask"></span></a>
     </div>
 
   </section>
@@ -139,27 +139,27 @@ export default {
       },
       rules: {
         name: {
-          required: '姓名不能为空',
+          required: '姓名不能为空 | Name cannot be empty',
           reg: /^[A-Za-z0-9\.\u4e00-\u9fa5]{2,3}$/,
-          errorMsg: '姓名格式不正确'
+          errorMsg: '姓名格式不正确 | Name format is incorrect'
         },
         company: {
-          required: '公司名称不能为空',
+          required: '公司名称不能为空 | Company name cannot be empty',
           reg: /^[A-Za-z0-9\.\u4e00-\u9fa5]{2,20}$/,
-          errorMsg: '公司名称格式不正确'
+          errorMsg: '公司名称格式不正确 | Company name format is incorrect'
         },
         mobilePhone: {
-          required: '电话不能为空',
+          required: '电话不能为空 | Phone cannot be empty',
           reg: /^\d{7,11}$/,
-          errorMsg: '电话格式不正确'
+          errorMsg: '电话格式不正确 | Phone format is incorrect'
         },
         mailAddress: {
-          required: '邮箱不能为空',
+          required: '邮箱不能为空 | E-mail can not be empty',
           reg: /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/,
-          errorMsg: '邮箱格式不正确'
+          errorMsg: '邮箱格式不正确 | E-mail format is incorrect'
         },
         opinion: {
-          required: '意见不能为空',
+          required: '意见不能为空 | Comments cannot be empty',
         }
       },
     }

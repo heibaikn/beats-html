@@ -2,7 +2,7 @@
   <section class="fixed-message">
     <div class="item fixed-icon" @click="showPopup">
       <i class="iconfont iconliuyan"></i>
-      <p>在线留言</p>
+      <p>{{$language.comments}}</p>
     </div>
 
     <div class="fixed-popup-bg" v-show="popupStatus" @click="hidePopup"></div>

@@ -3,7 +3,7 @@
 	<ul class="pagination">
 		<li :class="{disabled:current==1}">
 			<a href="javascript:;" @click="goPage(current==1?1:current-1)" aria-label="Previous">
-				<span aria-hidden="true">上一页</span>
+				<span aria-hidden="true">{{$language.previousPage}}</span>
 			</a>
 		</li>
 		<li v-for="(page,index) in showPageBtn" :key="index" :class="{active:page==current}">
@@ -12,11 +12,11 @@
 		</li>
 		<li :class="{disabled:current==pages}">
 			<a href="javascript:;" @click="goPage(current==pages?pages:current+1)" aria-label="Next">
-				<span aria-hidden="true">下一页</span>
+				<span aria-hidden="true">{{$language.nextPage}}</span>
 			</a>
 		</li>
 		<li :class="{disabled:pages==pages}">
-			<a href="javascript:void(0);"> 共  {{pages}} 页 </a>
+			<a href="javascript:void(0);"> {{$language.total}}  {{pages}} {{$language.page}} </a>
 		</li>
 	</ul>
 </nav>

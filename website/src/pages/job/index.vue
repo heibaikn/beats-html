@@ -5,7 +5,7 @@
     <banner />
     <section id="main-content" class="container">
       <div class="job-center">
-        <h2>人才中心</h2>
+        <h2 class="content-h2-title">人才中心</h2>
         <p>公司与工厂分开运作，现为扩大公司规模，需招外贸业务员若干名。</p>
         <p>业务运作平台：</p>
         <p>广交会（一年两度），香港环球资源电子展（一年两度），阿里巴巴国内及国际付费平台（已操作10年）</p>

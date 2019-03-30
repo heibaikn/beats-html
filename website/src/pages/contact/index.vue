@@ -6,7 +6,7 @@
     <banner />
     <section id="main-content" class="container">
       <div class="job-center">
-        <h2>联系我们</h2>
+        <h2 class="content-h2-title">联系我们</h2>
         
         <p>广州市白云区华义电子厂</p>
         <p>工厂：中国 广东 广州市 白云区 均禾工业区188号</p>

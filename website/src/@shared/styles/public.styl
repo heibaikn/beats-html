@@ -43,6 +43,11 @@ a
 .iconfont
   fs 22px
 
+.content-h2-title
+  fs 30px
+  mt 60px
+  mb 40px
+
 .flex-center
   display: flex;
   justify-content: center;
@@ -189,7 +194,37 @@ header#header
         fs 26px
       }
     .nav-right
-      abs right 0 top 0
+      abs right 45px top 11px
+      pad 0 10px 10px
+      cur()
+      fs 14px
+      .language-list
+        abs right 50% top 30px
+        mr -38px
+        background: #fff
+        pad 13px 15px
+        color #222
+        borr 4px
+        fs 14px
+        opacity 0
+        transform: scale(0)
+        transition: opacity,transform .4s
+        transform-origin: center top
+        &:after
+          content ''
+          db()
+          wh 0 0
+          border-left 6px solid transparent;
+          border-right 6px solid transparent;
+          border-bottom 8px solid #fff;
+          abs top -6px left 33px
+        .list
+          pad 3px 0
+          &:hover
+            color $red
+      &:hover .language-list
+        opacity 1
+        transform: scale(1)
 
 .header-mask
   position: fixed
@@ -485,7 +520,8 @@ figure
   background: #fff;
   tc()
   cur()
-  wh 70px 75px
+  wh 70px auto
+  pad 10px 0
   box-shadow: 0 0 2px #e4e4e4;
   @extends .flex-center;
   flex-direction: column;
@@ -509,7 +545,7 @@ figure
 .fixed-popup
   position: absolute;
   left 50%
-  w 840px
+  w 860px
   top 0
   ml -420px
   background: #fff;
@@ -546,7 +582,7 @@ figure
     mb 25px
     rel()
     .label
-      w 60px
+      w 90px
       lh 36px
       &.label--full
         w 100%
@@ -559,13 +595,13 @@ figure
         pl 10px
       textarea
         border: 1px solid #dedfe0;
-        wh 311px 100px
+        wh 340px 100px
         borr 4px
         pad 5px
       label
         mr 10px
     .error
-      abs left 60px top 38px
+      abs left 90px top 38px
       color $red
       fs 12px
     .error--big

@@ -4,7 +4,7 @@ const languageIndex = { chinese: 0, english: 1, japanese: 2, french: 3, german: 
 
 const languageObj = {
   homeTitle: '广州市白云区华义电子厂 | Guangzhou Baiyun District Huayi Electronics Factory',
-  messageTitle: '在线留言 | Online message',
+  messageTitle: '在线留言 | Feedback',
   aboutTitle: '公司介绍 | Company Profile',
   newsTitle: '新闻中心 | News Center',
   productTitle: '产品展示 | Product Display',
@@ -31,12 +31,25 @@ const languageObj = {
   browsing: '仅在浏览，无特别目的 | Only for browsing, no special purpose',
   veryGood: '非常好 | Very good',
   good: '好 | Good',
-  average: '平均 | average',
+  average: '平均 | Average',
   poor: '差 | Very poor',
+
+
+  comments: '在线留言 | Feedback',
+  previousPage: '上一页 | Previous Page',
+  nextPage: '下一页 | Next Page',
+  total: '共 | Total',
+  page: '页 | Page',
+
+  buy: '购买 | Buy',
+
+  send: '发送 | Send',
+  reset: '重新填写 | Reset',
 }
 
 
 export default {
+
   install(Vue){
     let language = {};
     Object.keys(languageObj).forEach(key=>{
@@ -50,6 +63,21 @@ export default {
       }
       language[key] = val;
     });
-    Vue.prototype.$language = language
+    Vue.prototype.$language = language;
+
+    // guid 用户唯一标识
+    function S4() {
+      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    }
+    function setGuid() {
+      return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+    }
+
+    let guid = localStorage.getItem('guid');
+    if (!guid) {
+      localStorage.setItem('guid', setGuid());
+    }
   }
+
+
 }

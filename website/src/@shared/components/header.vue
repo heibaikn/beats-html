@@ -23,7 +23,10 @@
           <!-- <li class="last"><a><i class="iconfont iconcaidan"></i></a></li> -->
         </ul> 
         <div class="nav-right">
-          <li>语音</li>
+          <div class="menu">{{currLanguage}}</div>
+          <div class="language-list">
+            <div class="list" v-for="(lan,index) in languageList" :key="index" @click="selectLanguage(lan)">{{lan.label}}</div>
+          </div>
         </div>
       </nav>
       <div class="right-icon flex-center" @click="clickSearchIcon">
@@ -110,8 +113,20 @@ export default {
   data(){
     return {
       menuStatus: false,
-      searchPopup: false
+      searchPopup: false,
+      currLanguage: '',
+      languageList: [
+        {label: '中文', value: 'chinese'},
+        {label: 'English', value: 'english'},
+      ]
     }
+  },
+  created() {
+    let language = localStorage.getItem('language') || 'chinese';
+    let curr = this.languageList.find(v=>{
+      return v.value == language ? true : false
+    })
+    this.currLanguage = curr.label;
   },
   methods: {
     MenuHover(){
@@ -141,6 +156,10 @@ export default {
     hideSearchMask(){
       this.searchPopup = false;
       document.body.classList.remove('hidden');
+    },
+    selectLanguage(language){
+      localStorage.setItem('language', language.value);
+      location.reload(); 
     }
   },
 }
