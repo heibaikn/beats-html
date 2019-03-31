@@ -38,6 +38,9 @@ export function post (url, params = {}) {
             })
             .catch((error) => {
                 reject(error);
+                if (params.tips === undefined) {
+                    Message.error('后台系统繁忙，请稍后再试');
+                }
             });
     });
 }

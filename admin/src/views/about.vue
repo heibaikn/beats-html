@@ -3,7 +3,7 @@
   max-width: 1200px;
   padding-top: 30px;
   .buttons{
-    padding: 30px 100px;
+    padding: 30px 130px;
   }
   .ivu-btn-large{
     padding: 8px 50px 9px;
@@ -15,11 +15,8 @@
 </style>
 <template>
     <section class="form-content">
-      <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
-          <FormItem label="招聘标题" prop="title">
-              <Input type="text" v-model="formCustom.title"></Input>
-          </FormItem>
-          <FormItem label="招聘内容" prop="content">
+      <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="130">
+          <FormItem label="公司介绍内容：" prop="content">
               <vue-ueditor-wrap v-model="formCustom.content"></vue-ueditor-wrap>
           </FormItem>
       </Form>
@@ -41,7 +38,6 @@ export default {
     return {
       loading: false,
       formCustom: {
-        title: '',
         content: '',
       },
       filterKey: ['content'],
@@ -57,20 +53,16 @@ export default {
 
     },
     confirm(){
-      this.$refs['formCustom'].validate((valid) => {
-        if(valid){
-          this.requestAjax()
-        }
-      })
+      this.requestAjax();
     },
     requestAjax(){
       if(this.loading) return
       let data = this.formCustom;
       let ajax = this.api.addRecruitmentInfo
-      let message = '添加人才招聘成功'
+      let message = '添加公司介绍成功'
 
-      if(this.params.id){
-        message = '更新人才招聘成功'
+      if(this.isEdit){
+        message = '更新公司介绍成功'
         ajax = this.api.updateRecruitmentInfo;
         data.id = this.params.id;
       }
@@ -90,7 +82,9 @@ export default {
       })
     },
     requestOneNew(){
-      this.api.getRecruitmentInfo({id: this.params.id}).then(d=>{
+      this.api.getCompanyInfo().then(d=>{
+        this.isEdit = true;
+        this.formCustom.id = d.id;
         this.formCustom.title = d.title;
         this.formCustom.content = d.content;
       });
@@ -109,11 +103,7 @@ export default {
     
   },
   created () {
-    let params = this.$route.params
-    this.params = params;
-    if(params.id){
-      this.requestOneNew()
-    }
+    this.requestOneNew();
   }
 };
 </script>

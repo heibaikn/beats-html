@@ -9,7 +9,19 @@ const Random = Mock.Random;
 Mock.mock('/api/admin/login', 'post', () => {
     return {
         'code': 200,
-        'data': {},
+        'data': {
+            'createBy': 'string',
+            'createDate': '2019-03-31T08:16:27.398Z',
+            'id': 0,
+            'isDelete': 'string',
+            'loginName': 'string',
+            'mobilePhone': 'string',
+            'name': 'string',
+            'status': 'string',
+            'token': 'string',
+            'updateBy': 'string',
+            'updateDate': '2019-03-31T08:16:27.398Z'
+        },
         'msg': 'string',
         'result': true,
         'serverTime': 0,
@@ -25,6 +37,8 @@ const getUserInfo = function () {
             id: Mock.mock({
                 'number|1-100': 100
             }).number,
+            mobilePhone: '1' + Mock.mock({ 'number|0-1000000000': 1000000000 }).number,
+            password: Mock.mock({ 'number|0-1000000000': 1000000000 }).number,
             title: Random.csentence(5, 30),
             face: Random.dataImage('300x250', 'mock的图片'),
             name: Random.cname(),
@@ -44,7 +58,17 @@ const getUserInfo = function () {
     };
 };
 
-Mock.mock('/api/queryUserInfo', 'post', getUserInfo);
+Mock.mock('/api/admin/getAdmin', 'post', getUserInfo);
+
+Mock.mock('/api/admin/addAdmin', 'post', () => {
+    return {
+        code: 200,
+        data: {
+
+        },
+        msg: ''
+    };
+});
 
 // 留言列表
 const getCustomerMessages = function () {

@@ -9,6 +9,9 @@
     padding: 8px 50px 9px;
   }
 }
+.edui-default .edui-toolbar .edui-combox .edui-combox-body, .edui-default .edui-button-body{
+  display: flex;
+}
 </style>
 <template>
     <section class="form-content">
@@ -63,12 +66,21 @@ export default {
     requestAjax(){
       if(this.loading) return
       let data = this.formCustom;
+      let ajax = this.api.addNewsInfo
+      let message = '添加新闻成功'
+
+      if(this.params.id){
+        message = '更新新闻成功'
+        ajax = this.api.updateNewsInfos;
+        data.id = this.params.id;
+      }
+
       this.loading = true;
 
-      this.api.addNewsInfo(data).then(d=>{
+      ajax(data).then(d=>{
         this.loading = false;
         this.$Message.success({
-          content: '添加新闻成功',
+          content: message,
           duration: 2
         });
         this.initData();
@@ -78,7 +90,7 @@ export default {
       })
     },
     requestOneNew(){
-      this.api.getNewsInfos({id: this.params.id}).then(d=>{
+      this.api.getNewsInfo({id: this.params.id}).then(d=>{
         this.formCustom.title = d.title;
         this.formCustom.content = d.content;
       });
@@ -97,7 +109,7 @@ export default {
     
   },
   created () {
-    let params = this.$route.params
+    let params = this.$route.params || {}
     this.params = params;
     if(params.id){
       this.requestOneNew()

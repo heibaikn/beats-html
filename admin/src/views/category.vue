@@ -156,15 +156,7 @@
             modalOk (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.modal_loading = true;
-                        //添加
-                        if(this.modalType == 1){
-                            
-                        }
-                        //更新
-                        else if(this.modalType == 2){
-                            
-                        }
+                        this.requestAddCate()
                     } else {
                         this.$Message.error('请检测验证信息!');
                     }
@@ -192,13 +184,36 @@
                 }
             },
             cancelModal2(){
-                this.modal2 = false;
+                this.modal2 = false
+                this.modal2Data = {}
             },
-            clickRemoveMessage(){
+            clickRemoveMessage(row){
               this.modal2 = true;
+              this.modal2Data = row;
+            },
+            requestAddCate(){
+                if(this.modal_loading) return;
+                this.modal_loading = true;
+                let url = this.api.addCategory;
+                let message = '添加分类成功'
+                //更新
+                if(this.modalType == 2){
+                    
+                }
+                url(this.formCustom).then(d=>{
+                    this.modalCancel();
+                    this.$Message.success(message);
+                    this.init();
+                })
+                .catch(e=>{
+                    this.modal_loading = false;
+                })
             },
             enterRemoveAjax(){
-              console.log('xx');
+              this.api.deleteCategory({id: this.modal2Data.id}).then(d=>{
+                  this.cancelModal2()
+                  this.init()
+              })
             },
         },
         watch: {

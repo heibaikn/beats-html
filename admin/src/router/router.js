@@ -61,6 +61,26 @@ export const otherRouter = {
 // 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
 export const appRouter = [
     {
+        path: '/about',
+        icon: 'a iconfont icongongsi',
+        title: { i18n: '公司介绍' },
+        name: 'about',
+        component: Main,
+        children: [
+            { path: 'index', title: { i18n: '公司介绍' }, name: 'about_index', component: resolve => { require(['@/views/about.vue'], resolve); } }
+        ]
+    },
+    {
+        path: '/contact',
+        icon: 'a iconfont iconlianxiwomen-copy',
+        title: { i18n: '联系我们' },
+        name: 'contact',
+        component: Main,
+        children: [
+            { path: 'index', title: { i18n: '联系我们' }, name: 'contact_index', component: resolve => { require(['@/views/contact.vue'], resolve); } }
+        ]
+    },
+    {
         path: '/user',
         icon: 'a iconfont iconaddressbook_fill',
         title: { i18n: '后台用户管理' },
