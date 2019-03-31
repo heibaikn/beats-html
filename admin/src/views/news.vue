@@ -88,10 +88,6 @@
                         key: 'title'
                     },
                     {
-                        title: '新闻内容',
-                        key: 'content'
-                    },
-                    {
                         title: '添加时间',
                         key: 'createDate',
                         width: 200

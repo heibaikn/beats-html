@@ -41,6 +41,9 @@ export const delContractInfo = (param = {}) => {
 };
 
 // 人才中心管理
+export const getRecruitmentInfos = (param = {}) => {
+    return post('/api/recruitmentInfo/getRecruitmentInfos', param);
+};
 export const addRecruitmentInfo = (param = {}) => {
     return post('/api/admin/recruitmentInfo/addRecruitmentInfo', param);
 };

@@ -52,7 +52,8 @@ export const otherRouter = {
     children: [
         { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: resolve => { require(['@/views/home/home.vue'], resolve); } },
         { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['@/views/own-space/own-space.vue'], resolve); } },
-        { path: 'news_edit/:id', title: '编辑新闻', name: 'news_edit', component: resolve => { require(['@/views/news_handel.vue'], resolve); } }
+        { path: 'news_edit/:id', title: '编辑新闻', name: 'news_edit', component: resolve => { require(['@/views/news_handel.vue'], resolve); } },
+        { path: 'job_edit/:id', title: '编辑人才招聘', name: 'job_edit', component: resolve => { require(['@/views/job_handel.vue'], resolve); } }
         // { path: 'message', title: '消息中心', name: 'message_index', component: resolve => { require(['@/views/message/message.vue'], resolve); } }
     ]
 };
@@ -107,7 +108,8 @@ export const appRouter = [
         name: 'job',
         component: Main,
         children: [
-            { path: 'index', title: { i18n: '人才中心' }, name: 'job_index', component: resolve => { require(['@/views/job.vue'], resolve); } }
+            { path: 'index', title: { i18n: '人才中心' }, name: 'job_index', component: resolve => { require(['@/views/job.vue'], resolve); } },
+            { path: 'job_handel', title: { i18n: '添加人才招聘' }, name: 'job_handel', component: resolve => { require(['@/views/job_handel.vue'], resolve); } }
         ]
     },
     {

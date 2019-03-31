@@ -13,10 +13,10 @@
 <template>
     <section class="form-content">
       <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
-          <FormItem label="新闻标题" prop="title">
+          <FormItem label="招聘标题" prop="title">
               <Input type="text" v-model="formCustom.title"></Input>
           </FormItem>
-          <FormItem label="新闻内容" prop="content">
+          <FormItem label="招聘内容" prop="content">
               <vue-ueditor-wrap v-model="formCustom.content"></vue-ueditor-wrap>
           </FormItem>
       </Form>
@@ -65,10 +65,10 @@ export default {
       let data = this.formCustom;
       this.loading = true;
 
-      this.api.addNewsInfo(data).then(d=>{
+      this.api.addRecruitmentInfo(data).then(d=>{
         this.loading = false;
         this.$Message.success({
-          content: '添加新闻成功',
+          content: '添加人才招聘成功',
           duration: 2
         });
         this.initData();
@@ -78,7 +78,7 @@ export default {
       })
     },
     requestOneNew(){
-      this.api.getNewsInfos({id: this.params.id}).then(d=>{
+      this.api.getRecruitmentInfos({id: this.params.id}).then(d=>{
         this.formCustom.title = d.title;
         this.formCustom.content = d.content;
       });
