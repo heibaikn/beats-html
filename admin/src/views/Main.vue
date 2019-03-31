@@ -32,6 +32,7 @@
                 <div class="header-avator-con">
                     <full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>
                     <lock-screen></lock-screen>
+                    <language></language>
                     <!-- <theme-switch></theme-switch> -->
                     
                     <div class="user-dropdown-menu-con">
@@ -71,6 +72,7 @@
     import fullScreen from './main-components/fullscreen.vue';
     import lockScreen from './main-components/lockscreen/lockscreen.vue';
     import themeSwitch from './main-components/theme-switch/theme-switch.vue';
+    import language from './main-components/language/language.vue';
     import Cookies from 'js-cookie';
     import util from '@/libs/util.js';
     
@@ -81,7 +83,8 @@
             breadcrumbNav,
             fullScreen,
             lockScreen,
-            themeSwitch
+            themeSwitch,
+            language
         },
         data () {
             return {

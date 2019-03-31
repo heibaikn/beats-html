@@ -51,7 +51,8 @@ export const otherRouter = {
     component: Main,
     children: [
         { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: resolve => { require(['@/views/home/home.vue'], resolve); } },
-        { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['@/views/own-space/own-space.vue'], resolve); } }
+        { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['@/views/own-space/own-space.vue'], resolve); } },
+        { path: 'news_edit/:id', title: '编辑新闻', name: 'news_edit', component: resolve => { require(['@/views/news_handel.vue'], resolve); } }
         // { path: 'message', title: '消息中心', name: 'message_index', component: resolve => { require(['@/views/message/message.vue'], resolve); } }
     ]
 };
@@ -95,7 +96,18 @@ export const appRouter = [
         name: 'news',
         component: Main,
         children: [
-            { path: 'index', title: { i18n: '新闻管理' }, name: 'news_index', component: resolve => { require(['@/views/news.vue'], resolve); } }
+            { path: 'index', title: { i18n: '新闻管理' }, name: 'news_index', component: resolve => { require(['@/views/news.vue'], resolve); } },
+            { path: 'news_handel', title: { i18n: '添加新闻' }, name: 'news_handel', component: resolve => { require(['@/views/news_handel.vue'], resolve); } }
+        ]
+    },
+    {
+        path: '/job',
+        icon: 'a iconfont icon959caidan_rencaizhongxin',
+        title: { i18n: '人才中心' },
+        name: 'job',
+        component: Main,
+        children: [
+            { path: 'index', title: { i18n: '人才中心' }, name: 'job_index', component: resolve => { require(['@/views/job.vue'], resolve); } }
         ]
     },
     {

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
-let language = localStorage.getItem('language') || 'cn';
+let language = localStorage.getItem('language') || 'chinese';
 axios.defaults.headers.post['language'] = language
 
 // 请求拦截器

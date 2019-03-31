@@ -283,6 +283,28 @@ util.extend = function (vmData, source) {
     });
 };
 
+// 加载js
+util.loadScript = (src, cb) => {
+    var script = document.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.onload = function () {
+        cb && cb();
+    };
+    script.setAttribute('src', src);
+    document.head.appendChild(script);
+};
+
+// 加载css
+util.oadCSS = (src, cb) => {
+    var css = document.createElement('link');
+    css.setAttribute('rel', 'stylesheet');
+    css.onload = function () {
+        cb && cb();
+    };
+    css.setAttribute('href', src);
+    document.head.appendChild(css);
+};
+
 // util.onWheel = function (ele, callback) {
 //     ele.addEventListener('mousewheel', function (e) {
 //         callback(e, e.wheelDelta);

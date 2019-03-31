@@ -5,6 +5,18 @@ import Mock from 'mockjs';
 // 获取 mock.Random 对象
 const Random = Mock.Random;
 
+// 后台登录
+Mock.mock('/api/admin/login', 'post', () => {
+    return {
+        'code': 200,
+        'data': {},
+        'msg': 'string',
+        'result': true,
+        'serverTime': 0,
+        'version': 'string'
+    };
+});
+
 // mock一组数据
 const getUserInfo = function () {
     let arrData = [];

@@ -45,6 +45,8 @@ const languageObj = {
 
   send: '发送 | Send',
   reset: '重新填写 | Reset',
+  hotSearch: '热们搜索词 | Hot Search',
+  search: '搜索 | Search',
 }
 
 

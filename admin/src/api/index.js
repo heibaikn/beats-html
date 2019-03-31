@@ -4,6 +4,11 @@ export const getNewsIndex = (param = {}) => {
     return post('/news/index', param);
 };
 
+// login
+export const adminLogin = (param = {}) => {
+    return post('/api/admin/login', param);
+};
+
 export const getUserInfo = (param = {}) => {
     return post('/api/queryUserInfo', param);
 };

@@ -3,8 +3,8 @@ import { Message } from 'iview';
 
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
-// let language = localStorage.getItem('language') || 'cn';
-// axios.defaults.headers.post['language'] = language;
+let language = localStorage.getItem('language') || 'chinese';
+axios.defaults.headers.post['language'] = language;
 
 // 请求拦截器
 axios.interceptors.request.use(function (config) {

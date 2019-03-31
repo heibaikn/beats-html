@@ -8,9 +8,9 @@
 </style>
 <template>
     <section>
-        <div style="padding:5px 0 10px;">
+        <!-- <div style="padding:5px 0 10px;">
             <Button type="success" @click="addModal">添加新闻</Button>
-        </div>
+        </div> -->
 
         <!--表格-->
         <Table stripe :columns="columns1" :data="dataList" :loading="loading"></Table>
@@ -104,6 +104,24 @@
                         render: (h, params) => {
                             var ButtonType = params.row.status == 'DISABLED' ? 'warning' : 'error';
                             return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            let argu = { id: params.row.id };
+                                            this.$router.push({
+                                                name: 'news_edit',
+                                                params: argu
+                                            });
+                                        }
+                                    }
+                                }, '编辑'),
                                 h('Button', {
                                     props: {
                                         size: 'small'

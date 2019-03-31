@@ -84,14 +84,14 @@
     <section class="header-search" v-show="searchPopup" @click="hideSearchMask">
       <div class="container">
         <div class="search">
-          <input type="text" placeholder="搜索" ref="search" @click.stop.prevent>
+          <input type="text" :placeholder="$language.search" ref="search" @click.stop.prevent>
         </div>
         <div class="search-close" @click="hideSearchMask">
           <i class="iconfont iconguanbi"></i>
         </div>
 
         <div class="search-box" @click.stop.prevent>
-          <p>热们搜索词</p>
+          <p>{{$language.hotSearch}}</p>
           <ul class="clear">
             <li><a href="">耳机</a></li>
             <li><a href="">耳机</a></li>
