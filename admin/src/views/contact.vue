@@ -2,6 +2,7 @@
 .form-content{
   max-width: 1200px;
   padding-top: 30px;
+  padding-right: 50px;
   .buttons{
     padding: 30px 130px;
   }

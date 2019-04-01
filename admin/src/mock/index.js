@@ -188,3 +188,48 @@ const getNewsInfos = function () {
 };
 
 Mock.mock('/api/newsInfo/getNewsInfos', 'post', getNewsInfos);
+
+Mock.mock('/api/admin/newsInfo/getNewsInfos', 'post', () => {
+    let arrData = [];
+    function getData () {
+        return {
+            id: Mock.mock({ 'number|1-100': 100 }).number,
+            title: Random.csentence(5, 20),
+            content: Random.csentence(20, 100)
+        };
+    }
+    for (let index = 0; index < 10; index++) {
+        arrData.push(getData());
+    }
+    return {
+        code: 200,
+        data: {
+            list: arrData,
+            count: 22
+        },
+        msg: ''
+    };
+});
+
+Mock.mock('/api/admin/newsInfo/getNewsInfo', 'post', () => {
+    function getData () {
+        return {
+            id: Mock.mock({ 'number|1-100': 100 }).number,
+            title: Random.csentence(5, 20),
+            content: Random.csentence(20, 100)
+        };
+    }
+    return {
+        code: 200,
+        data: getData(),
+        msg: ''
+    };
+});
+
+Mock.mock('/api/admin/recruitmentInfo/addRecruitmentInfo', 'post', () => {
+    return {
+        code: 200,
+        data: [],
+        msg: ''
+    };
+});

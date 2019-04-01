@@ -2,6 +2,7 @@
 .form-content{
   max-width: 1200px;
   padding-top: 30px;
+  padding-right: 50px;
   .buttons{
     padding: 30px 100px;
   }
@@ -81,9 +82,9 @@ export default {
         this.loading = false;
         this.$Message.success({
           content: message,
-          duration: 2
+          duration: 2,
+          onClose: this.removeCurrTag
         });
-        this.initData();
       })
       .catch(e=>{
         this.loading = false;
@@ -100,6 +101,12 @@ export default {
         title: '',
         content: '',
       }
+    },
+    removeCurrTag(){
+      let name = this.params.id ? 'news_edit' : 'news_handel';
+      this.$store.commit('removeTag', name);
+      this.$store.commit('closePage', name);
+      this.$router.push({ name: 'news_index' });
     }
   },
   watch: {
