@@ -82,7 +82,8 @@ export default {
       })
     },
     requestOneNew(){
-      this.api.getCompanyInfo().then(d=>{
+      this.api.getCompanyInfo().then(res=>{
+        let d = res[0];
         this.isEdit = true;
         this.formCustom.id = d.id;
         this.formCustom.title = d.title;

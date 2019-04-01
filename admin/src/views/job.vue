@@ -107,13 +107,9 @@ export default {
     },
     queryList(){
       this.loading = true;
-      this.api.getRecruitmentInfos(this.formSearch).then(d=>{
+      this.api.getRecruitmentInfos(this.formSearch).then(res=>{
           this.loading = false;
-          if(this.formSearch.pageIndex == 1){
-              this.dataList = [];
-          }   
-          this.dataList = d.list;
-          this.total = d.count;
+          this.dataList = res;
       }).catch(()=>{
           this.loading = false;
       })

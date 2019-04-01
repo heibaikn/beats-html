@@ -50,10 +50,7 @@ const getUserInfo = function () {
     }
     return {
         code: 200,
-        data: {
-            list: arrData,
-            count: 33
-        },
+        data: arrData,
         msg: ''
     };
 };

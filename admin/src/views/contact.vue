@@ -82,7 +82,8 @@ export default {
       })
     },
     requestOneNew(){
-      this.api.getContractInfo().then(d=>{
+      this.api.getContractInfo().then(res=>{
+        let d = res[0];
         this.isEdit = true;
         this.formCustom.id = d.id;
         this.formCustom.content = d.content;

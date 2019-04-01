@@ -211,11 +211,7 @@
                 this.loading = true;
                 this.api.getAdmin(this.formSearch).then(d=>{
                     this.loading = false;
-                    if(this.formSearch.pageIndex == 1){
-                        this.dataList = [];
-                    }   
-                    this.dataList = d.list;
-                    this.total = d.count;
+                    this.dataList = d;
                 }).catch(()=>{
                     this.loading = false;
                 })

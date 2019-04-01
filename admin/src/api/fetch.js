@@ -30,7 +30,7 @@ export function post (url, params = {}) {
                     resolve(resData.data);
                 } else {
                     if (params.tips === undefined) {
-                        let msg = (resData && resData.msg) ? resData.msg : '后台系统繁忙，请稍后再试';
+                        let msg = (resData && resData.message) ? resData.message : '后台系统繁忙，请稍后再试';
                         Message.error(msg);
                     }
                     reject(response);
@@ -38,8 +38,12 @@ export function post (url, params = {}) {
             })
             .catch((error) => {
                 reject(error);
+                let msg = '后台系统繁忙，请稍后再试';
+                if (error.response && error.response.data && error.response.data.message) {
+                    msg = error.response.data.message;
+                }
                 if (params.tips === undefined) {
-                    Message.error('后台系统繁忙，请稍后再试');
+                    Message.error(msg);
                 }
             });
     });
