@@ -58,10 +58,6 @@
                 modal2Name: '',
                 skuModel: '',
                 categoryList: [],
-                uploadData: {
-                    id: 0
-                },
-                goodsImage: 'goodsImage',
                 columns1: [
                     {
                         title: 'ID',
@@ -156,7 +152,7 @@
             init(){
                 this.queryList();
                 this.api.categories({id:0}).then(d=>{
-                    this.categoryList = d;
+                    this.categoryList = d.list;
                 })
             },
             addModal(){
