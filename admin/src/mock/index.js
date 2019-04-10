@@ -123,7 +123,10 @@ const categories = function () {
     }
     return {
         code: 200,
-        data: arrData,
+        data: {
+            list: arrData,
+            count: 10
+        },
         msg: ''
     };
 };
@@ -230,6 +233,28 @@ Mock.mock('/api/admin/recruitmentInfo/addRecruitmentInfo', 'post', () => {
     return {
         code: 200,
         data: [],
+        msg: ''
+    };
+});
+
+Mock.mock('/api/admin/goods/getSpecInfoList', 'post', () => {
+    return {
+        code: 200,
+        data: {
+            'count': 5,
+            'list': [
+                {
+                    'id': 1,
+                    'spuNo': '132156465kjkj',
+                    'specId': 1,
+                    'specNo': '1456498132132',
+                    'specName': '颜色',
+                    'specDescription': '用于区分商品颜色',
+                    'specValueId': 1,
+                    'specValue': '红色'
+                }
+            ]
+        },
         msg: ''
     };
 });

@@ -108,3 +108,11 @@ export const deleteCategory = (param = {}) => {
 export const categoryGoods = (param = {}) => {
     return post('/api/goods/categoryGoods', param);
 };
+
+// sku
+export const addSpecInfo = (param = {}) => {
+    return post('/api/admin/goods/addSpecInfo', param);
+};
+export const getSpecInfoList = (param = {}) => {
+    return post('/api/admin/goods/getSpecInfoList', param);
+};

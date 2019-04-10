@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "gulp": "cd gulp && gulp default",
-    "admin": "cd admin && yarn dev",
-    "website": "cd website && yarn dev",
+    "dev:admin": "cd admin && yarn dev",
+    "dev:website": "cd website && yarn dev",
     "build:website": "cd website && yarn build",
     "build:admin": "cd admin && yarn build"
   },

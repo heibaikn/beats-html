@@ -11,9 +11,6 @@
 </style>
 <template>
     <section>
-        <div style="padding:5px 0 10px;">
-            <Button type="success" @click="addModal">添加产品</Button>
-        </div>
 
         <!--表格-->
         <Table stripe :columns="columns1" :data="dataList" :loading="loading"></Table>
@@ -34,65 +31,6 @@
                 <Button type="default" size="large"  @click="cancelModal2" style="width: 50%">取消</Button>
                 <Button type="error" size="large"  @click="enterRemoveAjax" style="width: 50%" >确定</Button>
             </div> -->
-        </Modal>
-
-        <Modal v-model="modal3" width="600" @on-visible-change="modalVisibleChange">
-            <p slot="header" style="text-align:center">
-              <Icon type="ios-information-circle"></Icon>
-              <span>{{modalTitle}}</span>
-            </p>
-            <div>
-                <Form ref="formCustom" :label-width="200" :model="formCustom" :rules="ruleValidate">
-                  <FormItem label="产品ID ：" v-show="formCustom.id">
-                      <span>{{formCustom.id}}</span>
-                  </FormItem>
-                  <FormItem label="产品名称 ：" prop="goodsName">
-                      <Input v-model="formCustom.goodsName" placeholder="" />
-                  </FormItem>
-                  <FormItem label="产品编号：" v-show="formCustom.spuNo">
-                      <Input v-model="formCustom.spuNo" placeholder="" />
-                  </FormItem>
-                  <FormItem label="产品所属分类ID：" prop="categoryId">
-                      <Select v-model="formCustom.categoryId" style="width:100%">
-                        <Option v-for="item in categoryList" :value="item.id" :key="item.id">{{ item.categoryName }}</Option>
-                     </Select>
-                  </FormItem>
-                  <!-- <FormItem label="产品所属品牌ID：">
-                      <span>{{formCustom.brandId}}</span>
-                  </FormItem> -->
-                  <FormItem label="产品描述：" prop="goodsDescription">
-                      <Input v-model="formCustom.goodsDescription" placeholder="" />
-                  </FormItem>
-                  <FormItem label="产品规格ID：" v-show="formCustom.specId">
-                      <span>{{formCustom.specId}}</span>
-                  </FormItem>
-                  <FormItem label="产品规格名称：" prop="specName">
-                      <Input v-model="formCustom.specName" placeholder="" />
-                  </FormItem>
-                  <FormItem label="产品规格描述：" prop="specDescription">
-                      <Input v-model="formCustom.specDescription" placeholder="" />
-                  </FormItem>
-                  <FormItem label="产品规格编号 ："  v-show="formCustom.specNo">
-                      <Input v-model="formCustom.specNo" placeholder="" />
-                  </FormItem>
-                  <FormItem label="产品规格具体值：" prop="specValue">
-                      <Input v-model="formCustom.specValue" placeholder="" />
-                  </FormItem>
-                  <FormItem label="产品价格：" prop="lowPrice">
-                      <Input v-model="formCustom.lowPrice" placeholder="" />
-                  </FormItem>
-                  <FormItem label="产品图片：">
-                       <span v-show="formCustom.goodsImageKey"><img :src="formCustom.goodsImageKey" alt="" class="img"></span>
-                       <Upload action="//jsonplaceholder.typicode.com/posts/" v-show="!formCustom.goodsImageKey">
-                            <Button icon="ios-cloud-upload-outline">上传</Button>
-                       </Upload>
-                  </FormItem>
-                  
-                </Form>
-            </div>
-            <div slot="footer" class="flex">
-                <Button type="primary" size="large" :loading="modal_loading"  @click="enterEditAjax('formCustom')" style="width:100%">确定</Button>
-            </div>
         </Modal>
 
     </section>
@@ -120,6 +58,10 @@
                 modal2Name: '',
                 skuModel: '',
                 categoryList: [],
+                uploadData: {
+                    id: 0
+                },
+                goodsImage: 'goodsImage',
                 columns1: [
                     {
                         title: 'ID',
@@ -160,10 +102,15 @@
                                     },
                                     on: {
                                         click: () => {
-                                          this.modalTitle = '编辑'+this.popupTitle;
-                                          this.formCustom = Object.assign({}, params.row);
-                                          this.modal3 = true;
-                                          this.modalVisibleChange(false)
+                                            let argu = { id: params.row.id };
+                                            this.$router.push({
+                                                name: 'product_edit',
+                                                params: argu
+                                            });
+                                        //   this.modalTitle = '编辑'+this.popupTitle;
+                                        //   this.formCustom = Object.assign({}, params.row);
+                                        //   this.modal3 = true;
+                                        //   this.modalVisibleChange(false)
                                         }
                                     }
                                 }, '编辑'),
@@ -187,6 +134,7 @@
                 dataList: [],
                 formCustom: { },
                 formSearch:{
+                    id: 0,
                     name: '',
                     pageIndex: 1,
                 },
@@ -207,7 +155,7 @@
         methods: {
             init(){
                 this.queryList();
-                this.api.categories().then(d=>{
+                this.api.categories({id:0}).then(d=>{
                     this.categoryList = d;
                 })
             },
@@ -258,22 +206,6 @@
                     
                 })
             },
-            enterEditAjax(name){
-                this.$refs[name].validate((valid) => {
-                    if (valid) {
-                        this.modal_loading = true;
-                        this.modal3 = false;
-
-                        this.api.delNewsInfo({id: this.modal3Data.id}).then(d=>{
-                            
-                        }).catch(()=>{
-                            
-                        })
-                    } else {
-                        this.$Message.error('请检测验证信息!');
-                    }
-                });
-            }
         },
         watch: {
             

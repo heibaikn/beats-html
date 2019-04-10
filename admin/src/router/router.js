@@ -53,7 +53,8 @@ export const otherRouter = {
         { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: resolve => { require(['@/views/home/home.vue'], resolve); } },
         { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['@/views/own-space/own-space.vue'], resolve); } },
         { path: 'news_edit/:id', title: '编辑新闻', name: 'news_edit', component: resolve => { require(['@/views/news_handel.vue?v1'], resolve); } },
-        { path: 'job_edit/:id', title: '编辑人才招聘', name: 'job_edit', component: resolve => { require(['@/views/job_handel.vue?v1'], resolve); } }
+        { path: 'job_edit/:id', title: '编辑人才招聘', name: 'job_edit', component: resolve => { require(['@/views/job_handel.vue?v1'], resolve); } },
+        { path: 'product_edit/:id', title: '编辑产品', name: 'product_edit', component: resolve => { require(['@/views/product_handle.vue?v1'], resolve); } }
         // { path: 'message', title: '消息中心', name: 'message_index', component: resolve => { require(['@/views/message/message.vue'], resolve); } }
     ]
 };
@@ -102,12 +103,23 @@ export const appRouter = [
     },
     {
         path: '/product',
-        icon: 'a iconfont iconerji',
-        title: { i18n: '产品编辑' },
+        icon: 'a iconfont iconshangpin',
+        title: { i18n: '产品管理' },
         name: 'product',
         component: Main,
         children: [
-            { path: 'index', title: { i18n: '产品编辑' }, name: 'product_index', component: resolve => { require(['@/views/product.vue'], resolve); } }
+            { path: 'index', title: { i18n: '产品列表' }, name: 'product_index', component: resolve => { require(['@/views/product.vue'], resolve); } },
+            { path: 'handle', title: { i18n: '添加产品' }, name: 'product_handle', component: resolve => { require(['@/views/product_handle.vue'], resolve); } }
+        ]
+    },
+    {
+        path: '/sku',
+        icon: 'a iconfont iconguigeguanli',
+        title: { i18n: '规格管理' },
+        name: 'sku',
+        component: Main,
+        children: [
+            { path: 'index', title: { i18n: '规格管理' }, name: 'sku_index', component: resolve => { require(['@/views/sku.vue'], resolve); } }
         ]
     },
     {

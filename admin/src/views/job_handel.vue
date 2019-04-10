@@ -13,17 +13,38 @@
 .edui-default .edui-toolbar .edui-combox .edui-combox-body, .edui-default .edui-button-body{
   display: flex;
 }
+.ivu-tabs-bar{
+  padding-left: 20px;
+  margin-bottom: 40px;
+}
 </style>
 <template>
     <section class="form-content">
-      <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
-          <FormItem label="招聘标题" prop="title">
-              <Input type="text" v-model="formCustom.title"></Input>
-          </FormItem>
-          <FormItem label="招聘内容" prop="content">
-              <vue-ueditor-wrap v-model="formCustom.content"></vue-ueditor-wrap>
-          </FormItem>
-      </Form>
+
+      <Tabs :animated="false">
+        <TabPane label="中文">
+          <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
+              <FormItem label="招聘标题：" prop="title">
+                  <Input type="text" v-model="formCustom.title"></Input>
+              </FormItem>
+              <FormItem label="招聘内容：" prop="content">
+                  <vue-ueditor-wrap v-model="formCustom.content"></vue-ueditor-wrap>
+              </FormItem>
+          </Form>
+        </TabPane>
+        <TabPane label="Englist">
+          <Form ref="formEnglist" :model="formEnglist" :rules="ruleValidate" :label-width="100">
+              <FormItem label="title：" prop="title">
+                  <Input type="text" v-model="formEnglist.title"></Input>
+              </FormItem>
+              <FormItem label="content：" prop="content">
+                  <vue-ueditor-wrap v-model="formEnglist.content"></vue-ueditor-wrap>
+              </FormItem>
+          </Form>
+        </TabPane>
+      </Tabs>
+
+      
       <div class="buttons">
         <Button type="primary" size="large" :loading="loading" @click="confirm">提交</Button>
       </div>
@@ -45,6 +66,10 @@ export default {
         title: '',
         content: '',
       },
+      formEnglist: {
+        title: '',
+        content: '',
+      },
       filterKey: ['content'],
       ruleValidate: {}
     }
@@ -59,14 +84,19 @@ export default {
     },
     confirm(){
       this.$refs['formCustom'].validate((valid) => {
-        if(valid){
+      this.$refs['formEnglist'].validate((valid_E) => {
+        if(valid && valid_E){
           this.requestAjax()
         }
+        else{
+          this.$Message.error('请检验表单数据');
+        }
+      })
       })
     },
     requestAjax(){
       if(this.loading) return
-      let data = this.formCustom;
+      let data = this.getFormData();
       let ajax = this.api.addRecruitmentInfo
       let message = '添加人才招聘成功'
 
@@ -77,7 +107,7 @@ export default {
       }
 
       this.loading = true;
-
+      
       ajax(data).then(d=>{
         this.loading = false;
         this.$Message.success({

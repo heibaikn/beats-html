@@ -131,6 +131,7 @@
                     categoryDescription: ''
                 },
                 formSearch:{
+                    id: 0,
                     name: '',
                     pageIndex: 1,
                 },
@@ -173,7 +174,8 @@
                     if(this.formSearch.pageIndex == 1){
                         this.dataList = [];
                     }   
-                    this.dataList = d
+                    this.dataList = d.list;
+                    this.total = d.count;
                 }).catch(()=>{
                     this.loading = false;
                 })
