@@ -196,7 +196,7 @@
               this.modal2 = true;
             },
             enterRemoveAjax(){
-                this.api.delNewsInfo({id: this.modal2Data.id}).then(d=>{
+                this.api.deleteGoods({id: this.modal2Data.id}).then(d=>{
                     this.dataList.splice(this.modal2Data.index, 1);
                 }).catch(()=>{
                     

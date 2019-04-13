@@ -111,6 +111,9 @@ export const deleteCategory = (param = {}) => {
 export const categoryGoods = (param = {}) => {
     return post('/api/goods/categoryGoods', param);
 };
+export const goodsDetails = (param = {}) => {
+    return post('/api/goods/goodsDetails', param);
+};
 
 // admin 产品
 export const addGoods = (param = {}) => {
@@ -132,4 +135,21 @@ export const getSpecInfoList = (param = {}) => {
 };
 export const updateSpecInfo = (param = {}) => {
     return post('/api/admin/goods/updateSpecInfo', param);
+};
+export const deleteSpecInfo = (param = {}) => {
+    return post('/api/admin/goods/deleteSpecInfo', param);
+};
+
+// Banner
+export const addBanner = (param = {}) => {
+    return post('/api/admin/addBanner', param);
+};
+export const getBannerList = (param = {}) => {
+    return post('/api/admin/getBannerList', param);
+};
+export const updateBanner = (param = {}) => {
+    return post('/api/admin/updateBanner', param);
+};
+export const delBanner = (param = {}) => {
+    return post('/api/admin/delBanner', param);
 };

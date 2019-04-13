@@ -258,3 +258,23 @@ Mock.mock('/api/admin/recruitmentInfo/addRecruitmentInfo', 'post', () => {
 //         msg: ''
 //     };
 // });
+Mock.mock('/api/admin/getBannerList', 'post', () => {
+    return {
+        code: 200,
+        data: [
+            {
+                imageKey: 'http://47.111.11.214/static/img/banner1.8a0bb2f.png',
+                url: 'http://url'
+            },
+            {
+                imageKey: 'http://47.111.11.214/static/img/banner1.8a0bb2f.png',
+                url: 'http://url'
+            },
+            {
+                imageKey: 'http://47.111.11.214/static/img/banner1.8a0bb2f.png',
+                url: 'http://url'
+            }
+        ],
+        msg: ''
+    };
+});

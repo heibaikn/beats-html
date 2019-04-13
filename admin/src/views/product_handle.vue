@@ -37,7 +37,7 @@
                 <span>{{formCustom.spuNo}}</span>
             </FormItem>
             <FormItem label="产品所属分类：" prop="categoryId">
-              <Select style="width:200px; float:left; margin-right:10px" @on-change="categoryChange">
+              <Select v-model="selectCate" style="width:200px; float:left; margin-right:10px" @on-change="categoryChange">
                 <Option v-for="item in categoryList" :value="item.id" :key="item.id">{{ item.categoryName }}</Option>
               </Select>
               <Select v-model="selectChildCate" style="width:200px; float:left" @on-change="chindrenCategoryChange">
@@ -47,7 +47,7 @@
             <FormItem label="产品规格：">
               <CheckboxGroup v-model="formCustom.skuId" @on-change="checkboxChange">
                 <Checkbox :label="item.specValueId" v-for="(item,index) in skuList" :key="index"> 
-                    <span>{{item.specValue}}</span>
+                    <span>{{item.specValue}} <span class="span-color" :style="skuColorStyle(item.specValue)"></span> </span>
                 </Checkbox>
               </CheckboxGroup>
             </FormItem>
@@ -61,17 +61,34 @@
                 </InputNumber>
             </FormItem>
             <FormItem label="产品图片：">
-                <span v-show="formCustom.goodsImageKey"><img :src="formCustom.goodsImageKey" alt="" class="img"></span>
-                <Upload action="/api/image/upload" :name="goodsImage" :data="uploadData">
+                <!-- <Upload action="/api/image/upload" :name="goodsImage" :data="uploadData">
                     <Button icon="ios-cloud-upload-outline">上传图片</Button>
-                </Upload>
+                </Upload> -->
+                <Upload
+                  ref="upload"
+                  :show-upload-list="false"
+                  :on-success="handleSuccess"
+                  :format="['jpg','jpeg','png']"
+                  :max-size="2048"
+                  :name="goodsImage"
+                  :data="uploadData"
+                  action="/api/image/upload"
+                  class="my-upload">
+                  <div>
+                      <Icon type="ios-camera" size="20"></Icon>
+                  </div>
+              </Upload>
+              <span v-show="formCustom.goodsImageKey"><img :src="formCustom.goodsImageKey" alt="" class="upload-img"></span>
+
             </FormItem>
             </section>
             <FormItem label="产品描述：" prop="goodsDescription">
-                <span class="label">中文: </span>
+                <span class="label"  v-show="modalType==1">中文: </span>
                 <vue-ueditor-wrap v-model="formCustom.goodsDescription" :config="ueditorConfig"></vue-ueditor-wrap>
-                <span class="label">English: </span>
-                <vue-ueditor-wrap v-model="formEnglist.goodsDescription" :config="ueditorConfig"></vue-ueditor-wrap>
+                <div  v-show="modalType==1">
+                  <span class="label">English: </span>
+                  <vue-ueditor-wrap v-model="formEnglist.goodsDescription" :config="ueditorConfig"></vue-ueditor-wrap>
+                </div>
             </FormItem>
             <FormItem>
                 <Button type="primary" size="large" :loading="loading" @click="confirm">提交</Button>
@@ -91,6 +108,7 @@ export default {
   data () {
     return {
       loading: false,
+      selectCate: '',
       selectChildCate: '',
       modalType: 1,
       formCustom: { },
@@ -119,24 +137,42 @@ export default {
     }
   },
   computed: {
-      
+    
   },
   mixins: [mixins],
+  filters: {
+    
+  },
   methods: {
     init(){
       this.formCustom.lowPrice = 1;
       this.api.categories({id:0}).then(d=>{
         this.dataList = d.list;
         this.categoryList = this.getArrayGroup(d.list);
-      })
+        this.requestGetGood(this.params.id);
+      });
 
       this.api.getSpecInfoList().then(d=>{
         this.skuList = d.list;
       })
     },
     requestGetGood(id = ''){
-      this.api.categoryGoods({ id }).then(d=>{
-          Object.assign(this.formCustom, d);
+      this.api.goodsDetails({ id }).then(d=>{
+          Object.assign(this.formCustom, d.list && d.list[0] || {});
+          let cid = this.formCustom.categoryId;
+          let findCate = this.dataList.find(v=>{
+            return v.id == cid;
+          });
+          if(findCate.parentId != 0){
+            this.categoryChange(findCate.parentId);
+            this.selectChildCate = cid;
+            let pCate = this.dataList.find(v=>{
+              return v.id == findCate.parentId;
+            });
+            this.selectCate = pCate.id;
+          } else {
+            this.selectCate = cid;
+          }
       }).catch(()=>{
         
       })
@@ -181,9 +217,27 @@ export default {
     initData(){
       this.formCustom = { }
     },
-
+    handleSuccess (res, file) {
+      if(res.data){
+        let url = res.data.imageHost + '/' + res.data.imageKey;
+        // this.formCustom.goodsImageKey = url;
+        this.$set(this.formCustom, 'goodsImageKey', url);
+      }
+    },
     checkboxChange(val){
       this.formCustom.skuId = val;
+    },
+    isColor(val){
+      return /^#[a-z0-9A-Z]{6}/.test(val); 
+    },
+    skuColorStyle(val){
+      var is =  /^#[a-z0-9A-Z]{6}/.test(val); 
+      if(is){
+        return {
+          background: val
+        }
+      }
+      return {}
     }
   },
   watch: {
@@ -196,7 +250,6 @@ export default {
     let params = this.$route.params || {}
     this.params = params;
     if(params.id){
-      this.requestGetGood(params.id);
       this.modalType = 2;
     }
     else{

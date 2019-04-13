@@ -153,6 +153,16 @@ export const appRouter = [
         children: [
             { path: 'index', title: { i18n: '留言板' }, name: 'messages_index', component: resolve => { require(['@/views/message.vue'], resolve); } }
         ]
+    },
+    {
+        path: '/banner',
+        icon: 'a iconfont iconbanner',
+        title: { i18n: 'Banner管理' },
+        name: 'banner',
+        component: Main,
+        children: [
+            { path: 'index', title: { i18n: 'Banner管理' }, name: 'banner_index', component: resolve => { require(['@/views/banner.vue'], resolve); } }
+        ]
     }
 ];
 

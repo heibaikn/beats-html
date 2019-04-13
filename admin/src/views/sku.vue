@@ -16,9 +16,7 @@
             <Page :total="total" :current="formSearch.pageIndex" show-total @on-change="changePage"></Page>
         </div>
 
-        <Modal v-model="modal1" width="800"
-            @on-visible-change="modalVisibleChange"
-        >
+        <Modal v-model="modal1" width="800" @on-visible-change="modalVisibleChange" >
             <p slot="header" style="text-align:center">
                 <span>{{modalTitle}}</span>
             </p>
@@ -108,7 +106,29 @@
                     },
                     {
                         title: '规格值',
-                        key: 'specValue'
+                        key: 'specValue',
+                        render: (h, params) => {
+                            let val =  params.row.specValue
+                            let isColor = /^#[a-z0-9A-Z]{6}/.test(params.row.specValue); 
+                            let array = [];
+                            if(isColor){
+                                val = {
+                                    style: {
+                                        width: '12px',
+                                        height: '12px',
+                                        display: 'inline-block',
+                                        marginLeft: '10px',
+                                        borderRadius: '50%',
+                                        background: params.row.specValue
+                                    },
+                                }
+                                array.push(h('span', params.row.specValue))
+                            }
+
+                            array.push(h('span', val));
+
+                            return h('div', array);
+                        }
                     },
                     {
                         title: '操作',
@@ -231,6 +251,8 @@
                   this.$refs['formCustom'].resetFields();
                   this.$refs['formEnglist'].resetFields();
                 }
+                this.color = '';
+                this.color2 = '';
             },
             cancelModal2(){
                 this.modal2 = false;
@@ -240,9 +262,10 @@
               this.modal2 = true;
             },
             enterRemove(){
-              console.log(this.modal2Data)
               var index = this.modal2Data.index;
-              this.dataList.splice(index,  1);
+              this.api.deleteSpecInfo({id: this.modal2Data.id}).then(d=>{
+                this.dataList.splice(index,  1);
+              })
             },
             search(){
               this.queryList();
