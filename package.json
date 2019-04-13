@@ -7,8 +7,12 @@
     "gulp": "cd gulp && gulp default",
     "dev:admin": "cd admin && yarn dev",
     "dev:website": "cd website && yarn dev",
+    
     "build:website": "cd website && yarn build",
-    "build:admin": "cd admin && yarn build"
+    "build:admin": "cd admin && yarn build",
+
+    "release:admin": "yarn build:admin && gulp admin",
+    "release:website": "yarn build:website && gulp website"
   },
   "repository": {
     "type": "git",

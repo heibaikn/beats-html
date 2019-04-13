@@ -10,6 +10,7 @@ const languageObj = {
   productTitle: '产品展示 | Product Display',
   jobTitle: '人才中心 | Talent Center',
   contactTitle: '联系我们 | Contact Us',
+  searchTitle: '搜索页 | Search Products',
 
 
   userName: '姓名 | UserName',
@@ -47,6 +48,19 @@ const languageObj = {
   reset: '重新填写 | Reset',
   hotSearch: '热们搜索词 | Hot Search',
   search: '搜索 | Search',
+  browse: '浏览 | Browse',
+  browseAll: '浏览全部 | Browse all',
+  searchResults: '搜索结果 | Search Results',
+
+
+  // 菜单的
+  home: '首页 | Home',
+  about: '公司介绍 | About Us',
+  news: '新闻中心 | News',
+  products: '产品展示 | Products',
+  job: '人才中心 | Recruiment',
+  feedback: '客户留言 | Feedback',
+  contact: '联系我们 | Contact Us',
 }
 
 

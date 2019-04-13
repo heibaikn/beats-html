@@ -6,8 +6,8 @@
     <banner />
     <section id="main-content" class="container">
       <div class="about-content">
-        <h2 class="content-h2-title">公司介绍</h2>
-        <p>华义电子厂位于广东省广州市，是一家专业研发、制造、销售各种耳机的生产厂家，主要有免提耳机，MP3耳机及电脑耳机等。本公司自创立以来，始终坚持”以人为本，以客为尊，科技为导，诚信为基“的核心理念；遵循”创新、优质、高效“的企业精神。以优质的产品，合理的价格。良好的售后，完善的服务为企业宗旨。愿与新老客户携手合作，共创辉煌明天。</p>         
+        <h2 class="content-h2-title">{{$language.about}}</h2>
+        <section v-html="content"></section>
       </div>
     </section>
     <mainFooter />
@@ -20,13 +20,13 @@ import mainFooter from '@shared/components/footer'
 import banner from '@shared/components/banner'
 import fixedMessage from '@shared/components/fixedMessage'
 
-import { getUserInfo } from '@/api'
+import { getCompanyInfo } from '@/api'
 
 export default {
   name: 'about',
   data(){
     return{
-      
+      content: ''
     }
   },
   components: {
@@ -40,9 +40,16 @@ export default {
   },
   created(){
     document.title = this.$language.aboutTitle;
+    this.init();
   },
   methods: {
-    
+    init(){
+      getCompanyInfo().then(d=>{
+        if(d.data && d.data[0]){
+          this.content = d.data[0].content;
+        }
+      });
+    }
   },
 }
 </script>

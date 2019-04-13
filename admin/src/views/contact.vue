@@ -59,13 +59,12 @@ export default {
     requestAjax(){
       if(this.loading) return
       let data = this.formCustom;
-      let ajax = this.api.addContractInfo
+      let ajax = this.api.addContractInfo;
       let message = '添加联系我们成功'
 
       if(this.isEdit){
         message = '更新联系我们成功'
         ajax = this.api.updateContractInfo;
-        data.id = this.params.id;
       }
 
       this.loading = true;
@@ -76,7 +75,6 @@ export default {
           content: message,
           duration: 2
         });
-        this.initData();
       })
       .catch(e=>{
         this.loading = false;
@@ -92,7 +90,6 @@ export default {
     },
     initData(){
       this.formCustom = {
-        title: '',
         content: '',
       }
     }

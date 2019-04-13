@@ -65,7 +65,6 @@ export default {
       if(this.isEdit){
         message = '更新公司介绍成功'
         ajax = this.api.updateRecruitmentInfo;
-        data.id = this.params.id;
       }
 
       this.loading = true;
@@ -76,7 +75,6 @@ export default {
           content: message,
           duration: 2
         });
-        this.initData();
       })
       .catch(e=>{
         this.loading = false;

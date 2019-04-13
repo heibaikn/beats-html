@@ -21,7 +21,16 @@
 <template>
     <section class="form-content">
 
-      <Tabs :animated="false">
+      <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100" v-if="isEdit">
+          <FormItem label="招聘标题：" prop="title">
+              <Input type="text" v-model="formCustom.title"></Input>
+          </FormItem>
+          <FormItem label="招聘内容：" prop="content">
+              <vue-ueditor-wrap v-model="formCustom.content"></vue-ueditor-wrap>
+          </FormItem>
+      </Form>
+
+      <Tabs :animated="false" v-else>
         <TabPane label="中文">
           <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
               <FormItem label="招聘标题：" prop="title">
@@ -84,14 +93,12 @@ export default {
     },
     confirm(){
       this.$refs['formCustom'].validate((valid) => {
-      this.$refs['formEnglist'].validate((valid_E) => {
-        if(valid && valid_E){
+        if(valid){
           this.requestAjax()
         }
         else{
           this.$Message.error('请检验表单数据');
         }
-      })
       })
     },
     requestAjax(){
@@ -149,6 +156,7 @@ export default {
     let params = this.$route.params
     this.params = params;
     if(params.id){
+      this.isEdit = true;
       this.requestOneNew()
     }
   }

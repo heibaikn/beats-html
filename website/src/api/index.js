@@ -12,6 +12,11 @@ export const login = (param = {}) => {
   return post('/api/user/login', param);
 };
 
+// 按产品名模糊搜索产品
+export const searchApi = (param = {}) => {
+  return post('/api/goods/search', param)
+}
+
 // 公司介绍
 export const getCompanyInfo = (param = {}) => {
   return post('/api/companyInfo/getCompanyInfo', param)

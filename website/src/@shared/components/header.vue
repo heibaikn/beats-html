@@ -2,24 +2,24 @@
   <header id="header">
     <section class="container">
       <div class="logo">
-       logo
+       <a href="/"><img src="/static/logo.png" alt="" class="mainlogo" width="50"></a>
       </div>
       <nav>
         <ul>
-          <li class="hover "><a href="/index.html">首页</a></li>
-          <li class="hover active"><a href="/about/index.html">公司介绍</a></li>
-          <li class="hover"><a href="/news/index.html">新闻中心</a></li>
+          <li class="hover "><a href="/index.html">{{$language.home}}</a></li>
+          <li class="hover active"><a href="/about/index.html">{{$language.about}}</a></li>
+          <li class="hover"><a href="/news/index.html">{{$language.news}}</a></li>
           <li class="">
             <a
             @mouseover="MenuHover(0)" 
             @mouseout="MenuHoverOut(0)" 
-            href="">产品展示 
+            href="">{{$language.products}} 
               <i :class="{ 'arrow-active' : menuStatus}" class="iconfont iconjiantou_liebiaozhankai"></i>
             </a>
           </li>
-          <li class="hover"><a href="/job/index.html">人才中心</a> </li>
-          <li class="hover"><a href="/feedback/index.html">客户留言</a></li>
-          <li class="hover"><a href="/contact/index.html">联系我们</a></li>
+          <li class="hover"><a href="/job/index.html">{{$language.job}}</a> </li>
+          <li class="hover"><a href="/feedback/index.html">{{$language.feedback}}</a></li>
+          <li class="hover"><a href="/contact/index.html">{{$language.contact}}</a></li>
           <!-- <li class="last"><a><i class="iconfont iconcaidan"></i></a></li> -->
         </ul> 
         <div class="nav-right">
@@ -42,14 +42,14 @@
         <div class="container">
           <div class="header-mask__body__browse flex-center">
             <div class="animate-fade animate-fade1">
-              <h2>浏览：</h2>
+              <h2>{{$language.browse}}: </h2>
               <ul>
                 <li><a href="">BEATS POP COLLECTION</a></li>
                 <li><a href="">BEATS POP</a></li>
                 <li><a href="">BBBBBB</a></li>
               </ul>
               <div class="button-holder">
-                <span class="button-inner">浏览全部</span>
+                <span class="button-inner">{{$language.browseAll}}</span>
                 <span class="mask"></span>
               </div>
             </div>
@@ -84,7 +84,9 @@
     <section class="header-search" v-show="searchPopup" @click="hideSearchMask">
       <div class="container">
         <div class="search">
-          <input type="text" :placeholder="$language.search" ref="search" @click.stop.prevent>
+          <form action="" @submit.stop.prevent="goToSearch">
+            <input type="text" v-model="keyword" :placeholder="$language.search" ref="search" @click.stop.prevent>
+          </form>
         </div>
         <div class="search-close" @click="hideSearchMask">
           <i class="iconfont iconguanbi"></i>
@@ -112,6 +114,7 @@
 export default {
   data(){
     return {
+      keyword: '',
       menuStatus: false,
       searchPopup: false,
       currLanguage: '',
@@ -160,6 +163,10 @@ export default {
     selectLanguage(language){
       localStorage.setItem('language', language.value);
       location.reload(); 
+    },
+
+    goToSearch(){
+      location.href = '/search/index.html?search=' + this.keyword;
     }
   },
 }

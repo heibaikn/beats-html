@@ -2,7 +2,9 @@
   <footer id="footer">
     <section class="container">
       <div class="grid">
-        <div class="logo">logo</div>
+        <div class="logo">
+          <a href="/"><img src="/static/logo.png" alt="" class="logo"></a>
+        </div>
         <div class="grid__links">
           <div class="grid__links__item">
             <h2>产品</h2>

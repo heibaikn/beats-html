@@ -220,6 +220,7 @@
                 //更新
                 if(this.modalType == 2){
                     url = this.api.editCategory;
+                    message = '更新分类成功'
                 }
                 if(pid){
                     this.formCustom.parentId = pid;

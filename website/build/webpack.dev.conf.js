@@ -43,6 +43,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    proxy: {
+      //匹配代理的url
+      '/api': {
+        // 目标服务器地址
+        target: 'http://47.111.11.214',
+        //路径重写
+        pathRewrite: { '^/api': '/api' },
+        changeOrigin: true
+      }
     }
   },
   plugins: [

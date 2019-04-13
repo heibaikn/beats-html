@@ -21,10 +21,10 @@
             </p>
             <div style="">
                 <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="80">
-                    <FormItem label="登录账号: " prop="name">
+                    <FormItem label="登录名: " prop="name">
                         <Input type="text" v-model="formCustom.loginName"></Input>
                     </FormItem>
-                    <FormItem label="姓名: " prop="name">
+                    <FormItem label="用户名: " prop="name">
                         <Input type="text" v-model="formCustom.name"></Input>
                     </FormItem>
                     <FormItem label="手机号: " prop="mobilePhone">
@@ -81,6 +81,10 @@
                 skuModel: '',
                 skuList: [],
                 columns1: [
+                    {
+                        title: '登录名',
+                        key: 'loginName'
+                    },
                     {
                         title: '用户名',
                         key: 'name'
@@ -179,7 +183,7 @@
                 if(this.modalType == 2){
                     
                 }
-                
+
                 this.formCustom.password = md5(this.formCustom.password).toLocaleUpperCase();
 
                 url(this.formCustom).then(d=>{
