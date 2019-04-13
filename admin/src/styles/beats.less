@@ -18,3 +18,75 @@
     padding-bottom: 10px;
   }
 }
+
+.beats-table{
+  width: 770px;
+  background: #fff;
+  border: 1px solid #dddee1;
+  .table-list-flex{
+    .table-item{
+      display: flex;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border-bottom: 1px solid #e9eaec;
+    }
+    .table-item > *{
+      flex: 1;
+    }
+    .table-child .item1{
+      padding-left: 60px;
+    }
+    .item1{
+      width: 120px;
+      flex: 0 auto;
+      text-align: left;
+      padding-left: 20px;
+    }
+    .item4{
+      width: 200px;
+      flex: 0 auto;
+      text-align: right;
+      padding-right: 30px;
+    }
+  }
+  .table-list-header{
+    background-color: #f8f8f9;
+    font-weight: 600;
+  }
+}
+
+
+
+.form-item-lanaguage{
+  display: flex;
+  .item{
+    margin-right: 20px;
+    flex: 1;
+    span {
+      font-size: 12px;
+    }
+    &::last-child{
+      margin-right: 0;
+    }
+  }
+}
+
+.form-my-label .ivu-form-item-label{
+  padding-top: 42px;
+}
+
+.form-item-lanaguage-col{
+  .item{
+    width: 200px;
+    flex: 0 auto;
+    margin-right: 10px;
+    > span{
+      display: block;
+      padding-right: 10px;
+    }
+    .ivu-input-wrapper{
+      width: 200px;
+    }
+  }
+}

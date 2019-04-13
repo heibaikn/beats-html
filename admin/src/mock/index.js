@@ -131,7 +131,7 @@ const categories = function () {
     };
 };
 
-Mock.mock('/api/goods/categories', 'post', categories);
+// Mock.mock('/api/goods/categories', 'post', categories);
 
 // 产品列表
 const categoryGoods = function () {
@@ -237,24 +237,24 @@ Mock.mock('/api/admin/recruitmentInfo/addRecruitmentInfo', 'post', () => {
     };
 });
 
-Mock.mock('/api/admin/goods/getSpecInfoList', 'post', () => {
-    return {
-        code: 200,
-        data: {
-            'count': 5,
-            'list': [
-                {
-                    'id': 1,
-                    'spuNo': '132156465kjkj',
-                    'specId': 1,
-                    'specNo': '1456498132132',
-                    'specName': '颜色',
-                    'specDescription': '用于区分商品颜色',
-                    'specValueId': 1,
-                    'specValue': '红色'
-                }
-            ]
-        },
-        msg: ''
-    };
-});
+// Mock.mock('/api/admin/goods/getSpecInfoList', 'post', () => {
+//     return {
+//         code: 200,
+//         data: {
+//             'count': 5,
+//             'list': [
+//                 {
+//                     'id': 1,
+//                     'spuNo': '132156465kjkj',
+//                     'specId': 1,
+//                     'specNo': '1456498132132',
+//                     'specName': '颜色',
+//                     'specDescription': '用于区分商品颜色',
+//                     'specValueId': 1,
+//                     'specValue': '红色'
+//                 }
+//             ]
+//         },
+//         msg: ''
+//     };
+// });

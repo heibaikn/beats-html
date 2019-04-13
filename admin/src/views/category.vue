@@ -2,29 +2,73 @@
   .ivu-form-item-content, .ivu-form-item-label{
     font-size: 14px;
   }
+  @import url(../styles/beats.less);
 </style>
 <template>
     <section>
         <div style="padding:5px 0 10px;">
-            <Button type="success" @click="addModal">添加分类</Button>
+            <Button type="success" @click="handleCateModal">添加一级分类</Button>
         </div>
 
-        <!--表格-->
-        <Table stripe :columns="columns1" :data="dataList" :loading="loading"></Table>
+        <div class="beats-table">
+            <div class="table-list-flex table-list-header">
+                <div class="table-item">
+                    <div class="item item1">ID</div>
+                    <div class="item item2">分类名称</div>
+                    <div class="item item3">分类描述</div>
+                    <div class="item item4">操作</div>
+                </div>
+            </div>
+            <div class="table-list-flex" v-for="(item,index) in dataList" :key="index">
+                <div class="table-item">
+                    <div class="item item1"><i class="iconfont iconjiantou_liebiaozhankai"></i>{{item.id}}</div>
+                    <div class="item item2">{{item.categoryName}}</div>
+                    <div class="item item3">{{item.categoryDescription}}</div>
+                    <div class="item item4">
+                        <Button type="primary" size="small" @click="handleCateModal(item, item.id)">添加分类</Button>
+                        <Button type="info" size="small" @click="handleCateModal(item, 'edit')">编辑</Button>
+                        <Button type="warning" size="small" @click="clickRemoveModal(item, index)">删除</Button>
+                    </div>
+                </div>
+                <div class="table-child" v-if="item.children" v-for="(citem,cindex) in item.children" :key="cindex">
+                    <div class="table-item">
+                        <div class="item item1">{{citem.id}}</div>
+                        <div class="item item2">{{citem.categoryName}}</div>
+                        <div class="item item3">{{citem.categoryDescription}}</div>
+                        <div class="item item4">
+                            <Button type="info" size="small" @click="handleCateModal(citem, 'edit')">编辑</Button>
+                            <Button type="warning" size="small" @click="clickRemoveModal(citem, index, cindex)">删除</Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <Modal v-model="modal1" width="450"
+        <Modal v-model="modal1" width="550"
             @on-visible-change="modalVisibleChange"
         >
             <p slot="header" style="text-align:center">
                 <span>{{modalTitle}}</span>
             </p>
             <div style="">
-                <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="80">
-                    <FormItem label="分类名称" prop="categoryName">
-                        <Input type="text" v-model="formCustom.categoryName"></Input>
+                <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="120">
+                    <FormItem label="分类ID：" prop="id" v-show="formCustom.id">
+                        <span>{{formCustom.id}}</span>
                     </FormItem>
-                    <FormItem label="分类描述" prop="categoryDescription">
-                        <Input type="text" v-model="formCustom.categoryDescription"></Input>
+                    <FormItem label="父级ID：" prop="parentId" v-show="formCustom.parentId">
+                        <span>{{formCustom.parentId}}</span>
+                    </FormItem>
+                    <FormItem label="分类名称：" prop="categoryName" :class="{'form-my-label': modalType == 1}">
+                        <div class="form-item-lanaguage">
+                            <div class="item"><span v-show="modalType==1">中文: </span><Input type="text" v-model="formCustom.categoryName"></Input></div> 
+                            <div class="item" v-show="modalType==1"><span>Englisth: </span><Input type="text" v-model="formEnglist.categoryName"></Input></div> 
+                        </div>
+                    </FormItem>
+                    <FormItem label="分类描述：" prop="categoryDescription">
+                        <div class="form-item-lanaguage">
+                            <div class="item"><Input type="text" v-model="formCustom.categoryDescription"></Input></div> 
+                            <div class="item" v-show="modalType==1"><Input type="text" v-model="formEnglist.categoryDescription"></Input></div> 
+                        </div>
                     </FormItem>
                 </Form>
             </div>
@@ -74,59 +118,16 @@
                 modal2Name: '',
                 skuModel: '',
                 skuList: [],
-                columns1: [
-                    {
-                        title: 'ID',
-                        width: 100,
-                        key: 'id'
-                    },
-                    {
-                        title: '分类名称',
-                        key: 'categoryName'
-                    },
-                    {
-                        title: '分类描述',
-                        key: 'categoryDescription'
-                    },
-                    {
-                        title: '是否有可以展开的子分类',
-                        key: 'isOpen',
-                        render: (h, params) => {
-                            return h('div', params.row.isOpen ? '是' : '否');
-                        }
-                    },
-                    {
-                        title: '父级分类id',
-                        key: 'parentId'
-                    },
-                    {
-                        title: '操作',
-                        key: 'action',
-                        width: 150,
-                        align: 'center',
-                        render: (h, params) => {
-                            var ButtonType = params.row.status == 'DISABLED' ? 'warning' : 'error';
-                            return h('div', [
-                                h('Button', {
-                                    props: {
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                          this.clickRemoveMessage(params.row)
-                                        }
-                                    }
-                                }, '删除'),
-                            ]);
-                        }
-                    }
-                ],
                 dataList: [],
                 supplierList: [],
+                modalType: 1,
                 formCustom: {
+                    parentId: 0,
+                    categoryName: '',
+                    categoryDescription: ''
+                },
+                formEnglist: {
+                    parentId: 0,
                     categoryName: '',
                     categoryDescription: ''
                 },
@@ -135,6 +136,7 @@
                     name: '',
                     pageIndex: 1,
                 },
+                filterKey: ['id', 'parentId'],
                 ruleValidate: { }
             };
         },
@@ -149,15 +151,32 @@
             init(){
                 this.queryList();
             },
-            addModal(){
+            handleCateModal(item, pid){
                 this.modal1 = true;
-                this.modalTitle = '添加'+this.popupTitle;
-                this.modalType  = 1;
+                if(pid == 'edit'){
+                    this.modalTitle = '编辑' + this.popupTitle;
+                    this.modalType  = 2;
+                }
+                else{  
+                    this.popupTitle =  pid ? '子分类' : '分类';
+                    this.modalTitle = '添加' + this.popupTitle;
+                    this.modalType  = 1;
+                }
+                
+                if(pid && pid != 'edit'){
+                    this.formCustom.parentId = pid;
+                }
+                else if(item){
+                    Object.assign(this.formCustom, item);
+                }
+                else{
+                    this.initData()
+                }
             },
             modalOk (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.requestAddCate()
+                        this.requestAddCate();
                     } else {
                         this.$Message.error('请检测验证信息!');
                     }
@@ -174,7 +193,7 @@
                     if(this.formSearch.pageIndex == 1){
                         this.dataList = [];
                     }   
-                    this.dataList = d.list;
+                    this.dataList = this.getArrayGroup(d.list)
                     this.total = d.count;
                 }).catch(()=>{
                     this.loading = false;
@@ -189,20 +208,24 @@
                 this.modal2 = false
                 this.modal2Data = {}
             },
-            clickRemoveMessage(row){
+            clickRemoveModal(item, index, pindex){
               this.modal2 = true;
-              this.modal2Data = row;
+              this.modal2Data = item;
             },
-            requestAddCate(){
+            requestAddCate(pid){
                 if(this.modal_loading) return;
                 this.modal_loading = true;
                 let url = this.api.addCategory;
                 let message = '添加分类成功'
                 //更新
                 if(this.modalType == 2){
-                    
+                    url = this.api.editCategory;
                 }
-                url(this.formCustom).then(d=>{
+                if(pid){
+                    this.formCustom.parentId = pid;
+                }
+                let data = this.modalType == 1 ? this.getFormData() : Object.assign({}, this.formCustom);
+                url(data).then(d=>{
                     this.modalCancel();
                     this.$Message.success(message);
                     this.init();
@@ -213,10 +236,17 @@
             },
             enterRemoveAjax(){
               this.api.deleteCategory({id: this.modal2Data.id}).then(d=>{
-                  this.cancelModal2()
+                  this.cancelModal2();
                   this.init()
               })
             },
+
+            initData(){
+                this.formCustom =  {
+                    categoryName: '',
+                    categoryDescription: ''
+                }
+            }
         },
         watch: {
             

@@ -21,13 +21,16 @@
             </p>
             <div style="">
                 <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="80">
-                    <FormItem label="姓名" prop="name">
+                    <FormItem label="登录账号: " prop="name">
+                        <Input type="text" v-model="formCustom.loginName"></Input>
+                    </FormItem>
+                    <FormItem label="姓名: " prop="name">
                         <Input type="text" v-model="formCustom.name"></Input>
                     </FormItem>
-                    <FormItem label="手机号" prop="mobilePhone">
+                    <FormItem label="手机号: " prop="mobilePhone">
                         <Input type="text" v-model="formCustom.mobilePhone"></Input>
                     </FormItem>
-                    <FormItem label="密码" prop="password">
+                    <FormItem label="密码: " prop="password">
                         <Input type="text" v-model="formCustom.password"></Input>
                     </FormItem>
                 </Form>
@@ -58,6 +61,7 @@
 <script>
     import Cookies from 'js-cookie';
     import mixins from '@/libs/mixins.js';
+    import md5 from '@/libs/md5'
     
     export default {
         components: {
@@ -133,6 +137,7 @@
                 supplierList: [],
                 formCustom: {
                     name: '',
+                    loginName: '',
                     mobilePhone: '',
                     password: ''
                 },
@@ -174,6 +179,9 @@
                 if(this.modalType == 2){
                     
                 }
+                
+                this.formCustom.password = md5(this.formCustom.password).toLocaleUpperCase();
+
                 url(this.formCustom).then(d=>{
                     this.modalCancel();
                     this.$Message.success(message);

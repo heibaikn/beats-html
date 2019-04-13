@@ -24,24 +24,32 @@
             </p>
             <div class="form-body">
                 <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
-                  <p class="title">中文</p>
+                  <p class="title" v-show="modalType == 1">中文</p>
                   <FormItem label="规格名称：" prop="specName">
                       <Input type="text" v-model="formCustom.specName"></Input>
                   </FormItem>
                   <FormItem label="规格值：" prop="specValue">
                       <Input type="text" v-model="formCustom.specValue"></Input>
+                      <div style="font-size:12px;padding-top:10px">
+                            <span>如果是颜色请选择：</span>
+                            <ColorPicker v-model="color"  @on-change="changeColor"/>
+                      </div>
                   </FormItem>
                   <FormItem label="规格描述：" prop="specDescription">
                       <Input type="textarea" v-model="formCustom.specDescription"></Input>
                   </FormItem>
                 </Form>
-                <Form ref="formEnglist" :model="formEnglist" :rules="ruleValidate">
+                <Form ref="formEnglist" :model="formEnglist" :rules="ruleValidate" v-show="modalType == 1">
                   <p class="title">Englist</p>
                   <FormItem prop="specName">
                       <Input type="text" v-model="formEnglist.specName"></Input>
                   </FormItem>
                   <FormItem prop="specValue">
                       <Input type="text" v-model="formEnglist.specValue"></Input>
+                      <div style="font-size:12px;padding-top:10px">
+                            <span>如果是颜色请选择：</span>
+                            <ColorPicker v-model="color2"  @on-change="changeColor2"/>
+                      </div>
                   </FormItem>
                   <FormItem prop="specDescription">
                       <Input type="textarea" v-model="formEnglist.specDescription"></Input>
@@ -77,6 +85,8 @@
         },
         data () {
             return {
+                color: '',
+                color2: '',
                 popupTitle: '规格',
                 modal1: false,
                 modal2: false,
@@ -90,6 +100,7 @@
                 modal2Name: '',
                 skuModel: '',
                 skuList: [],
+                modalType: 1,
                 columns1: [
                     {
                         title: '规格名称',
@@ -117,6 +128,7 @@
                                     on: {
                                         click: () => {
                                           this.formCustom = Object.assign({}, params.row);
+                                          delete this.formCustom.translation;
                                           this.modalTitle = '编辑'+this.popupTitle;
                                           this.modal1 = true;
                                           this.modalType  = 2;
@@ -173,7 +185,7 @@
             modalOk (name) {
                 this.$refs['formCustom'].validate((valid) => {
                   this.$refs['formEnglist'].validate((valid_E) => {
-                    if (valid && valid_E) {
+                    if (valid) {
                         this.modal_loading = true;
                         //添加
                         if(this.modalType == 1){
@@ -181,7 +193,7 @@
                         }
                         //更新
                         else if(this.modalType == 2){
-                            
+                            this.updateSpecInfo();
                         }
                     } else {
                         this.$Message.error('请检测验证信息!');
@@ -236,7 +248,7 @@
               this.queryList();
             },
             requestAddSKU(){
-              let data = this.getFormData();
+              let data = this.modalType == 1 ? this.getFormData() : this.formCustom;
               this.api.addSpecInfo(data).then(d=>{
                 this.modal_loading = false;
                 this.$Message.success('添加规格成功!');
@@ -244,7 +256,25 @@
               }).catch(()=>{
                 this.modal_loading = false;
               });
-            }
+            },
+
+            updateSpecInfo(){
+                console.log(this.formCustom)
+                this.api.updateSpecInfo(this.formCustom).then(d=>{
+                    this.modal_loading = false;
+                    this.$Message.success('更新规格成功!');
+                    this.modal1 = false;
+                }).catch(()=>{
+                    this.modal_loading = false;
+                });
+            },
+
+            changeColor(e){
+                this.formCustom.specValue = e;
+            },
+            changeColor2(e){
+                this.formEnglist.specValue = e;
+            },
         },
         watch: {
             

@@ -13,62 +13,70 @@
 .edui-default .edui-toolbar .edui-combox .edui-combox-body, .edui-default .edui-button-body{
   display: flex;
 }
+.ivu-tabs-bar{
+  padding-left: 90px;
+  margin-bottom: 40px;
+}
+@import url(../styles/beats.less);
 </style>
 <template>
     <section class="form-content">
-      <Form ref="formCustom" :label-width="200" :model="formCustom" :rules="ruleValidate">
-        <section style="width:500px">
-        <FormItem label="产品ID ：" v-if="formCustom.id">
-            <span>{{formCustom.id}}</span>
-        </FormItem>
-        <FormItem label="产品名称 ：" prop="goodsName">
-            <Input v-model="formCustom.goodsName" placeholder="" />
-        </FormItem>
-        <FormItem label="产品编号：" v-if="formCustom.spuNo">
-            <span>{{formCustom.spuNo}}</span>
-        </FormItem>
-        <FormItem label="产品所属分类ID：" prop="categoryId">
-          <Select v-model="formCustom.categoryId" style="width:100%">
-            <Option v-for="item in categoryList" :value="item.id" :key="item.id">{{ item.categoryName }}</Option>
-          </Select>
-        </FormItem>
-        <FormItem label="产品规格ID：" v-show="formCustom.specId">
-            <span>{{formCustom.specId}}</span>
-        </FormItem>
-        <FormItem label="产品规格名称：" prop="specName">
-            <Input v-model="formCustom.specName" placeholder="" />
-        </FormItem>
-        <FormItem label="产品规格描述：" prop="specDescription">
-            <Input v-model="formCustom.specDescription" placeholder="" />
-        </FormItem>
-        <FormItem label="产品规格编号 ："  v-show="formCustom.specNo">
-            <Input v-model="formCustom.specNo" placeholder="" />
-        </FormItem>
-        <FormItem label="产品规格具体值：" prop="specValue">
-            <Input v-model="formCustom.specValue" placeholder="" />
-        </FormItem>
-        <FormItem label="产品价格：" prop="lowPrice">
-            <InputNumber
-            :max="10000"
-            v-model="formCustom.lowPrice"
-            :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
-            :parser="value => value.replace(/$s?|(,*)/g, '')">
-            </InputNumber>
-        </FormItem>
-        <FormItem label="产品图片：">
-            <span v-show="formCustom.goodsImageKey"><img :src="formCustom.goodsImageKey" alt="" class="img"></span>
-            <Upload action="/api/image/upload" :name="goodsImage" :data="uploadData">
-                <Button icon="ios-cloud-upload-outline">上传图片</Button>
-            </Upload>
-        </FormItem>
-        </section>
-        <FormItem label="产品描述：" prop="goodsDescription">
-            <vue-ueditor-wrap v-model="formCustom.goodsDescription"></vue-ueditor-wrap>
-        </FormItem>
-        <FormItem>
-            <Button type="primary" size="large" :loading="loading" @click="confirm">提交</Button>
-        </FormItem>
-      </Form>
+          <Form ref="formCustom" :label-width="200" :model="formCustom" :rules="ruleValidate">
+            <section style="width:800px">
+            <FormItem label="产品ID ：" v-if="formCustom.id">
+                <span>{{formCustom.id}}</span>
+            </FormItem>
+            <FormItem label="产品名称 ：" prop="goodsName">
+                <!-- <Input v-model="formCustom.goodsName" placeholder="" /> -->
+                <div class="form-item-lanaguage form-item-lanaguage-col">
+                  <div class="item"><span v-show="modalType==1">中文: </span><Input type="text" v-model="formCustom.goodsName"></Input></div> 
+                  <div class="item" v-show="modalType==1"><span>Englisth: </span><Input type="text" v-model="formEnglist.goodsName"></Input></div> 
+                </div>
+            </FormItem>
+            <FormItem label="产品编号：" v-if="formCustom.spuNo">
+                <span>{{formCustom.spuNo}}</span>
+            </FormItem>
+            <FormItem label="产品所属分类：" prop="categoryId">
+              <Select style="width:200px; float:left; margin-right:10px" @on-change="categoryChange">
+                <Option v-for="item in categoryList" :value="item.id" :key="item.id">{{ item.categoryName }}</Option>
+              </Select>
+              <Select v-model="selectChildCate" style="width:200px; float:left" @on-change="chindrenCategoryChange">
+                <Option v-for="item in chindrenCategoryList" :value="item.id" :key="item.id">{{ item.categoryName }}</Option>
+              </Select>
+            </FormItem>
+            <FormItem label="产品规格：">
+              <CheckboxGroup v-model="formCustom.skuId" @on-change="checkboxChange">
+                <Checkbox :label="item.specValueId" v-for="(item,index) in skuList" :key="index"> 
+                    <span>{{item.specValue}}</span>
+                </Checkbox>
+              </CheckboxGroup>
+            </FormItem>
+            <FormItem label="产品价格：" prop="lowPrice">
+                <InputNumber
+                :max="10000"
+                :min="1"
+                v-model="formCustom.lowPrice"
+                :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
+                :parser="value => value.replace(/$s?|(,*)/g, '')">
+                </InputNumber>
+            </FormItem>
+            <FormItem label="产品图片：">
+                <span v-show="formCustom.goodsImageKey"><img :src="formCustom.goodsImageKey" alt="" class="img"></span>
+                <Upload action="/api/image/upload" :name="goodsImage" :data="uploadData">
+                    <Button icon="ios-cloud-upload-outline">上传图片</Button>
+                </Upload>
+            </FormItem>
+            </section>
+            <FormItem label="产品描述：" prop="goodsDescription">
+                <span class="label">中文: </span>
+                <vue-ueditor-wrap v-model="formCustom.goodsDescription" :config="ueditorConfig"></vue-ueditor-wrap>
+                <span class="label">English: </span>
+                <vue-ueditor-wrap v-model="formEnglist.goodsDescription" :config="ueditorConfig"></vue-ueditor-wrap>
+            </FormItem>
+            <FormItem>
+                <Button type="primary" size="large" :loading="loading" @click="confirm">提交</Button>
+            </FormItem>
+          </Form>
     </section>
 </template>
 <script>
@@ -83,19 +91,31 @@ export default {
   data () {
     return {
       loading: false,
-      formCustom: { 
-        
-      },
+      selectChildCate: '',
+      modalType: 1,
+      formCustom: { },
+      formEnglist: {},
       ruleValidate: {
         goodsName: [{ required: true, message: '产品名称不能为空' }],
         specName: [{ required: true, message: '规格名称不能为空' }],
-        lowPrice: [{ required: true, min: 1, message: '请输入正确的价格' }],
+        // lowPrice: [{ required: true, min: 1, message: '请输入正确的价格' }],
       },
       goodsImage: 'goodsImage',
       uploadData: {
         id: 0
       },
-      categoryList: []
+      categoryList: [],
+      chindrenCategoryList: [],
+      skuList: [],
+      ueditorConfig: {
+        // 编辑器不自动被内容撑高
+        autoHeightEnabled: false,
+        // 初始容器高度
+        initialFrameHeight: 200,
+        // 初始容器宽度
+        initialFrameWidth: '100%',
+        serverUrl: '/api/image/upload',
+      }
     }
   },
   computed: {
@@ -104,9 +124,14 @@ export default {
   mixins: [mixins],
   methods: {
     init(){
-      this.formCustom.lowPrice = 0;
+      this.formCustom.lowPrice = 1;
       this.api.categories({id:0}).then(d=>{
-        this.categoryList = d.list;
+        this.dataList = d.list;
+        this.categoryList = this.getArrayGroup(d.list);
+      })
+
+      this.api.getSpecInfoList().then(d=>{
+        this.skuList = d.list;
       })
     },
     requestGetGood(id = ''){
@@ -121,14 +146,45 @@ export default {
         if (valid) {
             this.modal_loading = true;
             this.modal3 = false;
+            this.requestGoodHandle();
         } else {
             this.$Message.error('请检测验证信息!');
         }
-    });
+      });
+    },
+    requestGoodHandle(){
+      let url = this.params.id ? this.api.updateGoods : this.api.addGoods;
+      let data = this.params.id ? this.formCustom : this.getFormData();
+      url(data).then(d=>{
+        this.modal_loading = false;
+        if(this.params.id){
+          this.$Message.success('更新产品成功!');
+        }
+        else{
+          this.$Message.success('添加产品成功!');
+        }
+      })
+      .catch(()=>{
+        this.modal_loading = false;
+      });
+    },
+    categoryChange(id){
+      this.chindrenCategoryList =  this.dataList.filter(v=>{
+        return v.parentId == id;
+      })
+      this.formCustom.categoryId = id;
+      this.selectChildCate = '';
+    },
+    chindrenCategoryChange(id){
+      this.formCustom.categoryId = id;
     },
     initData(){
       this.formCustom = { }
     },
+
+    checkboxChange(val){
+      this.formCustom.skuId = val;
+    }
   },
   watch: {
       
@@ -141,6 +197,10 @@ export default {
     this.params = params;
     if(params.id){
       this.requestGetGood(params.id);
+      this.modalType = 2;
+    }
+    else{
+      this.modalType = 1;
     }
     this.init();
   }

@@ -14,6 +14,26 @@ fs.open('./build/env.js', 'w', function(err, fd) {
 
 module.exports = merge(webpackBaseConfig, {
     devtool: '#source-map',
+
+    //设置跨域代理
+    devServer: {
+        // port: 9209,
+        historyApiFallback: true,
+        hot: true,
+        inline: true,
+        stats: { colors: true },
+        proxy: {
+            //匹配代理的url
+            '/api': {
+                // 目标服务器地址
+                target: 'http://47.111.11.214',
+                //路径重写
+                pathRewrite: { '^/api': '/api' },
+                changeOrigin: true
+            }
+        }
+    },
+
     output: {
         publicPath: '/dist/',
         filename: '[name].js',

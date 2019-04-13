@@ -100,6 +100,9 @@ export const categories = (param = {}) => {
 export const addCategory = (param = {}) => {
     return post('/api/admin/goodsCategory/addCategory', param);
 };
+export const editCategory = (param = {}) => {
+    return post('/api/admin/goods/updateCategory', param);
+};
 export const deleteCategory = (param = {}) => {
     return post('/api/admin/goodsCategory/deleteCategory', param);
 };
@@ -109,10 +112,24 @@ export const categoryGoods = (param = {}) => {
     return post('/api/goods/categoryGoods', param);
 };
 
+// admin 产品
+export const addGoods = (param = {}) => {
+    return post('/api/admin/goods/addGoods', param);
+};
+export const updateGoods = (param = {}) => {
+    return post('/api/admin/goods/updateGoods', param);
+};
+export const deleteGoods = (param = {}) => {
+    return post('/api/admin/goods/deleteGoods', param);
+};
+
 // sku
 export const addSpecInfo = (param = {}) => {
     return post('/api/admin/goods/addSpecInfo', param);
 };
 export const getSpecInfoList = (param = {}) => {
     return post('/api/admin/goods/getSpecInfoList', param);
+};
+export const updateSpecInfo = (param = {}) => {
+    return post('/api/admin/goods/updateSpecInfo', param);
 };
