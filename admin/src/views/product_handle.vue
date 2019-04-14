@@ -44,12 +44,12 @@
                 <Option v-for="item in chindrenCategoryList" :value="item.id" :key="item.id">{{ item.categoryName }}</Option>
               </Select>
             </FormItem>
-            <FormItem label="产品规格：">
+            <!-- <FormItem label="产品规格：">
               <CheckboxGroup v-model="formCustom.skuId" @on-change="checkboxChange">
                 <Checkbox :label="item.specValueId" v-for="(item,index) in skuList" :key="index"> 
                     <span>{{item.specValue}} <span class="span-color" :style="skuColorStyle(item.specValue)"></span> </span>
                 </Checkbox>
-              </CheckboxGroup>
+              </CheckboxGroup> -->
             </FormItem>
             <FormItem label="产品价格：" prop="lowPrice">
                 <InputNumber
@@ -146,7 +146,7 @@ export default {
   methods: {
     init(){
       this.formCustom.lowPrice = 1;
-      this.api.categories({id:0}).then(d=>{
+      this.api.categories({id: 0}).then(d=>{
         this.dataList = d.list;
         this.categoryList = this.getArrayGroup(d.list);
         this.requestGetGood(this.params.id);
@@ -156,7 +156,8 @@ export default {
         this.skuList = d.list;
       })
     },
-    requestGetGood(id = ''){
+    requestGetGood(id){
+      if(!id) return;
       this.api.goodsDetails({ id }).then(d=>{
           Object.assign(this.formCustom, d.list && d.list[0] || {});
           let cid = this.formCustom.categoryId;

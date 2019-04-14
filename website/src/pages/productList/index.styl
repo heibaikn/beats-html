@@ -1,0 +1,47 @@
+@import '~@shared/stylus/common.styl'
+@import '~@shared/styles/public.styl'
+
+img
+  max-width 100%
+  max-height 100%
+
+body
+  pt 80px
+
+#main-content
+  mar 80px auto
+  pad 50px
+  pb 200px
+
+.job-center
+  width: 730px;
+  mar 0 auto
+  p
+    mb 10px
+
+.search-list-content
+  pt 60px
+  .item
+    wh 270px 270px
+    fl()
+    pad 10px
+    mr 20px
+    mb 30px
+    background: #fff
+    borr(50%)
+    pt 20px
+    ov()
+    tc()
+    .img
+      mar 0 auto
+      transition: all .35s
+    .info
+      pt 20px
+      notwrap()
+  .item:hover
+    .img
+      transform: scale(1.1)
+  &:after
+    content ''
+    db()
+    clear: both;

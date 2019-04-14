@@ -13,7 +13,7 @@
             <a
             @mouseover="MenuHover(0)" 
             @mouseout="MenuHoverOut(0)" 
-            href="">{{$language.products}} 
+            href="/productList/index.html">{{$language.products}} 
               <i :class="{ 'arrow-active' : menuStatus}" class="iconfont iconjiantou_liebiaozhankai"></i>
             </a>
           </li>

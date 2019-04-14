@@ -22,6 +22,7 @@
           <div class="item">
             <div class="img">
               <h3>添加Banner：</h3>
+              <p>提示：建议上传1980*600的图片</p>
               <div class="upload-center">
                 <Upload
                     ref="upload"

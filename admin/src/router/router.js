@@ -109,7 +109,8 @@ export const appRouter = [
         component: Main,
         children: [
             { path: 'index', title: { i18n: '产品列表' }, name: 'product_index', component: resolve => { require(['@/views/product.vue'], resolve); } },
-            { path: 'handle', title: { i18n: '添加产品' }, name: 'product_handle', component: resolve => { require(['@/views/product_handle.vue'], resolve); } }
+            { path: 'handle', title: { i18n: '添加产品' }, name: 'product_handle', component: resolve => { require(['@/views/product_handle.vue'], resolve); } },
+            { path: 'related', title: { i18n: '关联产品规格' }, name: 'product_related', component: resolve => { require(['@/views/product_related.vue'], resolve); } }
         ]
     },
     {

@@ -11,6 +11,7 @@ const languageObj = {
   jobTitle: '人才中心 | Talent Center',
   contactTitle: '联系我们 | Contact Us',
   searchTitle: '搜索页 | Search Products',
+  productListTitle: '产品列表 | Product Lists',
 
 
   userName: '姓名 | UserName',
