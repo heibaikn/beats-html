@@ -24,6 +24,11 @@
       <Tabs :animated="false">
         <TabPane label="中文">
           <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
+              <FormItem label="新闻类型：" prop="type">
+                  <Select v-model="formCustom.type" style="width:200px; float:left; margin-right:10px">
+                    <Option v-for="item in newsTypeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                  </Select>
+              </FormItem>
               <FormItem label="新闻标题：" prop="title">
                   <Input type="text" v-model="formCustom.title"></Input>
               </FormItem>
@@ -34,6 +39,11 @@
         </TabPane>
         <TabPane label="Englist">
           <Form ref="formEnglist" :model="formEnglist" :rules="ruleValidate" :label-width="100">
+              <FormItem label="新闻类型：" prop="type">
+                <Select v-model="formEnglist.type" style="width:200px; float:left; margin-right:10px">
+                  <Option v-for="item in newsTypeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+              </FormItem>
               <FormItem label="title：" prop="title">
                   <Input type="text" v-model="formEnglist.title"></Input>
               </FormItem>
@@ -70,13 +80,19 @@ export default {
     return {
       loading: false,
       formCustom: {
+        type: '',
         title: '',
         content: '',
       },
       formEnglist: {
+        type: '',
         title: '',
         content: '',
       },
+      newsTypeList: [
+        {label: '公司动态', value: 1},
+        {label: '行业动态', value: 2},
+      ],
       filterKey: ['content'],
       ruleValidate: {}
     }
@@ -91,14 +107,15 @@ export default {
     },
     confirm(){
       this.$refs['formCustom'].validate((valid) => {
-      this.$refs['formEnglist'].validate((valid_E) => {
-        if(valid && valid_E){
-          this.requestAjax()
-        }
-        else{
-          this.$Message.error('请检验表单数据');
-        }
-      })
+        this.$refs['formEnglist'].validate((valid_E) => {
+          if(!valid){
+            return this.$Message.error('请检验表单数据');
+          }
+          if(!valid_E){
+            return this.$Message.error('请检验English表单数据');
+          }
+          this.requestAjax();
+        })
       })
     },
     requestAjax(){

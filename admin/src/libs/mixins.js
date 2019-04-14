@@ -15,7 +15,7 @@ export default {
         getFormData () {
             let data = {};
             data = Object.assign({}, this.formCustom);
-            data.translation = this.getFormTranslationData();
+            data.optionals = this.getFormTranslationData();
             return data;
         },
 

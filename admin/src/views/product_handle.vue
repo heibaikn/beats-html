@@ -51,16 +51,16 @@
                 </Checkbox>
               </CheckboxGroup> -->
             </FormItem>
-            <FormItem label="产品价格：" prop="lowPrice">
+            <FormItem label="产品价格：" prop="price">
                 <InputNumber
                 :max="10000"
                 :min="1"
-                v-model="formCustom.lowPrice"
+                v-model="formCustom.price"
                 :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
                 :parser="value => value.replace(/$s?|(,*)/g, '')">
                 </InputNumber>
             </FormItem>
-            <FormItem label="产品图片：">
+            <FormItem label="产品图片：" prop="goodsImageKey">
                 <!-- <Upload action="/api/image/upload" :name="goodsImage" :data="uploadData">
                     <Button icon="ios-cloud-upload-outline">上传图片</Button>
                 </Upload> -->
@@ -116,7 +116,8 @@ export default {
       ruleValidate: {
         goodsName: [{ required: true, message: '产品名称不能为空' }],
         specName: [{ required: true, message: '规格名称不能为空' }],
-        // lowPrice: [{ required: true, min: 1, message: '请输入正确的价格' }],
+        goodsImageKey: [{ required: true, message: '请上传产品图片' }],
+        // price: [{ required: true, min: 1, message: '请输入正确的价格' }],
       },
       goodsImage: 'goodsImage',
       uploadData: {
@@ -145,7 +146,7 @@ export default {
   },
   methods: {
     init(){
-      this.formCustom.lowPrice = 1;
+      this.formCustom.price = 1;
       this.api.categories({id: 0}).then(d=>{
         this.dataList = d.list;
         this.categoryList = this.getArrayGroup(d.list);
@@ -159,7 +160,8 @@ export default {
     requestGetGood(id){
       if(!id) return;
       this.api.goodsDetails({ id }).then(d=>{
-          Object.assign(this.formCustom, d.list && d.list[0] || {});
+          this.formCustom = d.list && d.list[0] || {}
+
           let cid = this.formCustom.categoryId;
           let findCate = this.dataList.find(v=>{
             return v.id == cid;
@@ -215,14 +217,11 @@ export default {
     chindrenCategoryChange(id){
       this.formCustom.categoryId = id;
     },
-    initData(){
-      this.formCustom = { }
-    },
     handleSuccess (res, file) {
       if(res.data){
         let url = res.data.imageHost + '/' + res.data.imageKey;
-        // this.formCustom.goodsImageKey = url;
         this.$set(this.formCustom, 'goodsImageKey', url);
+        // this.formCustom.goodsImageKey = url;
       }
     },
     checkboxChange(val){

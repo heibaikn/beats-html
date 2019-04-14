@@ -47,7 +47,20 @@ export const categoryGoods = (param = {}) => {
   return post('/api/goods/categoryGoods', param)
 }
 
+// 获取某一个产品下所有不同规格产品
+export const goodsDetails = (param = {}) => {
+  return post('/api/goods/goodsDetails', param)
+}
+
+// 获取某一个产品下某一具体规格的详情
+export const goodsSpecDetails = (param = {}) => {
+  return post('/api/goods/goodsSpecDetails', param)
+}
+
 // 新闻
 export const getNewsInfos = (param = {}) => {
   return post('/api/newsInfo/getNewsInfos', param)
+}
+export const getNewsInfo = (param = {}) => {
+  return post('/api/newsInfo/getNewsInfo', param)
 }

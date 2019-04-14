@@ -29,15 +29,18 @@ export default {
              type: Number,
              default: 1
          },
-         current: {
+         curr: {
              type: Number,
              default: 1
          }
      },
      data:function (){
-         return{
-            //  current:1
-         }
+        return {
+             current: 1
+        }
+     },
+     mounted() {
+         this.current = this.curr;
      },
      computed: {
          // 显示分页按钮
@@ -62,11 +65,10 @@ export default {
      methods: {
          goPage:function(page) {
              if (page != this.current) {
-                 console.log(page);
                  this.current = page;
-                 this.$emit('navpage', this.current);
+                 this.$emit('toPage', this.current);
              }else{
-                 console.log('Already in the current page');
+                //  console.log('Already in the current page');
              }
          }
      }

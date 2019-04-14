@@ -13,9 +13,9 @@ import * as api from './api';
 
 import './views/iconfont.css';
 
-if (process.env.NODE_ENV === 'development') {
-    require('./mock');
-}
+// if (process.env.NODE_ENV === 'development') {
+//     require('./mock');
+// }
 // Vue.use(VueI18n);
 Vue.prototype.api = api;
 Vue.use(iView);

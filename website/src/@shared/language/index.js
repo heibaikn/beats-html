@@ -44,6 +44,8 @@ const languageObj = {
   page: '页 | Page',
 
   buy: '购买 | Buy',
+  explore: '探索 | Explore',
+  price: '价格 | Price',
 
   send: '发送 | Send',
   reset: '重新填写 | Reset',

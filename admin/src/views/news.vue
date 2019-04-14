@@ -88,6 +88,15 @@
                         key: 'title'
                     },
                     {
+                        title: '类型',
+                        key: 'type',
+                        render: (h, params) => {
+                            let type = params.row.type;
+                            let html = type == 1 ? '公司动态' : '行业动态';
+                            return h('div', html)
+                        }
+                    },
+                    {
                         title: '添加时间',
                         key: 'createDate',
                         width: 200
@@ -189,7 +198,7 @@
                     if(this.formSearch.pageIndex == 1){
                         this.dataList = [];
                     }   
-                    this.dataList = d.list;
+                    this.dataList = d.list || [];
                     this.total = d.count;
                 }).catch(()=>{
                     this.loading = false;

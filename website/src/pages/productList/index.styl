@@ -9,7 +9,7 @@ body
   pt 80px
 
 #main-content
-  mar 80px auto
+  mar 0 auto
   pad 50px
   pb 200px
 
@@ -45,3 +45,36 @@ body
     content ''
     db()
     clear: both;
+
+  
+.category
+  background: #fff;
+  pad 20px
+  borr 4px
+  display: flex
+  > .label
+    flex 0 auto
+    pt 10px
+    pl 10px
+  .category-list
+    flex 1
+    pl 50px
+    .item
+      fl()
+      pad 10px 30px
+      mr 20px
+      mb 10px
+      cur()
+      bor 1px solid #fff
+      borr 4px
+    .item.active
+      bor 1px solid #e01e3c
+      color: #e01e3c
+
+
+.product
+  mt 50px
+  .loading, .empty
+    background: #fff
+    whh 100% 300px
+    tc()
