@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <Modal v-model="modal1" width="550"
+        <Modal v-model="modal1" width="400"
             @on-visible-change="modalVisibleChange"
         >
             <p slot="header" style="text-align:center">
@@ -58,16 +58,14 @@
                     <FormItem label="父级ID：" prop="parentId" v-show="formCustom.parentId">
                         <span>{{formCustom.parentId}}</span>
                     </FormItem>
-                    <FormItem label="分类名称：" prop="categoryName" :class="{'form-my-label': modalType == 1}">
+                    <FormItem label="分类名称：" prop="categoryName">
                         <div class="form-item-lanaguage">
-                            <div class="item"><span v-show="modalType==1">中文: </span><Input type="text" v-model="formCustom.categoryName"></Input></div> 
-                            <div class="item" v-show="modalType==1"><span>Englisth: </span><Input type="text" v-model="formEnglist.categoryName"></Input></div> 
+                            <div class="item"><Input type="text" v-model="formCustom.categoryName"></Input></div> 
                         </div>
                     </FormItem>
                     <FormItem label="分类描述：" prop="categoryDescription">
                         <div class="form-item-lanaguage">
                             <div class="item"><Input type="text" v-model="formCustom.categoryDescription"></Input></div> 
-                            <div class="item" v-show="modalType==1"><Input type="text" v-model="formEnglist.categoryDescription"></Input></div> 
                         </div>
                     </FormItem>
                 </Form>
@@ -122,11 +120,6 @@
                 supplierList: [],
                 modalType: 1,
                 formCustom: {
-                    parentId: 0,
-                    categoryName: '',
-                    categoryDescription: ''
-                },
-                formEnglist: {
                     parentId: 0,
                     categoryName: '',
                     categoryDescription: ''
@@ -226,6 +219,9 @@
                     this.formCustom.parentId = pid;
                 }
                 let data = this.modalType == 1 ? this.getFormData() : Object.assign({}, this.formCustom);
+                if(this.modalType == 2){
+                    data.dictId = data.id;
+                }
                 url(data).then(d=>{
                     this.modalCancel();
                     this.$Message.success(message);

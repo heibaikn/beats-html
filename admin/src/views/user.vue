@@ -28,7 +28,7 @@
                         <Input type="text" v-model="formCustom.name"></Input>
                     </FormItem>
                     <FormItem label="手机号: " prop="mobilePhone">
-                        <Input type="text" v-model="formCustom.mobilePhone"></Input>
+                        <Input type="text" v-model="formCustom.mobilePhone" maxlength="11"></Input>
                     </FormItem>
                     <FormItem label="密码: " prop="password">
                         <Input type="text" v-model="formCustom.password"></Input>
@@ -184,9 +184,10 @@
                     
                 }
 
-                this.formCustom.password = md5(this.formCustom.password).toLocaleUpperCase();
+                let sendData = Object.assign({}, this.formCustom);
+                sendData.password = md5(sendData.password).toLocaleUpperCase();
 
-                url(this.formCustom).then(d=>{
+                url(sendData).then(d=>{
                     this.modalCancel();
                     this.$Message.success(message);
                     this.init();

@@ -17,6 +17,17 @@
   padding-left: 90px;
   margin-bottom: 40px;
 }
+.spec-list-item{
+  padding-top: 20px;
+}
+.spec-list-item:after{
+  content: '';
+  clear: both;
+  display: block;
+}
+.curr{
+  cursor: pointer;
+}
 @import url(../styles/beats.less);
 </style>
 <template>
@@ -27,10 +38,8 @@
                 <span>{{formCustom.id}}</span>
             </FormItem>
             <FormItem label="产品名称 ：" prop="goodsName">
-                <!-- <Input v-model="formCustom.goodsName" placeholder="" /> -->
                 <div class="form-item-lanaguage form-item-lanaguage-col">
-                  <div class="item"><span v-show="modalType==1">中文: </span><Input type="text" v-model="formCustom.goodsName"></Input></div> 
-                  <div class="item" v-show="modalType==1"><span>Englisth: </span><Input type="text" v-model="formEnglist.goodsName"></Input></div> 
+                  <div class="item"><Input type="text" v-model="formCustom.goodsName"></Input></div> 
                 </div>
             </FormItem>
             <FormItem label="产品编号：" v-if="formCustom.spuNo">
@@ -44,12 +53,6 @@
                 <Option v-for="item in chindrenCategoryList" :value="item.id" :key="item.id">{{ item.categoryName }}</Option>
               </Select>
             </FormItem>
-            <!-- <FormItem label="产品规格：">
-              <CheckboxGroup v-model="formCustom.skuId" @on-change="checkboxChange">
-                <Checkbox :label="item.specValueId" v-for="(item,index) in skuList" :key="index"> 
-                    <span>{{item.specValue}} <span class="span-color" :style="skuColorStyle(item.specValue)"></span> </span>
-                </Checkbox>
-              </CheckboxGroup> -->
             </FormItem>
             <FormItem label="产品价格：" prop="price">
                 <InputNumber
@@ -60,11 +63,41 @@
                 :parser="value => value.replace(/$s?|(,*)/g, '')">
                 </InputNumber>
             </FormItem>
+
+            <!-- 产品规格： -->
+            <FormItem label="产品规格：" prop="specRequest">
+                <div class="add-spec" @click="clickAddSpec"><i class="iconfont iconguanbi"></i></div>
+                <div class="spec-list">
+                  <div class="spec-list-item"  v-for="(item, index) in specRequest" :key="index" @click="clickSpecItem(item,index)">
+                    <span>增加规格：</span>
+                    <Select v-model="item.specValueId" style="width:200px; display:inilne-block ;margin-right:10px" @on-change="changeSpecSelect">
+                      <Option v-for="item in skuList" :value="item.specValueId" :key="item.specValueId">{{ item.specName }} - {{ item.specValue }}</Option>
+                    </Select>
+                    <Upload 
+                      :show-upload-list="false"
+                      :on-success="handleSpecSuccess"
+                      :format="['jpg','jpeg','png']"
+                      :max-size="2048"
+                      :name="goodsImage"
+                      :data="uploadData"
+                      action="/api/image/upload"
+                      class="my-upload my-upload-mini">
+                      <div>
+                          <Icon type="ios-camera" size="20"></Icon>
+                      </div>
+                    </Upload>
+                    <span v-show="item.goodsSpecImageKey"><img :src="item.goodsSpecImageKey" alt="" class="upload-img"></span>
+                    <span class="sepc-remove curr" @click.prevent.stop="removeSpec(item,index)"><i class="iconfont iconguanbi"></i></span>
+                  </div>
+                </div>
+            </FormItem>
+
+            <!-- 产品图片： -->
             <FormItem label="产品图片：" prop="goodsImageKey">
                 <!-- <Upload action="/api/image/upload" :name="goodsImage" :data="uploadData">
                     <Button icon="ios-cloud-upload-outline">上传图片</Button>
                 </Upload> -->
-                <Upload
+                <Upload 
                   ref="upload"
                   :show-upload-list="false"
                   :on-success="handleSuccess"
@@ -83,12 +116,7 @@
             </FormItem>
             </section>
             <FormItem label="产品描述：" prop="goodsDescription">
-                <span class="label"  v-show="modalType==1">中文: </span>
                 <vue-ueditor-wrap v-model="formCustom.goodsDescription" :config="ueditorConfig"></vue-ueditor-wrap>
-                <div  v-show="modalType==1">
-                  <span class="label">English: </span>
-                  <vue-ueditor-wrap v-model="formEnglist.goodsDescription" :config="ueditorConfig"></vue-ueditor-wrap>
-                </div>
             </FormItem>
             <FormItem>
                 <Button type="primary" size="large" :loading="loading" @click="confirm">提交</Button>
@@ -109,14 +137,14 @@ export default {
     return {
       loading: false,
       selectCate: '',
+      changeSpecIndex: -1,
       selectChildCate: '',
       modalType: 1,
       formCustom: { },
-      formEnglist: {},
       ruleValidate: {
         goodsName: [{ required: true, message: '产品名称不能为空' }],
         specName: [{ required: true, message: '规格名称不能为空' }],
-        goodsImageKey: [{ required: true, message: '请上传产品图片' }],
+        // goodsImageKey: [{ required: true, message: '请上传产品图片' }],
         // price: [{ required: true, min: 1, message: '请输入正确的价格' }],
       },
       goodsImage: 'goodsImage',
@@ -126,6 +154,7 @@ export default {
       categoryList: [],
       chindrenCategoryList: [],
       skuList: [],
+      specRequest: [],
       ueditorConfig: {
         // 编辑器不自动被内容撑高
         autoHeightEnabled: false,
@@ -183,6 +212,14 @@ export default {
     confirm(){
       this.$refs['formCustom'].validate((valid) => {
         if (valid) {
+            var specCheck = this.checkValidateSpec();
+            if(!specCheck){
+              return;
+            }
+            if(!this.formCustom.goodsImageKey){
+              this.$Message.error('请上传产品图片!');
+              return;
+            }
             this.modal_loading = true;
             this.modal3 = false;
             this.requestGoodHandle();
@@ -221,7 +258,12 @@ export default {
       if(res.data){
         let url = res.data.imageHost + '/' + res.data.imageKey;
         this.$set(this.formCustom, 'goodsImageKey', url);
-        // this.formCustom.goodsImageKey = url;
+      }
+    },
+    handleSpecSuccess (res, file) {
+      let url = res.data.imageHost + '/' + res.data.imageKey;
+      if(this.changeSpecIndex > -1){
+        this.specRequest[this.changeSpecIndex]['goodsSpecImageKey'] = url;
       }
     },
     checkboxChange(val){
@@ -238,6 +280,53 @@ export default {
         }
       }
       return {}
+    },
+
+
+    // 规格相关
+    checkValidateSpec(){
+      var status = true;
+      var index = -1;
+      this.specRequest.some((spec, i)=>{
+        if(spec.specId !== 0 && spec.goodsSpecImageKey == ''){
+          status = false;
+          index = i;
+          return false;
+        }
+      });
+      if(status == false){
+        this.$Message.error('第'+(index+1)+'个规格没上传图片');
+      }
+      else if(status == true && this.specRequest.length > 0){
+        let arr = this.specRequest.filter(item=>{
+          return item.specId > 0;
+        })
+        this.formCustom.specRequest = arr;
+      }
+      return status;
+    },
+
+    clickAddSpec(){
+      this.specRequest.push({
+        specId: 0,
+        specValueId: 0,
+        goodsSpecImageKey: '',
+      })``
+      this.changeSpecIndex = -1;
+    },
+    changeSpecSelect(id){
+      const find = this.skuList.find(item=>{
+        return item.specValueId == id;
+      })
+      if(this.changeSpecIndex > -1 && find.specId){
+        this.specRequest[this.changeSpecIndex]['specId'] = find.specId;
+      }
+    },
+    removeSpec(item, index){
+      this.specRequest.splice(index, 1);
+    },
+    clickSpecItem(item,index){
+      this.changeSpecIndex = index;
     }
   },
   watch: {

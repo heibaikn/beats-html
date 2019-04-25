@@ -64,7 +64,7 @@ export default {
 
       if(this.isEdit){
         message = '更新公司介绍成功'
-        ajax = this.api.updateRecruitmentInfo;
+        ajax = this.api.updateCompanyInfo;
       }
 
       this.loading = true;

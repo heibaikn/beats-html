@@ -98,13 +98,13 @@ export const categories = (param = {}) => {
     return post('/api/goods/categories', param);
 };
 export const addCategory = (param = {}) => {
-    return post('/api/admin/goodsCategory/addCategory', param);
+    return post('/api/admin/goods/addCategory', param);
 };
 export const editCategory = (param = {}) => {
     return post('/api/admin/goods/updateCategory', param);
 };
 export const deleteCategory = (param = {}) => {
-    return post('/api/admin/goodsCategory/deleteCategory', param);
+    return post('/api/admin/goods/deleteCategory', param);
 };
 
 // 商品

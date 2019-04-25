@@ -41,7 +41,7 @@ export default {
         {
             title: '添加时间',
             key: 'createDate',
-            width: 200
+            width: 400
         },
         {
             title: '操作',

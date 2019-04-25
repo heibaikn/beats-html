@@ -21,7 +21,7 @@
 <template>
     <section class="form-content">
 
-      <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100" v-if="isEdit">
+      <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
           <FormItem label="招聘标题：" prop="title">
               <Input type="text" v-model="formCustom.title"></Input>
           </FormItem>
@@ -29,30 +29,6 @@
               <vue-ueditor-wrap v-model="formCustom.content"></vue-ueditor-wrap>
           </FormItem>
       </Form>
-
-      <Tabs :animated="false" v-else>
-        <TabPane label="中文">
-          <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
-              <FormItem label="招聘标题：" prop="title">
-                  <Input type="text" v-model="formCustom.title"></Input>
-              </FormItem>
-              <FormItem label="招聘内容：" prop="content">
-                  <vue-ueditor-wrap v-model="formCustom.content"></vue-ueditor-wrap>
-              </FormItem>
-          </Form>
-        </TabPane>
-        <TabPane label="Englist">
-          <Form ref="formEnglist" :model="formEnglist" :rules="ruleValidate" :label-width="100">
-              <FormItem label="title：" prop="title">
-                  <Input type="text" v-model="formEnglist.title"></Input>
-              </FormItem>
-              <FormItem label="content：" prop="content">
-                  <vue-ueditor-wrap v-model="formEnglist.content"></vue-ueditor-wrap>
-              </FormItem>
-          </Form>
-        </TabPane>
-      </Tabs>
-
       
       <div class="buttons">
         <Button type="primary" size="large" :loading="loading" @click="confirm">提交</Button>
@@ -72,10 +48,6 @@ export default {
     return {
       loading: false,
       formCustom: {
-        title: '',
-        content: '',
-      },
-      formEnglist: {
         title: '',
         content: '',
       },

@@ -20,48 +20,19 @@
 </style>
 <template>
     <section class="form-content">
-
-      <Tabs :animated="false">
-        <TabPane label="中文">
-          <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
-              <FormItem label="新闻类型：" prop="type">
-                  <Select v-model="formCustom.type" style="width:200px; float:left; margin-right:10px">
-                    <Option v-for="item in newsTypeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-                  </Select>
-              </FormItem>
-              <FormItem label="新闻标题：" prop="title">
-                  <Input type="text" v-model="formCustom.title"></Input>
-              </FormItem>
-              <FormItem label="新闻内容：" prop="content">
-                  <vue-ueditor-wrap v-model="formCustom.content"></vue-ueditor-wrap>
-              </FormItem>
-          </Form>
-        </TabPane>
-        <TabPane label="Englist">
-          <Form ref="formEnglist" :model="formEnglist" :rules="ruleValidate" :label-width="100">
-              <FormItem label="新闻类型：" prop="type">
-                <Select v-model="formEnglist.type" style="width:200px; float:left; margin-right:10px">
+        <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
+            <FormItem label="新闻类型：" prop="type">
+                <Select v-model="formCustom.type" style="width:200px; float:left; margin-right:10px">
                   <Option v-for="item in newsTypeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
-              </FormItem>
-              <FormItem label="title：" prop="title">
-                  <Input type="text" v-model="formEnglist.title"></Input>
-              </FormItem>
-              <FormItem label="content：" prop="content">
-                  <vue-ueditor-wrap v-model="formEnglist.content"></vue-ueditor-wrap>
-              </FormItem>
-          </Form>
-        </TabPane>
-      </Tabs>
-
-      <!-- <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
-          <FormItem label="新闻标题" prop="title">
-              <Input type="text" v-model="formCustom.title"></Input>
-          </FormItem>
-          <FormItem label="新闻内容" prop="content">
-              <vue-ueditor-wrap v-model="formCustom.content"></vue-ueditor-wrap>
-          </FormItem>
-      </Form> -->
+            </FormItem>
+            <FormItem label="新闻标题：" prop="title">
+                <Input type="text" v-model="formCustom.title"></Input>
+            </FormItem>
+            <FormItem label="新闻内容：" prop="content">
+                <vue-ueditor-wrap v-model="formCustom.content"></vue-ueditor-wrap>
+            </FormItem>
+        </Form>
       <div class="buttons">
         <Button type="primary" size="large" :loading="loading" @click="confirm">提交</Button>
       </div>
@@ -84,11 +55,6 @@ export default {
         title: '',
         content: '',
       },
-      formEnglist: {
-        type: '',
-        title: '',
-        content: '',
-      },
       newsTypeList: [
         {label: '公司动态', value: 1},
         {label: '行业动态', value: 2},
@@ -107,15 +73,10 @@ export default {
     },
     confirm(){
       this.$refs['formCustom'].validate((valid) => {
-        this.$refs['formEnglist'].validate((valid_E) => {
-          if(!valid){
-            return this.$Message.error('请检验表单数据');
-          }
-          if(!valid_E){
-            return this.$Message.error('请检验English表单数据');
-          }
-          this.requestAjax();
-        })
+        if(!valid){
+          return this.$Message.error('请检验表单数据');
+        }
+        this.requestAjax();
       })
     },
     requestAjax(){

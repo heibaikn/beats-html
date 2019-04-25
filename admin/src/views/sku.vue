@@ -16,13 +16,12 @@
             <Page :total="total" :current="formSearch.pageIndex" show-total @on-change="changePage"></Page>
         </div>
 
-        <Modal v-model="modal1" width="800" @on-visible-change="modalVisibleChange" >
+        <Modal v-model="modal1" width="500" @on-visible-change="modalVisibleChange" >
             <p slot="header" style="text-align:center">
                 <span>{{modalTitle}}</span>
             </p>
             <div class="form-body">
                 <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
-                  <p class="title" v-show="modalType == 1">中文</p>
                   <FormItem label="规格名称：" prop="specName">
                       <Input type="text" v-model="formCustom.specName"></Input>
                   </FormItem>
@@ -35,22 +34,6 @@
                   </FormItem>
                   <FormItem label="规格描述：" prop="specDescription">
                       <Input type="textarea" v-model="formCustom.specDescription"></Input>
-                  </FormItem>
-                </Form>
-                <Form ref="formEnglist" :model="formEnglist" :rules="ruleValidate" v-show="modalType == 1">
-                  <p class="title">Englist</p>
-                  <FormItem prop="specName">
-                      <Input type="text" v-model="formEnglist.specName"></Input>
-                  </FormItem>
-                  <FormItem prop="specValue">
-                      <Input type="text" v-model="formEnglist.specValue"></Input>
-                      <div style="font-size:12px;padding-top:10px">
-                            <span>如果是颜色请选择：</span>
-                            <ColorPicker v-model="color2"  @on-change="changeColor2"/>
-                      </div>
-                  </FormItem>
-                  <FormItem prop="specDescription">
-                      <Input type="textarea" v-model="formEnglist.specDescription"></Input>
                   </FormItem>
                 </Form>
             </div>
@@ -175,7 +158,6 @@
                 dataList: [],
                 supplierList: [],
                 formCustom: { },
-                formEnglist: { },
                 formSearch:{
                     name: '',
                     pageIndex: 1,
@@ -204,7 +186,6 @@
             },
             modalOk (name) {
                 this.$refs['formCustom'].validate((valid) => {
-                  this.$refs['formEnglist'].validate((valid_E) => {
                     if (valid) {
                         this.modal_loading = true;
                         //添加
@@ -218,7 +199,6 @@
                     } else {
                         this.$Message.error('请检测验证信息!');
                     }
-                  })
                 })
             },
             modalCancel () {
@@ -232,7 +212,7 @@
                     if(this.formSearch.pageIndex == 1){
                         this.dataList = [];
                     }   
-                    this.dataList = d.list;
+                    this.dataList = d.list || [];
                     this.total = d.count;
                 }).catch(()=>{
                     this.loading = false;
@@ -249,7 +229,6 @@
             modalVisibleChange(visible){
                 if(!visible){
                   this.$refs['formCustom'].resetFields();
-                  this.$refs['formEnglist'].resetFields();
                 }
                 this.color = '';
                 this.color2 = '';
@@ -276,6 +255,7 @@
                 this.modal_loading = false;
                 this.$Message.success('添加规格成功!');
                 this.modal1 = false;
+                this.queryList();
               }).catch(()=>{
                 this.modal_loading = false;
               });
@@ -294,9 +274,6 @@
 
             changeColor(e){
                 this.formCustom.specValue = e;
-            },
-            changeColor2(e){
-                this.formEnglist.specValue = e;
             },
         },
         watch: {

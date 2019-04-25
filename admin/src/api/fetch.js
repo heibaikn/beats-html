@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { Message } from 'iview';
+import Cookies from 'js-cookie';
 
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 let language = localStorage.getItem('language') || 'chinese';
 axios.defaults.headers.post['language'] = language;
+axios.defaults.headers.post['loginName'] = Cookies.get('user') || '';
+axios.defaults.headers.post['adminToken'] = Cookies.get('token') || '';
 
 // 请求拦截器
 axios.interceptors.request.use(function (config) {
