@@ -52,7 +52,7 @@
             <h4>隆重介绍：</h4>
             <h3>{{item.goodsName}}</h3>
             <!-- <p>全新 Beats by Dr. Dre / sacai Collection，彰显你的独特风格和声音</p> -->
-            <a href="setProductHref(item.id)" class="button-holder"><span class="button-inner">探索</span> <span class="mask"></span></a>
+            <a :href="setProductHref(item.id)" class="button-holder"><span class="button-inner">探索</span> <span class="mask"></span></a>
           </div>
         </div>
 
