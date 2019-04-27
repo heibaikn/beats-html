@@ -28,12 +28,16 @@
 .curr{
   cursor: pointer;
 }
+.gray{
+  color: #9c9c9c;
+  font-size: 12px;
+}
 @import url(../styles/beats.less);
 </style>
 <template>
     <section class="form-content">
-          <Form ref="formCustom" :label-width="200" :model="formCustom" :rules="ruleValidate">
-            <section style="width:800px">
+          <Form ref="formCustom" :label-width="200" :model="formCustom" :rules="ruleValidate" @submit.native.prevent>
+            <section style="width:1000px">
             <FormItem label="产品ID ：" v-if="formCustom.id">
                 <span>{{formCustom.id}}</span>
             </FormItem>
@@ -55,13 +59,13 @@
             </FormItem>
             </FormItem>
             <FormItem label="产品价格：" prop="price">
-                <InputNumber
-                :max="10000"
-                :min="1"
-                v-model="formCustom.price"
-                :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
-                :parser="value => value.replace(/$s?|(,*)/g, '')">
-                </InputNumber>
+                <Input
+                style="width:200px"
+                :maxlength="7"
+                :number="true"
+                v-model="price"
+                @on-blur="productPriceChange" >
+                </Input>
             </FormItem>
 
             <!-- 产品规格： -->
@@ -88,6 +92,7 @@
                     </Upload>
                     <span v-show="item.goodsSpecImageKey"><img :src="item.goodsSpecImageKey" alt="" class="upload-img"></span>
                     <span class="sepc-remove curr" @click.prevent.stop="removeSpec(item,index)"><i class="iconfont iconguanbi"></i></span>
+                    <span class="gray">（请上传1000*1000的产品规格图片）</span>
                   </div>
                 </div>
             </FormItem>
@@ -137,10 +142,12 @@ export default {
     return {
       loading: false,
       selectCate: '',
+      price: '',
       changeSpecIndex: -1,
       selectChildCate: '',
       modalType: 1,
       formCustom: { },
+      skuList: [],
       ruleValidate: {
         goodsName: [{ required: true, message: '产品名称不能为空' }],
         specName: [{ required: true, message: '规格名称不能为空' }],
@@ -189,7 +196,20 @@ export default {
     requestGetGood(id){
       if(!id) return;
       this.api.goodsDetails({ id }).then(d=>{
-          this.formCustom = d.list && d.list[0] || {}
+          this.formCustom = d.list && d.list[0] || {};
+          this.price = this.formCustom.price = this.formCustom.lowPrice;
+
+          // skulist
+          if(d.list && d.list.length > 0){
+            d.list.forEach((item)=>{
+              this.specRequest.push({
+                specId: item.specId,
+                specValueId: item.specValueId,
+                goodsSpecImageKey: item.goodsSkuImageKey,
+              })
+            })
+          }
+          
 
           let cid = this.formCustom.categoryId;
           let findCate = this.dataList.find(v=>{
@@ -311,7 +331,7 @@ export default {
         specId: 0,
         specValueId: 0,
         goodsSpecImageKey: '',
-      })``
+      })
       this.changeSpecIndex = -1;
     },
     changeSpecSelect(id){
@@ -327,6 +347,16 @@ export default {
     },
     clickSpecItem(item,index){
       this.changeSpecIndex = index;
+    },
+
+
+    productPriceChange(e){
+      let value = e.target.value;
+      this.price = value = value.replace(/[^\d\.]/g, '');
+      clearTimeout(this.priceTime);
+      this.priceTime = setTimeout(() => {
+        this.formCustom.price = value;
+      }, 200);
     }
   },
   watch: {

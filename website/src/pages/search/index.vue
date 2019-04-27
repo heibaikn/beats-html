@@ -7,26 +7,11 @@
       <div class="search-content">
         <h2>{{$language.searchResults}}: {{keyword}}</h2>
         <div class="search-list-content">
-          <div class="item">
-            <a href="/"> 
-            <div class="img"><img src="https://www.beatsbydre.com/content/dam/beats/web/search/featured/pb3w_featured_retina_156x156.jpg" alt=""></div>
-            <div class="info">Powerbeats Wireless</div> </a>
-          </div>
-          <div class="item">
-            <div class="img"><img src="https://www.beatsbydre.com/content/dam/beats/web/search/featured/pb3w_featured_retina_156x156.jpg" alt=""></div>
-            <div class="info">Powerbeats Wireless</div>
-          </div>
-          <div class="item">
-            <div class="img"><img src="https://www.beatsbydre.com/content/dam/beats/web/search/featured/pb3w_featured_retina_156x156.jpg" alt=""></div>
-            <div class="info">Powerbeats Wireless</div>
-          </div>
-          <div class="item">
-            <div class="img"><img src="https://www.beatsbydre.com/content/dam/beats/web/search/featured/pb3w_featured_retina_156x156.jpg" alt=""></div>
-            <div class="info">Powerbeats Wireless</div>
-          </div>
-          <div class="item">
-            <div class="img"><img src="https://www.beatsbydre.com/content/dam/beats/web/search/featured/pb3w_featured_retina_156x156.jpg" alt=""></div>
-            <div class="info">Powerbeats Wireless</div>
+          <div class="item" v-for="(item, index) in dataList" :key="index">
+            <a :href="setProductHref(item.id)"> 
+              <div class="img"><img :src="item.goodsImageKey" alt=""></div>
+              <div class="info">{{item.goodsName}}</div> 
+            </a>
           </div>
         </div>
       </div>
@@ -42,12 +27,14 @@ import banner from '@shared/components/banner'
 import fixedMessage from '@shared/components/fixedMessage'
 
 import { searchApi } from '@/api'
+import { getQueryString } from '@shared/utils'
 
 export default {
   name: 'about',
   data(){
     return{
       content: '',
+      dataList: [],
       keyword: ''
     }
   },
@@ -66,19 +53,18 @@ export default {
   },
   methods: {
     init(){
-      this.keyword = this.getQueryString('search');
+      this.keyword = getQueryString('search');
       searchApi({keyWord: this.keyword}).then(d=>{
-        if(d.data && d.data[0]){
-          this.content = d.data[0].content;
+        d = d.data;
+        if(d.list){
+          this.dataList = d.list;
         }
       });
     },
-    getQueryString(name) {
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
-      var r = window.location.search.substr(1).match(reg); 
-      if (r != null) return decodeURIComponent(r[2]); 
-      return null; 
-    } 
+    setProductHref(id){
+      return '/detail/index.html?id='+id;
+    },
+    
   },
 }
 </script>

@@ -48,7 +48,11 @@ h2.title
       h 60%
       .product-photos
         pad 0 20%
+        tc()
+        height 100%;
       .product-details
+        pt 20px
+        pb 10px
         tc()
         b
           fs 18px
@@ -66,8 +70,14 @@ h2.title
   rel()
   .product-group__image
     mr 16.66%
-    img
+    max-height 500px
+    ov()
+    > a
       db()
+      max-height 500px
+    img
+      transform: translateY(-50%);
+      margin-top: 25%;
   .product-group__info
     w 460px
     abs right 10px bottom 10px
@@ -91,6 +101,8 @@ h2.title
       right auto
       left 0
 
+.product-group-left .product-group__image
+  text-align: right;
 
 @media (max-width: 1200px){
   .product-list .item-wrapper .item-content{

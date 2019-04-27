@@ -34,7 +34,7 @@ export default {
       return 'RMB ' + fmoney(price, 2);
     },
     formarPrice(price){
-      return fmoney(price, 2);
+      return '¥ ' + fmoney(price, 2);
     },
     formatDate(str){
       return dateFtt('yyyy-MM-dd hh:mm', new Date(str))

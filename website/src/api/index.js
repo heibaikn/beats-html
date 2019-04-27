@@ -47,6 +47,10 @@ export const categoryGoods = (param = {}) => {
   return post('/api/goods/categoryGoods', param)
 }
 
+export const goodsSearch = (param = {}) => {
+  return post('/api/goods/search', param)
+}
+
 // 获取某一个产品下所有不同规格产品
 export const goodsDetails = (param = {}) => {
   return post('/api/goods/goodsDetails', param)

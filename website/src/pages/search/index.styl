@@ -22,24 +22,24 @@ body
 .search-list-content
   pt 60px
   .item
-    wh 270px 270px
     fl()
     pad 10px
-    mr 20px
-    mb 30px
-    background: #fff
-    borr(50%)
-    pt 20px
-    ov()
+    mr 70px
+    mb 40px
+    // background: #fff
     tc()
     .img
-      mar 0 auto
-      transition: all .35s
+      borr(50%)
+      wh 270px 270px
+      ov()
+      img
+        wh 100% 100%
+        transition: all .35s
     .info
       pt 20px
       notwrap()
   .item:hover
-    .img
+    .img img
       transform: scale(1.1)
   &:after
     content ''

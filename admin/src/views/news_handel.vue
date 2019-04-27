@@ -20,7 +20,7 @@
 </style>
 <template>
     <section class="form-content">
-        <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100">
+        <Form ref="formCustom" :model="formCustom" :rules="ruleValidate" :label-width="100" @submit.native.prevent>
             <FormItem label="新闻类型：" prop="type">
                 <Select v-model="formCustom.type" style="width:200px; float:left; margin-right:10px">
                   <Option v-for="item in newsTypeList" :value="item.value" :key="item.value">{{ item.label }}</Option>

@@ -8,9 +8,26 @@
   .ivu-modal-body{
       padding-right: 40px;
   }
+  .search{
+      padding-top: 20px;
+  }
+  .search .ivu-btn{
+      margin-left: -50px;
+  }
 </style>
 <template>
     <section>
+
+        <div class="search">
+            <Form ref="formInline" :model="formSearch" label-position="left" :label-width="80" inline @submit.native.prevent>
+                <FormItem label="产品名称：">
+                    <Input type="text" v-model="formSearch.goodsName" placeholder="产品名称" clearable> </Input>
+                </FormItem>
+                <FormItem>
+                    <Button type="primary" @click="searchList">搜索</Button>
+                </FormItem>
+            </Form>
+        </div>
 
         <!--表格-->
         <Table stripe :columns="columns1" :data="dataList" :loading="loading"></Table>
@@ -132,6 +149,7 @@
                 formSearch:{
                     id: 0,
                     name: '',
+                    goodsName: '',
                     pageIndex: 1,
                 },
                 ruleValidate: {
@@ -173,6 +191,27 @@
                 }).catch(()=>{
                     this.loading = false;
                 })
+            },
+            querySearchList(){
+                this.loading = true;
+                let sendData = Object.assign({}, this.formSearch);
+                sendData.keyWord = this.formSearch.goodsName;
+
+                this.api.goodsSearch(sendData).then(d=>{
+                    this.loading = false;
+                    if(this.formSearch.pageIndex == 1){
+                        this.dataList = [];
+                    }   
+                    this.dataList = d.list;
+                    this.total = d.count;
+                }).catch(()=>{
+                    this.loading = false;
+                })
+            },
+            searchList(){
+                this.formSearch.id = 0;
+                this.formSearch.pageIndex = 1;
+                this.querySearchList();
             },
             changePage(d){
                 this.formSearch.pageIndex = d;

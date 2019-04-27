@@ -111,6 +111,9 @@ export const deleteCategory = (param = {}) => {
 export const categoryGoods = (param = {}) => {
     return post('/api/goods/categoryGoods', param);
 };
+export const goodsSearch = (param = {}) => {
+    return post('/api/goods/search', param);
+};
 export const goodsDetails = (param = {}) => {
     return post('/api/goods/goodsDetails', param);
 };

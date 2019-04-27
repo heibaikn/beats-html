@@ -63,14 +63,37 @@ body
     display: flex;
     ov()
     overflow-x: auto;
+    width: 500px;
+    margin 0 auto;
     justify-content: center;
     .item
       wh 100px 100px
       border 1px solid #e8e7e7
       borr 4px;
+      background: #fff
       mr 10px
       flex-shrink: 0;
       transition:  all .4s
       cur()
+      ov()
+      display: flex;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
       &:hover, &.active
         border 1px solid $red
+
+
+
+.product-detail
+  h3
+    tc()
+    fs 28px
+    mb 40px
+    fw 300
+  pad 40px
+  background: #fff
+  margin 0 90px
+  mt 50px
+  mb 200px
+  borr 8px

@@ -21,7 +21,7 @@
 
           <div class="product-box" v-show="!isLoading" v-for="(item,index) in productList" :key="index">
             <div class="product-box__img">
-              <img :src="item.goodsImageKey" alt="">
+              <a :href="toHref(item)"><img :src="item.goodsImageKey" alt=""></a>
             </div>
             <div class="product-box__content">
               <h2>{{item.goodsName}}</h2>
@@ -68,7 +68,8 @@ export default {
   name: 'about',
   data(){
     return{
-      currIndex: 9,
+      currIndex: 0,
+      cid: 0,
       content: '',
       keyword: '',
       categoryList: [],
@@ -93,6 +94,7 @@ export default {
   },
   created(){
     document.title = this.$language.productListTitle;
+    this.cid = getQueryString('cid');
     this.init()
   },
   methods: {
@@ -101,6 +103,14 @@ export default {
         d = d.data;
         if(d && d.list){
           this.categoryList = d.list;
+          if(this.cid){
+            let findParamsCid = this.categoryList.findIndex(item=>{
+              return item.id == this.cid
+            })
+            if(findParamsCid > -1){
+              this.currIndex = findParamsCid;
+            }
+          }
           this.queryCategoryGoods();
         }
       })

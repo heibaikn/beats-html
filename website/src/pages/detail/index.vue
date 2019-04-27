@@ -3,7 +3,7 @@
     <mainHeader />
     <fixedMessage />
     <section id="main-content">
-      <section class="container">
+      <section class="container" v-if="!isLoading && productDetail.id">
 
         <div class="product-content">
           <div class="product-content__images">
@@ -18,7 +18,7 @@
             <h1>{{productDetail.goodsName}}</h1>
             <div class="price-box">
               <!-- <p>价格：<del class="font">¥88</del></p> -->
-              <p>{{$language.price}}: <span class="red font font-fs">¥<span class="tm-price">{{productDetail.lowPrice | formarPrice}}</span></span></p>
+              <p>{{$language.price}}: <span class="red font font-fs"><span class="tm-price">{{productDetail.lowPrice | formarPrice}}</span></span></p>
             </div>
             <div class="button-buy">
               <!-- <a href="" class="button-holder button-holder--big button-holder--red2">
@@ -29,7 +29,17 @@
           </div>
         </div>
 
+        <div class="product-detail">
+          <h3>商品详情</h3>
+          <div v-html="productDetail.goodsDescription"></div>
+        </div>
+
       </section>   
+
+      <section class="product-detail" v-if="!isLoading && !productDetail.id">
+        <h3 style="padding-top:40px">没有查询到商品信息哦</h3>
+      </section>
+
     </section>
     <mainFooter />
   </div>
@@ -41,26 +51,25 @@ import mainHeader from '@shared/components/header'
 import mainFooter from '@shared/components/footer'
 import fixedMessage from '@shared/components/fixedMessage'
 
-import detailImg from '../../assets/detail-img.png'
-import detailImg3 from '../../assets/img3.png'
-
 import { goodsDetails, goodsSpecDetails } from '@/api'
 import { getQueryString } from '@shared/utils'
+import mixins from '@shared/mixins'
 
 export default {
   name: 'headPhones',
   data(){
     return{
-      currIndex: 0,
+      currIndex: -1,
       detailImg: '',
+      isLoading: true,
       productDetail: {},
       skuList: [],
       imgsList: [
-        detailImg,
-        detailImg3
+        
       ]
     }
   },
+  mixins: [mixins],
   components: {
     mainHeader,
     mainFooter,
@@ -72,7 +81,6 @@ export default {
   },
   created(){
     document.title = this.$language.homeTitle;
-    this.detailImg = this.imgsList[0];
     this.init()
   },
   methods: {
@@ -81,14 +89,18 @@ export default {
       if(id){
         this.productId = id;
         goodsDetails({id: id}).then(d=>{
+          this.isLoading = false;
           d = d.data;
           if(d && d.list){
             this.productDetail = d.list[0];
+            this.detailImg = this.productDetail.goodsImageKey;
             d.list.forEach(v=>{
-              this.skuList.push({specValueId: v.specValueId, specId: v.specId});
+              this.skuList.push({specValue: v.specValue, specName: v.specName, goodsSkuImageKey: v.goodsSkuImageKey});
+              this.imgsList.push(v.goodsSkuImageKey);
             })
+            this.storageProduct();
           }
-          this.querySkuInfo();
+          // this.querySkuInfo();
         })
       }
     },
@@ -108,8 +120,46 @@ export default {
       });
     },
     toggleImage(img, index){
+      if(this.currIndex == index){
+        this.currIndex = -1;
+        this.detailImg = this.productDetail.goodsImageKey;
+        return;
+      }
       this.detailImg = img
       this.currIndex = index
+    },
+    storageProduct(){
+      var product = this.productDetail;
+      if(!product.id) return;
+      var data = {id: product.id, goodsName: product.goodsName, goodsImageKey: product.goodsImageKey};
+      this.setStorage(data);
+    },
+    getStorage(){
+      let list = null;
+      try{
+        list = JSON.parse(localStorage.getItem('productList'));
+      } catch (e){
+
+      }
+      return list;
+    },
+    setStorage(data){
+      let list = this.getStorage();
+      if(list == null){
+        localStorage.setItem('productList', JSON.stringify([data]));
+        return;
+      }
+
+      let isFind = list.find(item=>{
+        return item.id == data.id
+      });
+      if(isFind) return;
+
+      if(list.length > 5){
+        list.splice(0, 1);
+      }
+      list.push(data);
+      localStorage.setItem('productList', JSON.stringify(list));
     }
   },
 }

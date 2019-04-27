@@ -32,7 +32,7 @@
                 <div class="header-avator-con">
                     <a href="/" target="_blank">官网首页</a>
                     <full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>
-                    <lock-screen></lock-screen>
+                    <!-- <lock-screen></lock-screen> -->
                     <language></language>
                     <!-- <theme-switch></theme-switch> -->
                     

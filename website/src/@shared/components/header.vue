@@ -44,35 +44,49 @@
             <div class="animate-fade animate-fade1">
               <h2>{{$language.browse}}: </h2>
               <ul>
-                <li><a href="">BEATS POP COLLECTION</a></li>
-                <li><a href="">BEATS POP</a></li>
-                <li><a href="">BBBBBB</a></li>
+                <li v-for="(item, index) in cateList" :key="index"><a :href="setCateHref(item.id)">{{item.categoryName}}</a></li>
               </ul>
               <div class="button-holder">
+                <a href="/productList/index.html">
                 <span class="button-inner">{{$language.browseAll}}</span>
                 <span class="mask"></span>
+                </a>
               </div>
             </div>
           </div>
           <div class="header-mask__body__group">
-            <div class="image-wrapper main-img animate-fade animate-fade2">
-              <img src="../../assets/img1.jpg" alt="">
-              <p>Beats Solo3 Wireless</p>
+            <div class="image-wrapper main-img animate-fade animate-fade2" v-if="productList[0]">
+              <a :href="setProductHref(productList[0].id)"><img :src="productList[0].goodsImageKey" alt=""></a>
+              <p>{{productList[0].goodsName}}</p>
             </div>
-            <div class="image-wrapper animate-fade animate-fade3">
-              <div class="image__content"><img src="../../assets/img1.jpg" alt=""><span>BEATS Pro</span></div> 
+            <div class="image-wrapper animate-fade animate-fade3" v-if="productList[1]">
+              <div class="image__content">
+                <a :href="setProductHref(productList[1].id)"><img :src="productList[1].goodsImageKey" alt=""></a>
+                <span>{{productList[1].goodsName}}</span>
+              </div> 
             </div>
-            <div class="image-wrapper animate-fade animate-fade4">
-              <div class="image__content"><img src="../../assets/img1.jpg" alt=""><span>BEATS Pro</span></div> 
+            <div class="image-wrapper animate-fade animate-fade4" v-if="productList[2]">
+              <div class="image__content">
+                <a :href="setProductHref(productList[2].id)"><img :src="productList[2].goodsImageKey" alt=""></a>
+                <span>{{productList[2].goodsName}}</span>
+              </div> 
             </div>
-            <div class="image-wrapper animate-fade animate-fade5">
-              <div class="image__content"><img src="../../assets/img1.jpg" alt=""><span>BEATS Pro</span></div> 
+            <div class="image-wrapper animate-fade animate-fade5" v-if="productList[3]">
+              <div class="image__content">
+                <a :href="setProductHref(productList[3].id)"><img :src="productList[3].goodsImageKey" alt=""></a>
+                <span>{{productList[3].goodsName}}</span>
+              </div> 
             </div>
-            <div class="image-wrapper animate-fade animate-fade6">
-              <div class="image__content"><img src="../../assets/img1.jpg" alt=""><span>BEATS Pro</span></div> 
+            <div class="image-wrapper animate-fade animate-fade6" v-if="productList[4]">
+              <div class="image__content">
+                <a :href="setProductHref(productList[4].id)"><img :src="productList[4].goodsImageKey" alt=""></a>
+                <span>{{productList[4].goodsName}}</span>
+              </div> 
             </div>
-            <div class="image-wrapper animate-fade animate-fade7">
-              <div class="image__content"><img src="../../assets/img1.jpg" alt=""> <span>这里是内容</span></div>
+            <div class="image-wrapper animate-fade animate-fade7" v-if="productList[5]">
+              <div class="image__content">
+                <a :href="setProductHref(productList[5].id)"><img :src="productList[5].goodsImageKey" alt=""> </a>
+                <span>{{productList[5].goodsName}}</span></div>
             </div>
           </div>
         </div>
@@ -111,9 +125,13 @@
 
 
 <script>
+import { categories, categoryGoods } from '@/api'
+
 export default {
   data(){
     return {
+      cateList: [],
+      productList: [],
       keyword: '',
       menuStatus: false,
       searchPopup: false,
@@ -130,8 +148,31 @@ export default {
       return v.value == language ? true : false
     })
     this.currLanguage = curr.label;
+    this.requestProduct()
   },
   methods: {
+    requestProduct(){
+      categories({id: 0}).then(data=>{
+        data = data.data;
+        let list = data && data.list;
+        if(list && list.length > 0){
+          this.cateList = list.splice(0, 3);
+        }
+      });
+      categoryGoods({id: 0, pageIndex: 1}).then(data=>{
+        data = data.data;
+        let list = data && data.list;
+        if(list && list.length > 0){
+          this.productList = list.splice(0, 6);
+        }
+      });
+    },
+    setCateHref(cid){
+      return '/productList/index.html?cid='+cid;
+    },
+    setProductHref(id){
+      return '/detail/index.html?id='+id;
+    },
     MenuHover(){
       this.menuStatus = true
       clearTimeout(this.hoverId)

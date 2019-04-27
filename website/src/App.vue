@@ -25,52 +25,18 @@
         <h2 class="title">精选产品</h2>
         <div class="product-list">
 
-          <div class="item-wrapper">
+          <div class="item-wrapper" v-for="(item, index) in recommendList" :key="index">
             <div class="item">
               <div class="item-content">
                 <div class="product-photos">
-                  <img src="./assets/img1.jpg" alt="" />
+                  <a :href="setProductHref(item.id)"><img :src="item.goodsImageKey" alt="" /></a>
                 </div>
                 <div class="product-details">
-                  <b class="name">Beats X 颜色</b>
-                  <p>2 款颜色</p>
+                  <b class="name">{{item.goodsName}}</b>
+                  <!-- <p>2 款颜色</p> -->
                 </div>
                 <div class="product-btn">
-                  <a href="" class="button-holder button-holder--red2"><span class="button-inner">购买</span><span class="mask"></span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item-wrapper">
-            <div class="item">
-              <div class="item-content">
-                <div class="product-photos">
-                  <img src="./assets/img1.jpg" alt="" />
-                </div>
-                <div class="product-details">
-                  <b class="name">Beats X 颜色</b>
-                  <p>2 款颜色</p>
-                </div>
-                <div class="product-btn">
-                  <a href="" class="button-holder button-holder--red2"><span class="button-inner">购买</span><span class="mask"></span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item-wrapper">
-            <div class="item">
-              <div class="item-content">
-                <div class="product-photos">
-                  <img src="./assets/img1.jpg" alt="" />
-                </div>
-                <div class="product-details">
-                  <b class="name">Beats X 颜色</b>
-                  <p>2 款颜色</p>
-                </div>
-                <div class="product-btn">
-                  <a href="" class="button-holder button-holder--red2"><span class="button-inner">购买</span><span class="mask"></span></a>
+                  <a :href="setProductHref(item.id)" class="button-holder button-holder--red2"><span class="button-inner">探索</span><span class="mask"></span></a>
                 </div>
               </div>
             </div>
@@ -78,7 +44,19 @@
 
         </div>
 
-        <div class="product-group">
+        <div class="product-group" :class="productListClass(index)" v-for="(item, index) in productList" :key="index">
+          <div class="product-group__image">
+            <a :href="setProductHref(item.id)"><img :src="item.goodsImageKey" alt="" /></a>
+          </div>
+          <div class="product-group__info">
+            <h4>隆重介绍：</h4>
+            <h3>{{item.goodsName}}</h3>
+            <!-- <p>全新 Beats by Dr. Dre / sacai Collection，彰显你的独特风格和声音</p> -->
+            <a href="setProductHref(item.id)" class="button-holder"><span class="button-inner">探索</span> <span class="mask"></span></a>
+          </div>
+        </div>
+
+        <!-- <div class="product-group product-group-left">
           <div class="product-group__image">
             <img src="./assets/img2.jpg" alt="">
           </div>
@@ -88,19 +66,7 @@
             <p>全新 Beats by Dr. Dre / sacai Collection，彰显你的独特风格和声音</p>
             <a href="" class="button-holder"><span class="button-inner">探索</span> <span class="mask"></span></a>
           </div>
-        </div>
-
-        <div class="product-group product-group-left">
-          <div class="product-group__image">
-            <img src="./assets/img2.jpg" alt="">
-          </div>
-          <div class="product-group__info">
-            <h4>隆重介绍：</h4>
-            <h3>Beats / sacai Collection</h3>
-            <p>全新 Beats by Dr. Dre / sacai Collection，彰显你的独特风格和声音</p>
-            <a href="" class="button-holder"><span class="button-inner">探索</span> <span class="mask"></span></a>
-          </div>
-        </div>
+        </div> -->
 
       </section>
     </section>
@@ -113,10 +79,16 @@
 import mainHeader from '@shared/components/header'
 import mainFooter from '@shared/components/footer'
 import fixedMessage from '@shared/components/fixedMessage'
-import { getUserInfo } from '@/api'
+import { categoryGoods } from '@/api'
 
 export default {
   name: 'Home',
+  data(){
+    return {
+      recommendList: [],
+      productList: [],
+    }
+  },
   components: {
     mainHeader,
     mainFooter,
@@ -124,13 +96,28 @@ export default {
   },
   created(){
     document.title = this.$language.homeTitle;
-
-    getUserInfo().then(d=>{
-      console.log(d)
-    })
+    this.requestProduct();
+  },
+  computed: {
+    
   },
   methods: {
-    
+    requestProduct(){
+      categoryGoods({id: 0, pageIndex: 1}).then(data=>{
+        data = data.data;
+        let list = data && data.list;
+        if(list && list.length > 0){
+          this.recommendList = list.splice(0, 3);
+          this.productList = list;
+        }
+      });
+    },
+    productListClass(index){
+      return index % 2 !== 0 ? 'product-group-left' : ''
+    },
+    setProductHref(id){
+      return '/detail/index.html?id='+id;
+    },
   },
 }
 </script>
