@@ -154,7 +154,7 @@ export default {
     requestProduct(){
       categories({id: 0}).then(data=>{
         data = data.data;
-        let list = data && data.list;
+        let list = data || []
         if(list && list.length > 0){
           this.cateList = list.splice(0, 3);
         }

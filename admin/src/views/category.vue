@@ -183,11 +183,7 @@
                 this.loading = true;
                 this.api.categories(this.formSearch).then(d=>{
                     this.loading = false;
-                    if(this.formSearch.pageIndex == 1){
-                        this.dataList = [];
-                    }   
-                    this.dataList = this.getArrayGroup(d.list)
-                    this.total = d.count;
+                    this.dataList = this.getArrayGroup(d)
                 }).catch(()=>{
                     this.loading = false;
                 })

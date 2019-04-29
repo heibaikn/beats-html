@@ -170,7 +170,7 @@
             init(){
                 this.queryList();
                 this.api.categories({id:0}).then(d=>{
-                    this.categoryList = d.list;
+                    this.categoryList = d;
                 })
             },
             addModal(){

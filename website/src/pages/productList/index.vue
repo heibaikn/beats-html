@@ -101,8 +101,8 @@ export default {
     init(){
       categories({id: 0}).then(d=>{
         d = d.data;
-        if(d && d.list){
-          this.categoryList = d.list;
+        if(d && d.length > 0){
+          this.categoryList = d;
           if(this.cid){
             let findParamsCid = this.categoryList.findIndex(item=>{
               return item.id == this.cid

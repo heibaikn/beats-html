@@ -184,8 +184,8 @@ export default {
     init(){
       this.formCustom.price = 1;
       this.api.categories({id: 0}).then(d=>{
-        this.dataList = d.list;
-        this.categoryList = this.getArrayGroup(d.list);
+        this.dataList = d;
+        this.categoryList = this.getArrayGroup(d);
         this.requestGetGood(this.params.id);
       });
 
@@ -348,15 +348,9 @@ export default {
     clickSpecItem(item,index){
       this.changeSpecIndex = index;
     },
-
-
     productPriceChange(e){
       let value = e.target.value;
-      this.price = value = value.replace(/[^\d\.]/g, '');
-      clearTimeout(this.priceTime);
-      this.priceTime = setTimeout(() => {
-        this.formCustom.price = value;
-      }, 200);
+      this.formCustom.price = this.price = value = value.replace(/[^\d\.]/g, '');
     }
   },
   watch: {
