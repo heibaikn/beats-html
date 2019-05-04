@@ -24,6 +24,11 @@
                     <FormItem label="登录名: " prop="name">
                         <Input type="text" v-model="formCustom.loginName"></Input>
                     </FormItem>
+                    <FormItem label="权限: " prop="identity">
+                        <Select v-model="formCustom.identity">
+                            <Option v-for="item in groupList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        </Select>
+                    </FormItem>
                     <FormItem label="用户名: " prop="name">
                         <Input type="text" v-model="formCustom.name"></Input>
                     </FormItem>
@@ -80,6 +85,11 @@
                 modal2Data: {},
                 skuModel: '',
                 skuList: [],
+                groupList: [
+                    {label: '管理员', value: 1},
+                    {label: '高级业务员', value: 2},
+                    {label: '普通业务员', value: 3},
+                ],
                 columns1: [
                     {
                         title: '登录名',
@@ -95,7 +105,7 @@
                     },
                     {
                         title: '注册时间',
-                        key: 'date'
+                        key: 'createDate'
                     },
                     {
                         title: '操作',
@@ -103,7 +113,8 @@
                         width: 150,
                         align: 'center',
                         render: (h, params) => {
-                            var ButtonType = params.row.status == 'DISABLED' ? 'warning' : 'error';
+                            if(!this.checkRemoveIdentity) return
+                            
                             return h('div', [
                                 // h('Button', {
                                 //     props: {
@@ -143,7 +154,8 @@
                     name: '',
                     loginName: '',
                     mobilePhone: '',
-                    password: ''
+                    password: '',
+                    identity: 1
                 },
                 formSearch:{
                     name: '',

@@ -33,7 +33,7 @@ export function post (url, params = {}) {
                     resolve(resData.data);
                 } else {
                     if (params.tips === undefined) {
-                        let msg = (resData && resData.message) ? resData.message : '后台系统繁忙，请稍后再试';
+                        let msg = (resData && resData.description) ? resData.description : '后台系统繁忙，请稍后再试';
                         Message.error(msg);
                     }
                     reject(response);

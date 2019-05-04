@@ -49,9 +49,7 @@ export default {
             width: 150,
             align: 'center',
             render: (h, params) => {
-                var ButtonType = params.row.status == 'DISABLED' ? 'warning' : 'error';
-                return h('div', [
-                    h('Button', {
+                let btn = [h('Button', {
                         props: {
                             type: 'primary',
                             size: 'small'
@@ -68,8 +66,9 @@ export default {
                                 });
                             }
                         }
-                    }, '编辑'),
-                    h('Button', {
+                    }, '编辑')]
+                if(this.checkRemoveIdentity){
+                    btn.push(h('Button', {
                         props: {
                             size: 'small'
                         },
@@ -81,8 +80,9 @@ export default {
                               this.clickRemove(params.row, params.index)
                             }
                         }
-                    }, '删除'),
-                ]);
+                    }, '删除'))
+                }    
+                return h('div', btn);
             }
         }
       ],

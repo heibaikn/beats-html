@@ -121,6 +121,9 @@
                 return this.$store.state.app.messageCount;
             }
         },
+        created() {
+            
+        },
         methods: {
             init () {
                 let pathArr = util.setCurrentPath(this, this.$route.name);

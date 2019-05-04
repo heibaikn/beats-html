@@ -155,8 +155,7 @@
                         width: 150,
                         align: 'center',
                         render: (h, params) => {
-                            var ButtonType = params.row.status == 'DISABLED' ? 'warning' : 'error';
-                            return h('div', [
+                            let btn = [
                                 h('Button', {
                                     props: {
                                         type: 'primary',
@@ -171,8 +170,10 @@
                                           this.modal3 = true;
                                         }
                                     }
-                                }, '查看'),
-                                h('Button', {
+                                }, '查看')
+                            ]
+                            if(this.checkRemoveIdentity){
+                                btn.push(h('Button', {
                                     props: {
                                         size: 'small'
                                     },
@@ -184,8 +185,9 @@
                                           this.clickRemoveMessage(params.row)
                                         }
                                     }
-                                }, '删除'),
-                            ]);
+                                }, '删除'))
+                            }
+                            return h('div', btn);
                         }
                     }
                 ],

@@ -27,7 +27,7 @@
                     <div class="item item4">
                         <Button type="primary" size="small" @click="handleCateModal(item, item.id)">添加分类</Button>
                         <Button type="info" size="small" @click="handleCateModal(item, 'edit')">编辑</Button>
-                        <Button type="warning" size="small" @click="clickRemoveModal(item, index)">删除</Button>
+                        <Button type="warning" size="small" @click="clickRemoveModal(item, index)" v-if="checkRemoveIdentity">删除</Button>
                     </div>
                 </div>
                 <div class="table-child" v-if="item.children" v-for="(citem,cindex) in item.children" :key="cindex">
@@ -37,7 +37,7 @@
                         <div class="item item3">{{citem.categoryDescription}}</div>
                         <div class="item item4">
                             <Button type="info" size="small" @click="handleCateModal(citem, 'edit')">编辑</Button>
-                            <Button type="warning" size="small" @click="clickRemoveModal(citem, index, cindex)">删除</Button>
+                            <Button type="warning" size="small" @click="clickRemoveModal(citem, index, cindex)" v-if="checkRemoveIdentity">删除</Button>
                         </div>
                     </div>
                 </div>

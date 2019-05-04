@@ -16,7 +16,7 @@
             <div class="info">
               链接：{{item.url}}
             </div>
-            <div class="close" @click="clickRemove(item)"><i class="iconfont iconguanbi"></i></div>
+            <div class="close" @click="clickRemove(item)" v-if="checkRemoveIdentity"><i class="iconfont iconguanbi"></i></div>
           </div>
 
           <div class="item">

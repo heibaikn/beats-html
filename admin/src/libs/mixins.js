@@ -1,4 +1,13 @@
+import Cookies from 'js-cookie';
+
 export default {
+    computed: {
+        checkRemoveIdentity () {
+            var identity = Cookies.get('identity');
+            if (identity == 3) return false;
+            return true;
+        }
+    },
     created () {
         this.setRuleValidate(this.filterKey);
     },
@@ -67,6 +76,12 @@ export default {
             }
 
             return arr;
+        },
+
+        checkIdentity () {
+            var identity = Cookies.get('identity');
+            return identity;
         }
+
     }
 };

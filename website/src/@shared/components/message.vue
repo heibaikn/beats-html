@@ -69,10 +69,20 @@
           </div>
         </div>
 
-        <div class="group">
+        <div class="group ">
           <div class="label">{{$language.address}}: </div>
           <div class="content">
             <input type="text" class="input"  v-model="userData.address"/>
+          </div>
+        </div>
+
+        <div class="group ">
+          <div class="label">{{$language.product}}: </div>
+          <div class="content">
+            <select v-model="userData.productId">
+              <option value="">--{{$language.productSelect}}--</option>
+              <option v-for="(item,index) in productList" :key="index" :value="item.id">{{item.goodsName}}</option>
+            </select>
           </div>
         </div>
 
@@ -123,6 +133,7 @@ export default {
     return {
       errorData: {},
       isLoading: false,
+      productList: [],
       userData: {
         "accessPurpose": "",
         "address": "",
@@ -135,7 +146,8 @@ export default {
         "name": "",
         "opinion": "",
         "postalCode": "",
-        "purposeFlag": ""
+        "purposeFlag": "",
+        "productId": "",
       },
       rules: {
         name: {
@@ -162,6 +174,18 @@ export default {
           required: '意见不能为空 | Comments cannot be empty',
         }
       },
+    }
+  },
+  created() {
+    var storage = localStorage.getItem('productList');
+    try {
+      if(storage){
+        storage = JSON.parse(storage);
+      }
+    } catch(e) {}
+
+    if(storage){
+      this.productList = storage;
     }
   },
   methods: {

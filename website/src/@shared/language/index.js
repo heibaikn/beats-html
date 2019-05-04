@@ -26,6 +26,8 @@ const languageObj = {
   purposeFlag: '您的目的是否已经达到 | Has your purpose been reached',
   dealFlag: '您是否曾经或打算提交一个服务请求以解决您的问题 | Have you ever or intend to submit a service request to resolve your issue',
   documentQuality: '请评价该文档的质量 | Please rate the quality of this document',
+  product: '产品 | Product',
+  productSelect: '请选择 | Please choose',
 
   yes: '是 | Yes',
   no: '否 | No',

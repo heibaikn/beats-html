@@ -119,8 +119,7 @@
                         width: 150,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div', [
-                                h('Button', {
+                            var btn = [ h('Button', {
                                     props: {
                                         type: 'primary',
                                         size: 'small'
@@ -138,7 +137,9 @@
                                         }
                                     }
                                 }, '编辑'),
-                                h('Button', {
+                            ]
+                            if(this.checkRemoveIdentity){
+                                btn.push(h('Button', {
                                     props: {
                                         size: 'small'
                                     },
@@ -150,8 +151,10 @@
                                           this.clickRemoveMessage(params)
                                         }
                                     }
-                                }, '删除'),
-                            ]);
+                                }, '删除'))
+                            }
+                            
+                            return h('div', btn);
                         }
                     }
                 ],
