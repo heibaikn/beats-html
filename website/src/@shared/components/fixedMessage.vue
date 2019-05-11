@@ -8,7 +8,7 @@
     <div class="fixed-popup-bg" v-show="popupStatus" @click="hidePopup"></div>
     <div class="fixed-popup" :style="popupStyle" v-show="popupStatus">
       <span class="colse" @click="hidePopup"><i class="iconfont iconguanbi"></i></span>
-      <message />
+      <message ref="message"/>
     </div>
       
   </section>
@@ -40,6 +40,7 @@ export default {
       var top = document.documentElement.scrollTop;
       this.top = top;
       this.popupStatus = true;
+      this.$refs.message.show();
     },
     hidePopup(){
       this.popupStatus = false;

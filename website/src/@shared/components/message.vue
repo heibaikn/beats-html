@@ -178,20 +178,23 @@ export default {
     }
   },
   created() {
-    let language = localStorage.getItem('language') || 'chinese';
-    var storage = localStorage.getItem('productList_' + language);
-    this.language = language;
-    try {
-      if(storage){
-        storage = JSON.parse(storage);
-      }
-    } catch(e) {}
-
-    if(storage){
-      this.productList = storage;
-    }
+    
   },
   methods: {
+    show(){
+      let language = localStorage.getItem('language') || 'chinese';
+      var storage = localStorage.getItem('productList_' + language);
+      this.language = language;
+      try {
+        if(storage){
+          storage = JSON.parse(storage);
+        }
+      } catch(e) {}
+
+      if(storage){
+        this.productList = storage;
+      }
+    },
     clickApply(){
       var check = dataRuleCheck(this.rules, this.userData);
       if(check === true){
