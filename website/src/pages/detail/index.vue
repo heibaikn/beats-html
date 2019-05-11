@@ -137,7 +137,8 @@ export default {
     getStorage(){
       let list = null;
       try{
-        list = JSON.parse(localStorage.getItem('productList'));
+        let language = localStorage.getItem('language') || 'chinese';
+        list = JSON.parse(localStorage.getItem('productList_' + language));
       } catch (e){
 
       }
@@ -145,8 +146,9 @@ export default {
     },
     setStorage(data){
       let list = this.getStorage();
+      let language = localStorage.getItem('language') || 'chinese';
       if(list == null){
-        localStorage.setItem('productList', JSON.stringify([data]));
+        localStorage.setItem('productList_' + language, JSON.stringify([data]));
         return;
       }
 
@@ -159,7 +161,7 @@ export default {
         list.splice(0, 1);
       }
       list.push(data);
-      localStorage.setItem('productList', JSON.stringify(list));
+      localStorage.setItem('productList_' + language , JSON.stringify(list));
     }
   },
 }

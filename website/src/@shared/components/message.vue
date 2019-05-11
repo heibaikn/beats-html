@@ -133,6 +133,7 @@ export default {
       errorData: {},
       isLoading: false,
       productList: [],
+      language: '',
       userData: {
         "accessPurpose": "",
         "address": "",
@@ -177,7 +178,9 @@ export default {
     }
   },
   created() {
-    var storage = localStorage.getItem('productList');
+    let language = localStorage.getItem('language') || 'chinese';
+    var storage = localStorage.getItem('productList_' + language);
+    this.language = language;
     try {
       if(storage){
         storage = JSON.parse(storage);
@@ -206,6 +209,7 @@ export default {
         this.isLoading = false;
         this.$layer.alert(this.$language.submitSuccess);
         this.clickRestart();
+        localStorage.removeItem('productList_' + this.language);
       }).catch(()=>{
         this.isLoading = false;
       })
