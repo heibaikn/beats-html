@@ -126,6 +126,7 @@
 
 <script>
 import { categories, categoryGoods } from '@/api'
+import Event from '@shared/utils/event'
 
 export default {
   data(){
@@ -148,6 +149,7 @@ export default {
       return v.value == language ? true : false
     })
     this.currLanguage = curr.label;
+    document.body.classList.add('language-' + language);
     this.requestProduct()
   },
   methods: {
@@ -157,6 +159,7 @@ export default {
         let list = data || []
         if(list && list.length > 0){
           this.cateList = list.splice(0, 3);
+          Event.$emit('cate-list', this.cateList);
         }
       });
       categoryGoods({id: 0, pageIndex: 1}).then(data=>{
@@ -164,6 +167,7 @@ export default {
         let list = data && data.list;
         if(list && list.length > 0){
           this.productList = list.splice(0, 6);
+          Event.$emit('product-list', this.productList);
         }
       });
     },

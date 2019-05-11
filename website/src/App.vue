@@ -3,7 +3,9 @@
     <mainHeader />
     <fixedMessage />
 
-    <section class="banner">
+    <banner />
+
+    <!-- <section class="banner">
       <img src="./assets/banner1.jpg" alt="" />
       <div class="banner-inner">
         <div class="container">
@@ -18,11 +20,11 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     
     <section class="section-home">
       <section class="container">
-        <h2 class="title">精选产品</h2>
+        <h2 class="title">{{$language.featuredProducts}}</h2>
         <div class="product-list">
 
           <div class="item-wrapper" v-for="(item, index) in recommendList" :key="index">
@@ -78,6 +80,7 @@
 <script>
 import mainHeader from '@shared/components/header'
 import mainFooter from '@shared/components/footer'
+import banner from '@shared/components/banner'
 import fixedMessage from '@shared/components/fixedMessage'
 import { categoryGoods } from '@/api'
 
@@ -90,6 +93,7 @@ export default {
     }
   },
   components: {
+    banner,
     mainHeader,
     mainFooter,
     fixedMessage,

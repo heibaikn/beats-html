@@ -5,12 +5,12 @@
     <fixedMessage />
     <section id="main-content" class="container">
       <nav>
-        <div class="nav-item" :class="{active: searchParams.type == 1}" @click="clickType(1)">公司动态</div>
-        <div class="nav-item" :class="{active: searchParams.type == 2}" @click="clickType(2)">行业动态</div>
+        <div class="nav-item" :class="{active: searchParams.type == 1}" @click="clickType(1)">{{$language.companyNews}}</div>
+        <div class="nav-item" :class="{active: searchParams.type == 2}" @click="clickType(2)">{{$language.industrynews}}</div>
       </nav>
       <section class="news-list">
-        <div class="loading" v-show="isLoading">加载中...</div>
-        <div class="empty"  v-show="!isLoading && newsList.length == 0">还没有新闻哦~</div>
+        <div class="loading" v-show="isLoading">{{$language.loading}}...</div>
+        <div class="empty"  v-show="!isLoading && newsList.length == 0">{{$language.notNews}}~</div>
         <ul v-show="!isLoading">
           <li v-for="(item,index) in newsList" :key="index"><a :href="toHref(item)" target="_blank">{{item.title}}</a> <span class="time">{{item.createDate|formatDate}}</span></li>
         </ul>

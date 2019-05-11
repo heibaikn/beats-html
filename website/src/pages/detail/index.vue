@@ -155,7 +155,7 @@ export default {
       });
       if(isFind) return;
 
-      if(list.length > 5){
+      if(list.length > 9){
         list.splice(0, 1);
       }
       list.push(data);

@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import App from './App'
-// import 'babel-polyfill'
+import layer from 'vue-layer'
 import language from '@shared/language'
+// import 'babel-polyfill'
+
+Vue.prototype.$layer = layer(Vue);
 
 import '@shared/styles/main.styl'
 

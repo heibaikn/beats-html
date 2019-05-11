@@ -44,6 +44,9 @@ export const addCompanyIndelCompanyInfofo = (param = {}) => {
 export const getCustomerMessages = (param = {}) => {
     return post('/api/admin/customerMessage/getCustomerMessages', param);
 };
+export const exportCustomerMessages = (param = {}) => {
+    return post('/api/admin/customerMessage/exportCustomerMessages', param);
+};
 
 // 联系我们管理
 export const addContractInfo = (param = {}) => {

@@ -105,29 +105,29 @@
                         width: 150,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div', [
-                                h('Button', {
-                                    props: {
-                                        size: 'small', type: 'primary'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            let argu = { id: params.row.id };
-                                            this.$router.push({
-                                                name: 'product_edit',
-                                                params: argu
-                                            });
-                                        //   this.modalTitle = '编辑'+this.popupTitle;
-                                        //   this.formCustom = Object.assign({}, params.row);
-                                        //   this.modal3 = true;
-                                        //   this.modalVisibleChange(false)
-                                        }
+                            let btn = [h('Button', {
+                                props: {
+                                    size: 'small', type: 'primary'
+                                },
+                                style: {
+                                    marginRight: '5px'
+                                },
+                                on: {
+                                    click: () => {
+                                        let argu = { id: params.row.id };
+                                        this.$router.push({
+                                            name: 'product_edit',
+                                            params: argu
+                                        });
+                                    //   this.modalTitle = '编辑'+this.popupTitle;
+                                    //   this.formCustom = Object.assign({}, params.row);
+                                    //   this.modal3 = true;
+                                    //   this.modalVisibleChange(false)
                                     }
-                                }, '编辑'),
-                                h('Button', {
+                                }
+                            }, '编辑')]
+                            if(this.checkRemoveIdentity){
+                                btn.push(h('Button', {
                                     props: {
                                         size: 'small'
                                     },
@@ -139,8 +139,10 @@
                                           this.clickRemove(params.row, params.index)
                                         }
                                     }
-                                }, '删除'),
-                            ]);
+                                }, '删除'))
+                            }
+
+                            return h('div', btn);
                         }
                     }
                 ],

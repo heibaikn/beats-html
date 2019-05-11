@@ -92,7 +92,7 @@
                     </Upload>
                     <span v-show="item.goodsSpecImageKey"><img :src="item.goodsSpecImageKey" alt="" class="upload-img"></span>
                     <span class="sepc-remove curr" @click.prevent.stop="removeSpec(item,index)"><i class="iconfont iconguanbi"></i></span>
-                    <span class="gray">（请上传1000*1000的产品规格图片）</span>
+                    <span class="gray">（请上传600*600的产品规格图片）</span>
                   </div>
                 </div>
             </FormItem>

@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import App from './index.vue'
-import 'babel-polyfill'
 import language from '@shared/language'
+import layer from 'vue-layer'
+Vue.prototype.$layer = layer(Vue);
 import './index.styl'
 
 Vue.use(language)

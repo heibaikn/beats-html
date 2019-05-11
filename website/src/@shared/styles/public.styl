@@ -623,6 +623,36 @@ figure
     border 1px solid #dedfe0
     background #fff
     font-size 14px
+  .f-product-list
+    w 220px
+    abs left 0 top 0
+  .f-product-list__item
+    wh 50px 50px
+    border 1px solid #eceaea
+    border-radius:  4px;
+    padding: 2px;
+    cur()
+    fl()
+    mr 10px
+    mb 10px
+    rel()
+    ov();
+    .mask
+      display: none
+      wh 44px 44px
+      abs3 left 2px top 2px right 2px
+      bottom 2px
+      background: rgba(0,0,0,.3);
+      @extends .flex-center;
+      .iconfont
+        color #fff
+    img
+      wh 100% 100%
+      border-radius: 4px;
+    &.active
+      border: 1px solid red;
+      .mask
+        display: flex;
   
 .group-btn
   pt 50px
@@ -696,3 +726,15 @@ figure
     w 41%
     ml 50%
     align-self: center
+
+
+
+/* language的css */
+.language-english
+  fs 14px
+  header#header nav
+    fs 16px
+  #footer h2
+    fs 18px
+  #main-content h3, .content-h2-title
+    fs 28px

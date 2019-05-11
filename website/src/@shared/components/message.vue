@@ -78,11 +78,10 @@
 
         <div class="group ">
           <div class="label">{{$language.product}}: </div>
-          <div class="content">
-            <select v-model="userData.productId">
-              <option value="">--{{$language.productSelect}}--</option>
-              <option v-for="(item,index) in productList" :key="index" :value="item.id">{{item.goodsName}}</option>
-            </select>
+          <div class="content rel">
+            <div class="f-product-list">
+              <div class="f-product-list__item" :class="[userData.goodsIds.indexOf(item.id) > -1 && 'active']" v-for="(item,index) in productList" :key="index" @click="selectedProduct(item)"><span class="mask"><i class="iconfont iconduihao"></i></span><img :src="item.goodsImageKey" alt=""></div>
+            </div>
           </div>
         </div>
 
@@ -148,6 +147,7 @@ export default {
         "postalCode": "",
         "purposeFlag": "",
         "productId": "",
+        "goodsIds": [],
       },
       rules: {
         name: {
@@ -204,11 +204,20 @@ export default {
       this.isLoading = true;
       addCustomerMessage(this.userData).then(d=>{
         this.isLoading = false;
-        this.$layer.alert('恭喜您提交成功');
+        this.$layer.alert(this.$language.submitSuccess);
         this.clickRestart();
       }).catch(()=>{
         this.isLoading = false;
       })
+    },
+    selectedProduct(item){
+      var findIndex = this.userData.goodsIds.indexOf(item.id);
+      if(findIndex > -1){
+        this.userData.goodsIds.splice(findIndex, 1)
+      }
+      else{
+        this.userData.goodsIds.push(item.id);
+      }
     },
     clickRestart(){
       this.userData = {
