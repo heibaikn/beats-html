@@ -1,7 +1,26 @@
 <style lang="less">
-  .ivu-form-item-content, .ivu-form-item-label{
+    .ivu-form-item-content, .ivu-form-item-label{
     font-size: 14px;
-  }
+    }
+    .msg-product-list{
+        width: 300px;
+        span{
+            float: left;
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+            display: block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            padding: 3px;
+            border-radius: 4px;
+            cursor: pointer;
+            img{
+                width: 100%;
+            }
+        }
+    }
 </style>
 <template>
     <section>
@@ -95,6 +114,16 @@
                   </FormItem>
                   <FormItem label="请评价该文档的质量：">
                       <span>{{modal3Data.documentQuality|documentQuality}}</span>
+                  </FormItem>
+
+                  <FormItem label="浏览的产品：">
+                      <div class="msg-product-list">
+                        <span v-for="(item,index) in modal3Data.goodsSpus" :key="index" @click="lookProduct(item)">
+                            <Tooltip placement="top" :content="item.goodsName">
+                                <img :src="item.goodsImageKey" alt="" srcset="">
+                            </Tooltip>
+                        </span>
+                      </div>
                   </FormItem>
                 </Form>
             </div>
@@ -315,6 +344,11 @@
 
             exportMessage(){
                 document.querySelector('#exportForm').submit();
+            },
+
+            lookProduct(item){
+                if(!item.id) return;
+                window.open('/detail/index.html?id=' + item.id);
             }
         },
         watch: {
