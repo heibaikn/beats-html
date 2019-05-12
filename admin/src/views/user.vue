@@ -86,7 +86,7 @@
                 skuModel: '',
                 skuList: [],
                 groupList: [
-                    {label: '管理员', value: 1},
+                    // {label: '管理员', value: 1},
                     {label: '高级业务员', value: 2},
                     {label: '普通业务员', value: 3},
                 ],
@@ -155,7 +155,7 @@
                     loginName: '',
                     mobilePhone: '',
                     password: '',
-                    identity: 1
+                    identity: 3
                 },
                 formSearch:{
                     name: '',
