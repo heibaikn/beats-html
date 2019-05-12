@@ -62,9 +62,25 @@ export default {
             this.$refs.loginForm.validate((valid) => {
                 if (valid) {
                     this.requestLogin().then(d=>{
+                        if(d.adminRole >= '0'){
+                            let identity = -1;
+                            if(d.adminRole == '0'){
+                                identity = 1;
+                            }
+                            else if(d.adminRole == '1'){
+                                identity = 2;
+                            }
+                            else if(d.adminRole == '2'){
+                                identity = 3;
+                            }
+                            Cookies.set('identity', 1, {expires: 3});
+                        } else{
+                            alert('没有找到相关权限用户');
+                            return;
+                        }
+
                         Cookies.set('user', this.form.userName, {expires: 3});
                         Cookies.set('token', d.token, {expires: 3});
-                        Cookies.set('identity', 1, {expires: 3});
                         this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
                         // if (this.form.userName === 'iview_admin') {
                         //     Cookies.set('access', 0);

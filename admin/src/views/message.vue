@@ -24,7 +24,7 @@
 </style>
 <template>
     <section>
-        <div style="padding:5px 0 10px;">
+        <div style="padding:5px 0 10px;" v-if="checkAdminIdentity">
             <form action="/api/admin/customerMessage/exportCustomerMessages" target="_blank" id="exportForm" method="post"></form>
             <Button type="success" @click="exportMessage">导出留言</Button>
         </div> 

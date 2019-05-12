@@ -6,6 +6,11 @@ export default {
             var identity = Cookies.get('identity');
             if (identity == 3) return false;
             return true;
+        },
+        checkAdminIdentity () {
+            var identity = Cookies.get('identity');
+            if (identity == 1) return true;
+            return false;
         }
     },
     created () {

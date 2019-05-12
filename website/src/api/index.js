@@ -1,4 +1,8 @@
-import { post } from './fetch'
+import { post, get } from './fetch'
+
+export const getLanguage = (param = {}) => {
+  return get('/static/language/language.json', param)
+}
 
 export const getNewsIndex = (param = {}) => {
   return post('/news/index', param)

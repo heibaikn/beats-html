@@ -16,8 +16,10 @@ if (process.env.NODE_ENV == 'development'){
 
 Vue.config.productionTip = false
 
-new Vue({
-  el: '#app',
-  components: { App },
-  template: '<App/>'
+language.load().then(()=>{
+  new Vue({
+    el: '#app',
+    components: { App },
+    template: '<App/>'
+  })
 })

@@ -61,6 +61,7 @@ export const otherRouter = {
     ]
 };
 
+// 普通管理员
 let identityGeneral = [
     {
         path: '/product',
@@ -86,6 +87,18 @@ let identityGeneral = [
     }
 ];
 
+// 高级业务员
+let identitySenior = {
+    path: '/user',
+    icon: 'a iconfont iconaddressbook_fill',
+    title: { i18n: '后台用户管理' },
+    name: 'user',
+    component: Main,
+    children: [
+        { path: 'index', title: { i18n: '后台用户管理' }, name: 'user_index', component: resolve => { require(['@/views/user.vue'], resolve); } }
+    ]
+};
+
 // 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
 let appRouters = [
     {
@@ -106,16 +119,6 @@ let appRouters = [
         component: Main,
         children: [
             { path: 'index', title: { i18n: '联系我们' }, name: 'contact_index', component: resolve => { require(['@/views/contact.vue'], resolve); } }
-        ]
-    },
-    {
-        path: '/user',
-        icon: 'a iconfont iconaddressbook_fill',
-        title: { i18n: '后台用户管理' },
-        name: 'user',
-        component: Main,
-        children: [
-            { path: 'index', title: { i18n: '后台用户管理' }, name: 'user_index', component: resolve => { require(['@/views/user.vue'], resolve); } }
         ]
     },
     {
@@ -172,9 +175,16 @@ let appRouters = [
     }
 ];
 
+// 管理员
 if (identity == 1) {
     appRouters = [...appRouters, ...identityGeneral];
+    appRouters.splice(2, 0, identitySenior);
 }
+// 高级业务员
+if (identity == 2) {
+    appRouters = [...appRouters, ...identityGeneral];
+}
+// 普通业务员
 if (identity == 3) {
     appRouters = identityGeneral;
 }
