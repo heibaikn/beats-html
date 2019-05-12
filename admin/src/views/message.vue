@@ -205,7 +205,7 @@
                                     }
                                 }, '查看')
                             ]
-                            if(this.checkRemoveIdentity){
+                            if(this.checkAdminIdentity){
                                 btn.push(h('Button', {
                                     props: {
                                         size: 'small'
