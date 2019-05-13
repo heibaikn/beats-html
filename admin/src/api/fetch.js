@@ -36,6 +36,17 @@ export function post (url, params = {}) {
                         let msg = (resData && resData.description) ? resData.description : '后台系统繁忙，请稍后再试';
                         Message.error(msg);
                     }
+                    if (resData.code == 605) {
+                        setTimeout(() => {
+                            Cookies.remove('user');
+                            Cookies.remove('password');
+                            Cookies.remove('access');
+                            Cookies.remove('identity');
+                            localStorage.clear();
+                            location.reload();
+                        }, 1500);
+                        return;
+                    }
                     reject(response);
                 }
             })

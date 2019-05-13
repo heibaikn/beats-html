@@ -47,6 +47,9 @@ export const getCustomerMessages = (param = {}) => {
 export const exportCustomerMessages = (param = {}) => {
     return post('/api/admin/customerMessage/exportCustomerMessages', param);
 };
+export const delCustomerMessages = (param = {}) => {
+    return post('/api/admin/customerMessage/delCustomerMessages', param);
+};
 
 // 联系我们管理
 export const addContractInfo = (param = {}) => {

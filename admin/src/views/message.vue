@@ -25,7 +25,9 @@
 <template>
     <section>
         <div style="padding:5px 0 10px;" v-if="checkAdminIdentity">
-            <form action="/api/admin/customerMessage/exportCustomerMessages" target="_blank" id="exportForm" method="post"></form>
+            <form action="/api/admin/customerMessage/exportCustomerMessages" target="_blank" id="exportForm" method="post">
+                <input type="hidden" :value="languageStorage" name="language" >
+            </form>
             <Button type="success" @click="exportMessage">导出留言</Button>
         </div> 
 
@@ -156,6 +158,7 @@
                 modal2Status : '',
                 modal2Name: '',
                 skuModel: '',
+                languageStorage: '',
                 skuList: [],
                 columns1: [
                     {
@@ -332,11 +335,15 @@
             cancelModal2(){
                 this.modal2 = false;
             },
-            clickRemoveMessage(){
-              this.modal2 = true;
+            clickRemoveMessage(row){
+                this.modal2Data = row;
+                this.modal2 = true;
             },
             enterRemoveMessage(){
-                
+                let id = this.modal2Data.id;
+                this.api.delCustomerMessages({id}).then(d=>{
+                    this.queryList();
+                })
             },
             search(){
                 this.queryList();
@@ -356,6 +363,7 @@
         },
         mounted () {
             this.init();
+            this.languageStorage  = localStorage.getItem('language') || 'chinese'
         },
         created () {
 

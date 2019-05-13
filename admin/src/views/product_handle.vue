@@ -58,7 +58,7 @@
               </Select>
             </FormItem>
             </FormItem>
-            <FormItem label="产品价格：" prop="price">
+            <!-- <FormItem label="产品价格：" prop="price">
                 <Input
                 style="width:200px"
                 :maxlength="7"
@@ -66,7 +66,7 @@
                 v-model="price"
                 @on-blur="productPriceChange" >
                 </Input>
-            </FormItem>
+            </FormItem> -->
 
             <!-- 产品规格： -->
             <FormItem label="产品规格：" prop="specRequest">

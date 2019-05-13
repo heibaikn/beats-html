@@ -21,3 +21,52 @@ body
   mar 0 auto
   p
     mb 10px
+
+
+nav
+  fs 22px
+  mb 30px
+  tc()
+  .nav-item
+    mar 0 20px
+    dib()
+    cur()
+    pb 7px
+    &.active
+      border-bottom:  3px solid $red;
+      
+
+.news-list
+  width: 600px
+  mar 0 auto 
+  pt 30px
+  mb 100px
+  li
+    pl 25px
+    mb 20px
+    rel()
+    pb 10px
+    border-bottom: 1px dashed #f1f1f1;
+    &:after
+        content ''
+        wh 4px 4px
+        borr 50%
+        background: #919191
+        abs left 3px top 8px
+      &:before
+        content ''
+        wh 6px 6px
+        borr 50%
+        border: 2px solid #e6e6e6;
+        abs left 0 top 5px
+    .time
+      fr()
+      color #8c8c8c
+      fs 14px
+    &:hover
+      color $red
+  
+.news-list
+  .loading, .empty
+    whh 100% 200px
+    tc()
