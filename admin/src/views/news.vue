@@ -12,6 +12,15 @@
             <Button type="success" @click="addModal">添加新闻</Button>
         </div> -->
 
+        <div style="padding:5px 0 10px;">
+            <Button :type="tabIndex==0 ? 'success' : 'default'" @click="clickTab(0)">公司动态</Button>
+            <Button :type="tabIndex==1 ? 'success' : 'default'" @click="clickTab(1)">行业动态</Button>
+        </div>
+
+        <div style="padding:5px 0 10px;">
+            
+        </div>
+
         <!--表格-->
         <Table stripe :columns="columns1" :data="dataList" :loading="loading"></Table>
         <div class="table-page">
@@ -64,6 +73,7 @@
         },
         data () {
             return {
+                tabIndex: 0,
                 popupTitle: '新闻',
                 modal1: false,
                 modal2: false,
@@ -99,7 +109,7 @@
                     {
                         title: '添加时间',
                         key: 'createDate',
-                        width: 200
+                        width: 300
                     },
                     {
                         title: '操作',
@@ -154,6 +164,7 @@
                 formSearch:{
                     name: '',
                     pageIndex: 1,
+                    type: 1, // "1:公司 2:行业"
                 },
                 ruleValidate: { }
             };
@@ -237,6 +248,12 @@
                     
                 })
             },
+            clickTab(index){
+                this.tabIndex = index;
+                this.formSearch.type = (index + 1) + '';
+                this.formSearch.pageIndex = 1;
+                this.queryList();
+            }
         },
         watch: {
             

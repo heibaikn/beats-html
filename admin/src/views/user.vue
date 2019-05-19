@@ -24,8 +24,8 @@
                     <FormItem label="登录名: " prop="name">
                         <Input type="text" v-model="formCustom.loginName"></Input>
                     </FormItem>
-                    <FormItem label="权限: " prop="identity">
-                        <Select v-model="formCustom.identity">
+                    <FormItem label="权限: " prop="adminRole">
+                        <Select v-model="formCustom.adminRole">
                             <Option v-for="item in groupList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                         </Select>
                     </FormItem>
@@ -113,7 +113,7 @@
                         width: 150,
                         align: 'center',
                         render: (h, params) => {
-                            if(!this.checkRemoveIdentity) return
+                            if(!this.checkRemoveadminRole) return
                             
                             return h('div', [
                                 // h('Button', {
@@ -155,7 +155,7 @@
                     loginName: '',
                     mobilePhone: '',
                     password: '',
-                    identity: 3
+                    adminRole: 3
                 },
                 formSearch:{
                     name: '',

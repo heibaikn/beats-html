@@ -51,13 +51,13 @@ export default {
     return {
       loading: false,
       formCustom: {
-        type: '',
+        type: '1',
         title: '',
         content: '',
       },
       newsTypeList: [
-        {label: '公司动态', value: 1},
-        {label: '行业动态', value: 2},
+        {label: '公司动态', value: '1'},
+        {label: '行业动态', value: '2'},
       ],
       filterKey: ['content'],
       ruleValidate: {}
@@ -109,6 +109,9 @@ export default {
       this.api.getNewsInfo({id: this.params.id}).then(d=>{
         this.formCustom.title = d.title;
         this.formCustom.content = d.content;
+        this.formCustom.type = d.type;
+
+        console.log(this.formCustom)
       });
     },
     removeCurrTag(){
