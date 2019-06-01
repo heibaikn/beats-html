@@ -32,6 +32,7 @@
                     :max-size="2048"
                     :name="goodsImage"
                     :data="uploadData"
+                    :headers="uploadHeaders"
                     action="/api/image/upload"
                     class="my-upload">
                     <div>
@@ -92,6 +93,10 @@
                 dataList: [],
                 formCustom: { },
                 formEnglist: { },
+                uploadHeaders: {
+                  loginName: Cookies.get('user') || '',
+                  adminToken: Cookies.get('token') || '',
+                }
             };
         },
         computed: {

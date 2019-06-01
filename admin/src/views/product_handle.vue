@@ -110,6 +110,7 @@
                   :max-size="2048"
                   :name="goodsImage"
                   :data="uploadData"
+                  :headers="uploadHeaders"
                   action="/api/image/upload"
                   class="my-upload">
                   <div>
@@ -162,6 +163,10 @@ export default {
       chindrenCategoryList: [],
       skuList: [],
       specRequest: [],
+      uploadHeaders: {
+        loginName: Cookies.get('user') || '',
+        adminToken: Cookies.get('token') || '',
+      },
       ueditorConfig: {
         // 编辑器不自动被内容撑高
         autoHeightEnabled: false,

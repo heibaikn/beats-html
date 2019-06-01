@@ -42,6 +42,7 @@
                   :max-size="2048"
                   :name="goodsImage"
                   :data="uploadData"
+                  :headers="uploadHeaders"
                   action="/api/image/upload"
                   class="my-upload">
                   <div>
@@ -83,6 +84,10 @@ export default {
       },
       productList: [],
       skuList: [],
+      uploadHeaders: {
+        loginName: Cookies.get('user') || '',
+        adminToken: Cookies.get('token') || '',
+      }
     }
   },
   computed: {
