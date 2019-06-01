@@ -3790,6 +3790,10 @@ merge-descriptors@1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/merge-descriptors/download/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
 
+mescroll.js@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.npm.taobao.org/mescroll.js/download/mescroll.js-1.4.1.tgz#42078bddb65dbf2f9e6d916de090e12c2d2b6a3e"
+
 methods@~1.1.2:
   version "1.1.2"
   resolved "http://registry.npm.taobao.org/methods/download/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"

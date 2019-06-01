@@ -52,6 +52,7 @@
   "search": "搜索 | Search",
   "browse": "浏览 | Browse",
   "browseAll": "浏览全部 | Browse all",
+  "all": "全部 | All",
   "searchResults": "搜索结果 | Search Results",
   "home": "首页 | Home",
   "about": "公司介绍 | About Us",
@@ -59,5 +60,11 @@
   "products": "产品展示 | Products",
   "job": "人才中心 | Recruiment",
   "feedback": "客户留言 | Feedback",
-  "contact": "联系我们 | Contact Us"
+  "contact": "联系我们 | Contact Us",
+  "language": "语言 | Language",
+  "cateNotGoods": "该分类下还没有商品哦~ | There are no products under this category.",
+  "noMoreGoods": "没有更多商品了~ | No more goods.",
+  "noMoreData": "没有更多数据了~ | No more data.",
+  "commodityDetails": "商品详情 | Commodity details",
+  "filter": "筛选 | Filter"
 }

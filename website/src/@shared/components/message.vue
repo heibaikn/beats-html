@@ -5,7 +5,7 @@
     <div class="feedback">
 
         <div class="group" :class="{'group--error': errorData.key == 'name'}">
-          <div class="label">{{$language.userName}}: </div>
+          <div class="label">{{$language.userName}}: <span class="red" v-if="mobile">*</span></div>
           <div class="content">
             <input type="text" class="input"  v-model="userData.name"/>
             <span class="red">*</span>
@@ -14,7 +14,7 @@
         </div>
 
         <div class="group" :class="{'group--error': errorData.key == 'company'}">
-          <div class="label">{{$language.company}}: </div>
+          <div class="label">{{$language.company}}: <span class="red" v-if="mobile">*</span></div>
           <div class="content">
             <input type="text" class="input"  v-model="userData.company"/>
             <span class="red">*</span>
@@ -23,16 +23,16 @@
         </div>
 
         <div class="group" :class="{'group--error': errorData.key == 'mobilePhone'}">
-          <div class="label">{{$language.phone}}: </div>
+          <div class="label">{{$language.phone}}: <span class="red" v-if="mobile">*</span></div>
           <div class="content">
-            <input type="text" class="input"  v-model="userData.mobilePhone"/>
+            <input type="text" class="input"  v-model="userData.mobilePhone" maxlength="11"/>
             <span class="red">*</span>
           </div>
           <span class="error" v-show="errorData.key == 'mobilePhone'">{{errorData.msg}}</span>
         </div>
 
         <div class="group" :class="{'group--error': errorData.key == 'mailAddress'}">
-          <div class="label">{{$language.email}}: </div>
+          <div class="label">{{$language.email}}: <span class="red" v-if="mobile">*</span></div>
           <div class="content">
             <input type="text" class="input"  v-model="userData.mailAddress"/>
             <span class="red">*</span>
@@ -117,7 +117,7 @@
 
     <div class="group-btn">
       <a class="button-holder button-holder--big button-holder--red2" @click="clickApply" :class="{'button-holder--disabled': isLoading}"><span class="button-inner">{{$language.send}}</span><span class="mask"></span></a>
-      <a class="button-holder " @click="clickRestart"><span class="button-inner">{{$language.reset}}</span><span class="mask"></span></a>
+      <a class="button-holder " @click="clickRestart" v-if="!mobile"><span class="button-inner">{{$language.reset}}</span><span class="mask"></span></a>
     </div>
 
   </section>
@@ -175,6 +175,12 @@ export default {
           required: '意见不能为空 | Comments cannot be empty',
         }
       },
+    }
+  },
+  props: {
+    mobile: {
+      type: Boolean,
+      default: false
     }
   },
   created() {

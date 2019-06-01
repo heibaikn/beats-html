@@ -4,6 +4,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const entryList = require('./entry-list')
+const entryMobileName = entryList.findMobileEntryName()
 const entryName = entryList.findEntryName()
 const entryPages = entryList.findEntryPages()
 
@@ -29,6 +30,7 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: entryName,
+    mobile: entryMobileName,
     ...entryPages
   },
   output: {

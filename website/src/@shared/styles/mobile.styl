@@ -1,0 +1,201 @@
+@import '~@shared/stylus/common.styl'
+@import './public-mobile.styl'
+
+html
+  fs 50PX;
+
+body
+  fs 14PX;
+
+.rel
+  position relative
+
+
+/* 
+  product-detail
+ */
+.product-detail
+  pt .2rem
+  .title
+    whh 100% .8rem
+    border-left: 3px solid #FF0036;
+    color: #666;
+    background: #fff;
+    pl .3rem
+.product-detail-content
+  fs .26rem
+  p
+    pad .1rem
+  img
+    max-width 100%
+
+.scroll-body
+  .mescroll
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 2.1rem;
+    height: auto!important;
+
+.products-body
+  h 100%
+  display: flex;
+  flex-direction: column;
+  .products-menu
+    flex: 0 auto;
+  .mescroll
+    flex: 1;
+    w 100%
+
+.category-list
+  pad .32rem
+  pr 0
+  .item
+    border: 1px solid #f5efef;
+    background-color: #f5efef;
+    display inline-block
+    whh 2.56rem .8rem
+    tc()
+    ov()
+    mr .2rem
+    mb .15rem
+    borr 2px
+    fs .24rem
+    &.active
+      color: #f83931;
+      border: 1px solid #f83931;
+      background-color: #fff;
+
+.products-filter-menu
+  text-align: right;
+  pad .26rem
+  pb .1rem
+
+.products-cate-fixed
+  position: fixed;
+  left 0;
+  right 0;
+  top 0;
+  bottom 0;
+  z-index 1000;
+  .bg
+    abs3 left 0 top 0 right 0
+    wh 100% 100%
+    background: rgba(0,0,0,.2);
+  .product-cate
+    abs3 right 0 top 0 bottom 0
+    w 6rem
+    background: #fff;
+    .title
+      fs .3rem
+      color #111
+      pad .4rem .6rem
+      pb 0
+
+.product-empty
+  tc()
+  pad .9rem .1rem;
+
+.catemask-enter-active, .catemask-leave-active{
+  transition: opacity .35s;
+}
+.catemask-enter, .catemask-leave-to{
+  opacity: 1;
+}
+.catemask-enter-active .bg, .catemask-leave-active .bg{
+  transition: opacity  .35s;
+}
+.catemask-enter .bg, .catemask-leave-to .bg{
+  opacity: 0;
+}
+.catemask-enter-active .product-cate, .catemask-leave-active .product-cate{
+  transition: all .35s;
+  transform: translateX(0);
+}
+.catemask-enter .product-cate, .catemask-leave-to .product-cate{
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+
+
+/* 
+  留言
+ */
+.message-body
+  h3
+    tc()
+    fs .38rem
+    color #111
+    mar .3rem
+  .feedback
+    pad 0 .3rem
+    .group
+      mb .2rem
+    label
+      pr .2rem
+    .label
+      fs .28rem
+      color #909090
+      mb .1rem
+    .input
+      wh 100% .72rem
+      border 1px solid #e6e6e6;
+      borr 4px
+      pl .1rem
+    textarea
+      wh 100% 1rem
+      border 1px solid #e6e6e6;
+      borr 4px
+      pad .1rem
+    .content
+      span.red
+        display none
+    .group--error
+      .input
+        border 1px solid #e01e3c;
+      .error 
+        pt .1rem
+        dib()
+        fs .26rem
+        color #e01e3c;
+  .f-product-list
+    display: flex;
+    flex-wrap: nowrap;
+    overflow hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    .f-product-list__item
+      wh 1rem 1rem
+      mr .2rem
+      flex-shrink: 0
+      ov()
+      rel()
+      border 1px solid #ccc
+      borr 4px
+      .mask
+        abs3 right 0 top 0 bottom 0
+        wh 100% 100%
+        z-index 2
+        flex-center()
+        display none
+        i
+          fs .4rem
+      &.active
+        border 1px solid #e01e3c
+        .mask
+          background: rgba(0,0,0,.2)
+          display: flex
+          color #fff
+
+
+  .group-btn
+    pad .2rem .4rem
+    pb .6rem
+    a
+      db()
+      w 100%
+      pt .1rem
+      pb .1rem

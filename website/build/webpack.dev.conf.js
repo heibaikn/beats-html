@@ -69,6 +69,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       chunks: ['app'],
       inject: true
     }),
+    new HtmlWebpackPlugin({
+      filename: 'mobile.html',
+      template: 'mobile.html',
+      chunks: ['mobile'],
+      inject: true
+    }),
     ...entryList.pushHtmlWebpackPlugin(),
 
     // copy custom static assets

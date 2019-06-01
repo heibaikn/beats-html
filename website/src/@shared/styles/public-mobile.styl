@@ -1,0 +1,329 @@
+.flex-center
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+
+body
+  pt 1rem
+  max-width 640px
+  margin 0 auto
+
+.body-section
+  h 100%
+
+.header-holder
+  position: fixed;
+  left 0 
+  right 0
+  top 0
+  h 1rem
+  z-index 99
+  user-select: none;
+  background: #181818;
+  overflow hidden
+  max-width 640px
+  margin 0 auto
+
+  transition: background .36s cubic-bezier(0.32, 0.08, 0.24, 1),height .56s cubic-bezier(0.52, 0.16, 0.24, 1);
+  header
+    h 1rem
+    display: flex;
+    justify-content: space-between;
+    .search
+      @extends .flex-center;
+      w 1rem
+    .menu
+      @extends .flex-center;
+      w 1rem
+    .logo
+      pt .1rem
+      img
+        w 1rem
+    i.icon-search
+      color #6e6e6e
+      fs 20px
+      fw 700
+    i.icon-menu
+      color #6e6e6e
+      fs 26px
+  .content-abs-wrapper
+    position: absolute;
+    left 0
+    right 0
+    top 1rem
+
+
+.header-holder--mask
+  h 100%
+
+.header-menu-wrapper
+  ul
+    pad .4rem .6rem
+    pt .2rem
+    border-top: 1px solid #292929;
+  li
+    lh .9rem
+    border-bottom: 1px solid #292929;
+  a 
+    db()
+    color #fff
+    fs .3rem
+  a:active
+    color red
+  .language
+    pad 0 .6rem
+    color #ccc
+    .language-title
+      pb .1rem
+    .list
+      dib()
+      mr .2rem
+
+.header-search-wrapper
+  .search-input
+    pad .3rem .6rem
+    display: flex;
+    input
+      flex 1
+    .search-btn
+      flex 0 auto
+      color #fff
+      lh .7rem
+      pl .2rem
+    input
+      border 0
+      wh 100% .7rem
+      background: #282828;
+      border-radius: 28px;
+      color #fff
+      pl .2rem
+      fs .28rem
+  .hot
+    pad .4rem .6rem;
+  ul
+    pt .2rem
+  a
+    color #fff
+  li
+    lh .9rem
+
+
+
+.fade-enter-active{
+  transition: all .45s .25s;
+  transform: translateY(0);
+  z-index: 3;
+}
+.fade-leave-active{
+  transition: all .45s;
+}
+.fade-enter, .fade-leave-to{
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+
+
+// @keyframes fadeIn {
+//   0%{
+//     transform: translateY(20px);
+//     opacity 0;
+//   }
+//   100%{
+//     transform: translateY(0);
+//     opacity 1;
+//   }
+// }
+
+// @keyframes fadeOut {
+//   0%{
+//     transform: translateY(20px);
+//     opacity 0;
+//   }
+//   100%{
+//     transform: translateY(0);
+//     opacity 1;
+//   }
+
+// }
+
+
+.button-holder
+  border 2px solid #bec1c3
+  lh .6rem
+  borr .4rem
+  pad 0 .4rem
+  fs .28rem
+  min-width 2rem
+  tc()
+  dib()
+  ov()
+  rel()
+  cur()
+  font-def()
+  &:active
+    opacity .8
+  &.button-holder--black
+    border 2px solid #222
+    color #222
+    .mask
+      background: #222;
+
+  &.button-holder--red
+    border 0
+    background: #e01e3c
+    color: #fff
+    pt 2px
+    pb 2px
+    .mask
+      background: #fff
+  &.button-holder--red2
+    border 0
+    background: #e01e3c
+    color: #fff
+    pt 2px
+    pb 2px
+    .mask
+      background: #222
+  &.button-holder--big
+    pl 60px
+    pr 60px
+  &.button-holder--disabled
+    opacity: .5;
+    background: #ccc;
+    color #fff;
+
+
+img
+  max-height: 100%
+
+/* 
+  product-list 产品列表
+ */
+
+.product-list
+  mt .2rem
+  pad 0 .2rem
+  .item-wrapper
+    background: #fff;
+    pad .8rem .2rem .4rem
+    tc()
+    mb .2rem
+    .product-photos
+      h 4rem
+    .product-details
+      pad .2rem 0
+      fs .32rem
+
+
+/* 
+  header-back
+ */
+.body-padding-top
+   pt 1.2rem
+.header-back
+  position: fixed;
+  left: 0
+  right: 0
+  top: 1rem
+  h 1rem
+  ov()
+  background: #ffffff
+  border: 1px solid #e5e5e5
+  z-index 90
+  display: flex;
+  .back-icon
+    wh 1rem 1rem
+    @extends .flex-center;
+    flex 0 auto
+    border-right: 1px solid #e5e5e5
+  .back-content
+    flex 1
+    lh 1rem
+    pl .2rem
+    ov()
+    p
+      text-ov()
+
+/* 
+  footer
+ */
+
+footer.footer
+  tc()
+  color gray
+  background: #f7f7f8;
+  pad .8rem .3rem
+  fs .20rem
+
+
+/* 
+  body-content
+ */
+.body-content
+  mt .8rem
+  background: #fff;
+  pad .8rem .5rem
+  h2
+    fs .5rem
+    tc()
+    color #111
+    mb .6rem
+  .body-content-html
+    fs .28rem
+    img
+      height auto
+
+
+/* 
+  section-nav
+ */
+.section-nav
+  display: flex;
+  background: #fff;
+  mt .4rem
+  mb .2rem
+  whh 100% .9rem
+  pad 0 .4rem
+  .item
+    db()
+    flex: 1;
+    tc()
+    fs .30rem
+    color #111
+  .item.active
+    rel()
+    &:after
+      content ''
+      border-top: 2px solid #f66917;
+      position: absolute;
+      width: 1.6rem;
+      left 50%;
+      margin-left -.8rem;
+      bottom: 0;
+
+
+/* 
+  article-list
+ */
+.article-list
+  background: #fff;
+  li
+    border-bottom: 1px solid #f3f3f3;
+    pad .2rem .3rem
+    a
+      db()
+      pb .1rem
+      fs .3rem
+      color #111
+  .time
+    color #c7c7c7
+    fs .24rem
+
+
+.mescroll
+  position: relative;
+  overflow-y: scroll!important;
+  -webkit-overflow-scrolling: touch;

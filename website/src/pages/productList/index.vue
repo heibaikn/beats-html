@@ -5,7 +5,7 @@
     
     <section id="main-content" class="container">
       <div class="category">
-        <span class="label">分类: </span>
+        <span class="label">{{$language.category}}: </span>
         <div class="category-list">
           <div class="item" :class="{active: currIndex == index}" v-for="(item,index) in categoryList" :key="index" @click="clickCategory(item,index)">
             {{item.categoryName}}
@@ -15,9 +15,9 @@
 
       <div class="product">
         <div class="product-list">
-          <div class="loading" v-show="isLoading">加载中...</div>
+          <div class="loading" v-show="isLoading">{{$language.loading}}...</div>
 
-          <div class="empty" v-show="!isLoading && productList.length == 0">该分类下还没有商品哦~</div>
+          <div class="empty" v-show="!isLoading && productList.length == 0">{{$language.cateNotGoods}}~</div>
 
           <div class="product-box" v-show="!isLoading" v-for="(item,index) in productList" :key="index">
             <div class="product-box__img">

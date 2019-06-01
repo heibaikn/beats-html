@@ -4,6 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var srcPath = './src';  //输出文件的目录
 var entryName = '';
+var entryMobileName = '';
 var entryPages = {};
 
 
@@ -38,6 +39,18 @@ function findDirFiles(){
 
 function findEntryName(){
   return findDirFiles()
+}
+
+function findMobileEntryName() {
+  var mainArr = ['mobile.js'];
+  mainArr.some((v) => {
+    var is = checkIsFile(resolve(`../src/${v}`))
+    if (is) {
+      entryMobileName = `${srcPath}/${v}`
+      return false
+    }
+  });
+  return entryMobileName;
 }
 
 function eachFiles(files, dirpath){
@@ -99,6 +112,7 @@ function pushHtmlWebpackPlugin(){
 
 module.exports = {
   findEntryName,
+  findMobileEntryName,
   pushHtmlWebpackPlugin,
   findEntryPages: function(){
     return findEntryPages(currNamePath)

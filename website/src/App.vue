@@ -35,10 +35,9 @@
                 </div>
                 <div class="product-details">
                   <b class="name">{{item.goodsName}}</b>
-                  <!-- <p>2 款颜色</p> -->
                 </div>
                 <div class="product-btn">
-                  <a :href="setProductHref(item.id)" class="button-holder button-holder--red2"><span class="button-inner">探索</span><span class="mask"></span></a>
+                  <a :href="setProductHref(item.id)" class="button-holder button-holder--red2"><span class="button-inner">{{$language.explore}}</span><span class="mask"></span></a>
                 </div>
               </div>
             </div>
@@ -51,10 +50,10 @@
             <a :href="setProductHref(item.id)"><img :src="item.goodsImageKey" alt="" /></a>
           </div>
           <div class="product-group__info">
-            <h4>隆重介绍：</h4>
+            <!-- <h4>隆重介绍：</h4> -->
             <h3>{{item.goodsName}}</h3>
             <!-- <p>全新 Beats by Dr. Dre / sacai Collection，彰显你的独特风格和声音</p> -->
-            <a :href="setProductHref(item.id)" class="button-holder"><span class="button-inner">探索</span> <span class="mask"></span></a>
+            <a :href="setProductHref(item.id)" class="button-holder"><span class="button-inner">{{$language.explore}}</span> <span class="mask"></span></a>
           </div>
         </div>
 

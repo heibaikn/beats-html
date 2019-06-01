@@ -30,7 +30,7 @@
         </div>
 
         <div class="product-detail">
-          <h3>商品详情</h3>
+          <h3>{{$language.commodityDetails}}</h3>
           <div v-html="productDetail.goodsDescription"></div>
         </div>
 

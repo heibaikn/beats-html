@@ -30,22 +30,50 @@ export default function(rules, checkData){
     let val = checkData[key].trim();
     let rule = rules[key];
     if ( rule ){
-      // 在规则里面就开始验证
-      if ((rule.required && val != '') || (rule.reg && rule.reg.test(val)) || (rule.min && val && val.length >= rule.min) ){
-        
+      // if (rule.reg && rule.reg.test(val)) {
+
+      // }
+      // else 
+      let msg = '';
+
+      if (rule.required && val == ''){
+        msg = rule.required;
       }
-      else if(typeof rule.check == 'function'){
+      else if (rule.reg && !rule.reg.test(val) && !msg) {
+        msg = rule.errorMsg;
+      }
+      else if (rule.min && val && val.length < rule.min && !msg){
+        msg = rule.errorMsg;
+      }
+      else if (typeof rule.check == 'function' && !msg) {
         let check = rule.check.call(rules);
         if (check !== true){
-          result.msg = getLanguageMsg(check);
-          result.key = key;
+          msg = getLanguageMsg(check);
         }
       }
-      else{
-        result.msg = getLanguageMsg(rule.errorMsg || rule.required)
+
+      if (msg){
         result.key = key;
+        result.msg = getLanguageMsg(msg)
         return true;
       }
+      
+      // if ((rule.required && val != '') || (rule.min && val && val.length >= rule.min) ){
+        
+      // }
+      // else if(typeof rule.check == 'function'){
+      //   let check = rule.check.call(rules);
+      //   if (check !== true){
+      //     result.msg = getLanguageMsg(check);
+      //     result.key = key;
+      //   }
+      // }
+      // else{
+      //   let msg = val == '' ? rule.required : rule.errorMsg;
+      //   result.msg = getLanguageMsg(msg)
+      //   result.key = key;
+      //   return true;
+      // }
 
     }
   })
