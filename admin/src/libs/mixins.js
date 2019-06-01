@@ -1,23 +1,43 @@
 import Cookies from 'js-cookie';
 
+function dateFtt(fmt, date) { //author: meizz   
+    var o = {
+        "M+": date.getMonth() + 1,                 //月份   
+        "d+": date.getDate(),                    //日   
+        "h+": date.getHours(),                   //小时   
+        "m+": date.getMinutes(),                 //分   
+        "s+": date.getSeconds(),                 //秒   
+        "q+": Math.floor((date.getMonth() + 3) / 3), //季度   
+        "S": date.getMilliseconds()             //毫秒   
+    };
+    if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}
 export default {
     computed: {
-        checkRemoveIdentity () {
+        checkRemoveIdentity() {
             var identity = Cookies.get('identity');
             if (identity == 3) return false;
             return true;
         },
-        checkAdminIdentity () {
+        checkAdminIdentity() {
             var identity = Cookies.get('identity');
             if (identity == 1) return true;
             return false;
         }
     },
-    created () {
+    created() {
         this.setRuleValidate(this.filterKey);
     },
     methods: {
-        setRuleValidate (filterKey) {
+        formatDateFun(str) {
+            return dateFtt('yyyy-MM-dd hh:mm', new Date(str))
+        },
+        setRuleValidate(filterKey) {
             if (!filterKey) filterKey = [];
             for (let i in this.formCustom) {
                 if (filterKey.indexOf(i) === -1) {
@@ -25,15 +45,14 @@ export default {
                 }
             }
         },
-
-        getFormData () {
+        getFormData() {
             let data = {};
             data = Object.assign({}, this.formCustom);
             // data.translation = this.getFormTranslationData();
             return data;
         },
 
-        getFormTranslationData () {
+        getFormTranslationData() {
             let data = {};
             let exclude = ['parentId'];
             if (this.formEnglist) {
@@ -53,7 +72,7 @@ export default {
             return data;
         },
 
-        getArrayGroup (arrData) {
+        getArrayGroup(arrData) {
             let arr = [];
 
             arrData.forEach((v, k) => {
@@ -74,7 +93,7 @@ export default {
                 }
             });
 
-            function findArrChild (pid) {
+            function findArrChild(pid) {
                 return arr.findIndex(v => {
                     return v.id == pid;
                 });
@@ -83,7 +102,7 @@ export default {
             return arr;
         },
 
-        checkIdentity () {
+        checkIdentity() {
             var identity = Cookies.get('identity');
             return identity;
         }

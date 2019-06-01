@@ -7,10 +7,14 @@ const webpackBaseConfig = require('./webpack.base.config.js');
 const fs = require('fs');
 const package = require('../package.json');
 
-fs.open('./build/env.js', 'w', function(err, fd) {
-    const buf = 'export default "development";';
-    fs.write(fd, buf, 0, buf.length, 0, function(err, written, buffer) {});
-});
+// fs.open('./build/env.js', 'w', function (err, fd) {
+//     const buf = 'export default "development";';
+//     console.log(buf)
+//     console.log(err)
+//     fs.write(fd, buf, 0, buf.length, 0, function (err, written, buffer) {
+//         console.log(err, written, buffer)
+//     });
+// });
 
 module.exports = merge(webpackBaseConfig, {
     devtool: '#source-map',
@@ -72,9 +76,9 @@ module.exports = merge(webpackBaseConfig, {
                 from: 'src/views/main-components/theme-switch/theme'
             },
         ], {
-            ignore: [
-                'text-editor.vue'
-            ]
-        })
+                ignore: [
+                    'text-editor.vue'
+                ]
+            })
     ]
 });
