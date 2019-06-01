@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="product-empty" v-show="productList.length == 0">
-        <p>没有搜索到商品哦~</p>
+        <p>{{$language.noWereFoundGoods}}</p>
       </div>
     </mescroll-vue>
 

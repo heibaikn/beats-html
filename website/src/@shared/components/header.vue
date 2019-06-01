@@ -107,14 +107,14 @@
         </div>
 
         <div class="search-box" @click.stop.prevent>
-          <p>{{$language.hotSearch}}</p>
+          <!-- <p>{{$language.hotSearch}}</p>
           <ul class="clear">
             <li><a href="">耳机</a></li>
             <li><a href="">耳机</a></li>
             <li><a href="">耳机</a></li>
             <li><a href="">耳机</a></li>
             <li><a href="">耳机</a></li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </section>

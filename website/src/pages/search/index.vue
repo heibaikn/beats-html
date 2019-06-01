@@ -14,6 +14,10 @@
             </a>
           </div>
         </div>
+
+        <div class="product-empty" v-show="dataList.length == 0">
+          <p>{{$language.noWereFoundGoods}}</p>
+        </div>
       </div>
     </section>
     <mainFooter />
