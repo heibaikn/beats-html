@@ -72,3 +72,9 @@ export const getNewsInfos = (param = {}) => {
 export const getNewsInfo = (param = {}) => {
   return post('/api/newsInfo/getNewsInfo', param)
 }
+
+// Banner
+export const getBannerList = (param = {}) => {
+  return post('/api/banner/getBannerList', param)
+}
+

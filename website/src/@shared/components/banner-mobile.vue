@@ -2,7 +2,7 @@
   <section id="banner" :class="[images.length > 0 && 'banner-big']">
     <div class="banner-wrapper">
       <swiper ref="mySwiper" :options="options">
-        <swiperSlide  v-for="(src, index) in bannerList" :key="index"><a href=""><img :src="src" alt=""></a></swiperSlide>
+        <swiperSlide  v-for="(item, index) in bannerList" :key="index"><a :href="setBannerUrl(item)"><img :src="item.imageKey" alt=""></a></swiperSlide>
       </swiper>
     </div>
   </section>
@@ -12,14 +12,14 @@
 <script>
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
-import banner1 from '../../assets/banner1.png'
+// import banner1 from '../../assets/banner1.png'
 
 export default {
   data(){
     return {
         isAnimate: true,
         bannerList: [
-          banner1
+          // banner1
         ],
         options: {
           loop : true,
@@ -50,7 +50,9 @@ export default {
     }
   },
   mounted() {
-    
+    if(this.images.length == 0){
+      this.requestBanner();
+    }
   },
   computed: {
     mySwiper() {
@@ -58,12 +60,26 @@ export default {
     }
   },
   methods: {
+    requestBanner() {
+      this.$api.getBannerList().then(d => {
+        d = d.data;
+        if (d && this.images.length == 0) {
+          this.bannerList = d;
+        }
+      });
+    },
     slidePrev(){
       this.mySwiper.slidePrev()
     },
     slideNext(){
       this.mySwiper.slideNext()
     },
+    setBannerUrl(item){
+      if(item.url){
+        return item.url;
+      }
+      return 'javascript:;'
+    }
   },
 }
 </script>
