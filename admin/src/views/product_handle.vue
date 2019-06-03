@@ -84,6 +84,7 @@
                       :max-size="2048"
                       :name="goodsImage"
                       :data="uploadData"
+                      :headers="uploadHeaders"
                       action="/api/image/upload"
                       class="my-upload my-upload-mini">
                       <div>
