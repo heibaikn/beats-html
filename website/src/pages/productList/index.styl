@@ -12,6 +12,7 @@ body
   mar 0 auto
   pad 50px
   pb 200px
+  box-shadow none
 
 .job-center
   width: 730px;
@@ -67,8 +68,26 @@ body
       cur()
       bor 1px solid #fff
       borr 4px
+      rel();
     .item.active
       bor 1px solid #e01e3c
+      color: #e01e3c
+      &:after
+        content: '';
+        border-left: 6px solid transparent; 
+        border-right: 6px solid transparent; 
+        border-top: 6px solid #e01e3c;
+        abs left 50% bottom -6px
+        ml -6px
+
+  .category-list-children
+    pl 80px
+    pt 10px
+    .item
+      fl()
+      mr 20px
+      cur()
+    .item.active
       color: #e01e3c
 
 

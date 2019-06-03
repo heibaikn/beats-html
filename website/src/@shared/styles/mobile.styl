@@ -51,21 +51,31 @@ body
 .category-list
   pad .32rem
   pr 0
+  pl .5rem
+  pr .5rem
   .item
-    border: 1px solid #f5efef;
-    background-color: #f5efef;
-    display inline-block
-    whh 2.56rem .8rem
-    tc()
+    // border: 1px solid #f5efef;
+    // background-color: #f5efef;
+    // whh 100% .65rem
+    lh .65rem
+    border-bottom: 1px solid #efecec;
+    // tc()
     ov()
     mr .2rem
     mb .15rem
-    borr 2px
-    fs .24rem
-    &.active
+    // borr 2px
+    fs .26rem
+    &.active > .name
       color: #f83931;
-      border: 1px solid #f83931;
-      background-color: #fff;
+      // border: 1px solid #f83931;
+      // background-color: #fff;
+  .item-child
+    .item
+      pl .4rem
+      &.active
+        color: #f83931;
+    .item:last-child
+      border 0  
 
 .products-filter-menu
   text-align: right;
@@ -86,12 +96,21 @@ body
   .product-cate
     abs3 right 0 top 0 bottom 0
     w 6rem
+    ov()
+    display: flex;
+    flex-direction: column;
     background: #fff;
     .title
       fs .3rem
       color #111
-      pad .4rem .6rem
+      pad .4rem .5rem
       pb 0
+      flex 0 auto
+    .category-list
+      flex 1
+      ov()
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
 
 .product-empty
   tc()

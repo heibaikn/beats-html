@@ -12,10 +12,15 @@
           <div class="title">{{$language.category}}: </div>
           <div class="category-list">
             <div class="item" :class="{active: currIndex == -1}" @click="clickCategory({categoryName: $language.all, id: 0}, -1)">
-              {{$language.all}}
+              <div class="name">{{$language.all}}</div>
             </div>
             <div class="item" :class="{active: currIndex == index}" v-for="(item,index) in categoryList" :key="index" @click="clickCategory(item,index)">
-              {{item.categoryName}}
+              <div class="name">{{item.categoryName}} <span class="icon" v-if="item.children"><i class="iconfont iconjiantou_liebiaozhankai"></i></span></div>
+              <div class="item-child" v-if="item.children" v-show="item.isOpen">
+                <div class="item" :class="{active: currChildId == itemchild.id}" v-for="(itemchild,indexchild) in item.children" :key="indexchild" @click.stop.prevent="clickChildCategory(itemchild,index)">
+                  {{itemchild.categoryName}}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -62,8 +67,10 @@ export default {
       isShowMask: false,
       mescroll: null,
       currIndex: -1,
+      currChildId: -1,
       currCateName: this.$language.all,
       categoryList: [],
+      categoryChildList: [],
       productList: [],
       searchParams: {
         id: 0,
@@ -117,7 +124,12 @@ export default {
       this.$api.categories({id: 0}).then(d=>{
         d = d.data;
         if(d && d.length > 0){
-          this.categoryList = d;
+          // this.categoryList = d;
+          d.forEach(item => {
+            item.isOpen = false
+          });
+          this.categoryList = this.getArrayGroup(d);
+
           if(this.cid){
             let findParamsCid = this.categoryList.findIndex(item=>{
               return item.id == this.cid
@@ -137,6 +149,22 @@ export default {
       this.isShowMask = false;
     },
     clickCategory(item, index){
+      if(!item.children){
+        this.currChildId = -1;
+        this.hideCateMask();
+        this.currIndex = index;
+        this.searchParams.id = item.id;
+        this.currCateName = item.categoryName;
+        this.productList = [];
+        this.mescroll.resetUpScroll();
+      }
+      else{
+        item.isOpen = !item.isOpen;
+      }
+    },
+    clickChildCategory(item, index){
+      this.currChildId = item.id;
+      console.log(this.currChildId)
       this.hideCateMask();
       this.currIndex = index;
       this.searchParams.id = item.id;

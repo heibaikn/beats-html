@@ -6,11 +6,20 @@
     <section id="main-content" class="container">
       <div class="category">
         <span class="label">{{$language.category}}: </span>
-        <div class="category-list">
-          <div class="item" :class="{active: currIndex == index}" v-for="(item,index) in categoryList" :key="index" @click="clickCategory(item,index)">
-            {{item.categoryName}}
+        <section class="category-content">
+          <div class="category-list">
+            <div class="item" :class="{active: currIndex == index}" v-for="(item,index) in categoryList" :key="index" @click="clickCategory(item,index)">
+              {{item.categoryName}}
+            </div>
+            <div class="clear"></div>
           </div>
-        </div>
+          <div class="category-list-children">
+            <div class="item" :class="{active: currChildIndex == index}" v-for="(item,index) in categoryChildList" :key="index" @click="clickChildCategory(item,index)">
+              {{item.categoryName}}
+            </div>
+            <div class="clear"></div>
+          </div>
+        </section>
       </div>
 
       <div class="product">
@@ -69,10 +78,12 @@ export default {
   data(){
     return{
       currIndex: 0,
+      currChildIndex: 0,
       cid: 0,
       content: '',
       keyword: '',
       categoryList: [],
+      categoryChildList: [],
       productList: [],
       isLoading: false,
       searchParams: {
@@ -102,7 +113,9 @@ export default {
       categories({id: 0}).then(d=>{
         d = d.data;
         if(d && d.length > 0){
-          this.categoryList = d;
+          // this.categoryList = d;
+          this.categoryList = this.getArrayGroup(d);
+
           if(this.cid){
             let findParamsCid = this.categoryList.findIndex(item=>{
               return item.id == this.cid
@@ -111,7 +124,7 @@ export default {
               this.currIndex = findParamsCid;
             }
           }
-          this.queryCategoryGoods();
+          this.clickCategory(this.categoryList[0], 0);
         }
       })
     },
@@ -123,7 +136,6 @@ export default {
     },
     queryCategoryGoods(){
       this.isLoading = true;
-      this.searchParams.id = this.categoryList[this.currIndex].id;
       categoryGoods(this.searchParams).then(d=>{
         d = d.data;
         this.isLoading = false;
@@ -138,8 +150,22 @@ export default {
     clickCategory(item,index){
       this.productList = [];
       this.currIndex = index;
-      this.queryCategoryGoods();
+      this.currChildIndex = 0;
+      let child = this.categoryList[this.currIndex].children;
+      if(child){
+        this.categoryChildList = child;
+      }
+      else{
+        this.searchParams.id = this.categoryList[this.currIndex].id;
+        this.categoryChildList = [];
+        this.queryCategoryGoods();
+      }
     },
+    clickChildCategory(item, index){
+      this.currChildIndex = index;
+      this.searchParams.id = this.categoryChildList[this.currChildIndex].id;
+      this.queryCategoryGoods();
+    }
   },
 }
 </script>
