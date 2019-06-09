@@ -92,6 +92,10 @@ export default {
           title: "产品编号",
           key: "spuNo"
         },
+        {
+          title: "分类名称",
+          key: "categoryName"
+        },
         // {
         //     title: '产品价格',
         //     render(h, params){

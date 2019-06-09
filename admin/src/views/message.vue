@@ -121,8 +121,7 @@
 <script>
 import Cookies from "js-cookie";
 import mixins from "@/libs/mixins.js";
-import $export from "@/api/export";
-console.log("export", $export);
+import { exportCustomerMessages } from "@/api/index";
 export default {
   components: {},
   data() {
@@ -340,8 +339,15 @@ export default {
     },
 
     exportMessage() {
-      $export("/api/admin/customerMessage/exportCustomerMessages");
+      // $export("/api/admin/customerMessage/exportCustomerMessages");
       // document.querySelector('#exportForm').submit();
+
+      exportCustomerMessages().then(xls=>{
+        if(xls){
+          let host = 'http://' + location.host;
+          window.open(host + xls);
+        }
+      })
     },
 
     lookProduct(item) {
